@@ -61,7 +61,7 @@ export default function AboutPage() {
               <span className="text-base font-bold bg-gradient-to-r from-blue-600 via-green-600 to-cyan-600 bg-clip-text text-transparent">Our Inspiring Story</span>
             </div>
             
-            <h1 className="text-6xl lg:text-8xl font-extrabold leading-tight tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight tracking-tight">
               <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-green-600 bg-clip-text text-transparent drop-shadow-lg">
                 Empowering
               </span>
@@ -141,7 +141,7 @@ export default function AboutPage() {
               <span className="text-base font-bold bg-gradient-to-r from-green-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">Our Purpose & Direction</span>
             </div>
             
-            <h2 className="text-5xl lg:text-7xl font-extrabold mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-6">
               <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-green-600 bg-clip-text text-transparent">
                 Mission
               </span>
@@ -220,7 +220,7 @@ export default function AboutPage() {
               <span className="text-base font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent">Our Amazing Team</span>
             </div>
             
-            <h2 className="text-5xl lg:text-7xl font-extrabold mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-6">
               <span className="text-gray-800 dark:text-gray-200">Meet Our</span>{" "}
               <span className="bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent">Dream Team</span>
             </h2>
@@ -302,9 +302,9 @@ export default function AboutPage() {
               <span className="text-base font-bold bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">Measurable Impact</span>
             </div>
             
-            <h2 className="text-5xl lg:text-7xl font-extrabold mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-6">
               <span className="text-gray-800 dark:text-gray-200">Our</span>{" "}
-              <span className="bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">Impact Story</span>
+              <span className="bg-gradient-to-r from-green-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">Impact Story</span>
             </h2>
             <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto font-medium">
               Real impact measured through lives transformed, communities empowered, and futures brightened.
@@ -351,7 +351,7 @@ export default function AboutPage() {
                 <span className="text-lg font-bold text-white">Join Our Movement</span>
               </div>
               
-              <h2 className="text-5xl lg:text-7xl font-extrabold text-white leading-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight">
                 Ready to{" "}
                 <span className="bg-gradient-to-r from-green-300 via-emerald-300 to-teal-300 bg-clip-text text-transparent">
                   Make a Difference?
