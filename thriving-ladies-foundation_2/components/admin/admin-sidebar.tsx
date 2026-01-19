@@ -17,7 +17,11 @@ import {
   FileText,
   Calendar,
   Mail,
-  Shield
+  Shield,
+  Database,
+  Heart,
+  Target,
+  TrendingUp
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
@@ -49,6 +53,16 @@ const navigationItems = [
       { id: "donations", label: "Donations", icon: DollarSign, href: "/dashboard/donations" },
       { id: "users", label: "Users", icon: Users, href: "/dashboard/users" },
       { id: "reports", label: "Reports", icon: FileText, href: "/dashboard/reports" },
+    ]
+  },
+  {
+    title: "Database Management",
+    items: [
+      { id: "admin-users", label: "Admin Users", icon: Shield, href: "/dashboard/admin-users" },
+      { id: "beneficiaries", label: "Beneficiaries", icon: Heart, href: "/dashboard/beneficiaries" },
+      { id: "donors", label: "Donors", icon: Users, href: "/dashboard/donors" },
+      { id: "projects", label: "Projects", icon: Target, href: "/dashboard/projects" },
+      { id: "impact", label: "Impact Metrics", icon: TrendingUp, href: "/dashboard/impact" },
     ]
   },
   {

@@ -2,17 +2,20 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
+import { supabase } from '@/lib/supabase'
+import type { User as SupabaseUser } from '@supabase/supabase-js'
 
 interface User {
   id: string
   email: string
-  name: string
+  name?: string
   role: 'admin' | 'user'
 }
 
 interface AuthContextType {
   user: User | null
-  login: (email: string, password: string) => Promise<boolean>
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
+  signup: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
   logout: () => void
   isLoading: boolean
   isAuthenticated: boolean
@@ -37,83 +40,117 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
-  // Demo credentials (in a real app, this would be handled by your backend)
-  const DEMO_CREDENTIALS = {
-    email: 'admin@thrivingladies.org',
-    password: 'admin123',
-    user: {
-      id: '1',
-      email: 'admin@thrivingladies.org',
-      name: 'Admin User',
-      role: 'admin' as const
-    }
-  }
-
   // Check for existing session on app load
   useEffect(() => {
-    checkExistingSession()
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session?.user) {
+        setUser({
+          id: session.user.id,
+          email: session.user.email!,
+          name: session.user.user_metadata?.name || session.user.email?.split('@')[0],
+          role: 'admin' // You can customize this based on your user metadata or database
+        })
+      }
+      setIsLoading(false)
+    }
+
+    getSession()
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (session?.user) {
+          setUser({
+            id: session.user.id,
+            email: session.user.email!,
+            name: session.user.user_metadata?.name || session.user.email?.split('@')[0],
+            role: 'admin' // Customize based on your needs
+          })
+        } else {
+          setUser(null)
+        }
+        setIsLoading(false)
+      }
+    )
+
+    return () => subscription.unsubscribe()
   }, [])
 
-  const checkExistingSession = () => {
-    try {
-      // Check if there's a stored session
-      const storedUser = localStorage.getItem('auth-user')
-      const authToken = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('auth-token='))
-        ?.split('=')[1]
-
-      if (storedUser && authToken) {
-        const userData = JSON.parse(storedUser)
-        setUser(userData)
-      }
-    } catch (error) {
-      console.error('Error checking session:', error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     setIsLoading(true)
-    
+
     try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      // Check credentials (in a real app, this would be an API call)
-      if (email === DEMO_CREDENTIALS.email && password === DEMO_CREDENTIALS.password) {
-        const userData = DEMO_CREDENTIALS.user
-        
-        // Set user data
-        setUser(userData)
-        
-        // Store session data
-        localStorage.setItem('auth-user', JSON.stringify(userData))
-        
-        // Set HTTP-only cookie (in a real app, this would be done by your backend)
-        document.cookie = `auth-token=demo-jwt-token; path=/; secure; samesite=strict; max-age=86400` // 24 hours
-        
-        return true
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+
+      if (error) {
+        setIsLoading(false)
+        return { success: false, error: error.message }
       }
-      
-      return false
+
+      if (data.user) {
+        setUser({
+          id: data.user.id,
+          email: data.user.email!,
+          name: data.user.user_metadata?.name || data.user.email?.split('@')[0],
+          role: 'admin' // Customize role logic
+        })
+      }
+
+      setIsLoading(false)
+      return { success: true }
     } catch (error) {
       console.error('Login error:', error)
-      return false
-    } finally {
       setIsLoading(false)
+      return { success: false, error: 'An unexpected error occurred' }
     }
   }
 
-  const logout = () => {
+  const signup = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
+    setIsLoading(true)
+
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      })
+
+      if (error) {
+        setIsLoading(false)
+        return { success: false, error: error.message }
+      }
+
+      // Note: Supabase signup may require email confirmation
+      // The user will be automatically logged in if email confirmation is disabled
+      if (data.user && !data.user.email_confirmed_at) {
+        setIsLoading(false)
+        return { success: true, error: 'Please check your email to confirm your account' }
+      }
+
+      if (data.user) {
+        setUser({
+          id: data.user.id,
+          email: data.user.email!,
+          name: data.user.user_metadata?.name || data.user.email?.split('@')[0],
+          role: 'admin' // Customize role logic
+        })
+      }
+
+      setIsLoading(false)
+      return { success: true }
+    } catch (error) {
+      console.error('Signup error:', error)
+      setIsLoading(false)
+      return { success: false, error: 'An unexpected error occurred' }
+    }
+  }
+
+  const logout = async () => {
+    await supabase.auth.signOut()
     setUser(null)
-    localStorage.removeItem('auth-user')
-    
-    // Remove auth cookie
-    document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
-    
-    // Redirect to login
     router.push('/login')
   }
 
@@ -124,6 +161,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       value={{
         user,
         login,
+        signup,
         logout,
         isLoading,
         isAuthenticated,

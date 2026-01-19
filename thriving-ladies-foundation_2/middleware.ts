@@ -1,39 +1,13 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-// Define protected routes that require authentication
-const protectedRoutes = ['/dashboard']
-const authRoutes = ['/login']
+// Note: Authentication is now handled client-side with Supabase
+// The middleware is kept for future server-side auth if needed
+// Dashboard protection is handled by the client-side auth context
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
-  
-  // Get the authentication token from cookies
-  const token = request.cookies.get('auth-token')?.value
-  
-  // Check if the current path is a protected route
-  const isProtectedRoute = protectedRoutes.some(route => 
-    pathname.startsWith(route)
-  )
-  
-  // Check if the current path is an auth route (login page)
-  const isAuthRoute = authRoutes.some(route => 
-    pathname.startsWith(route)
-  )
-  
-  // If accessing a protected route without authentication
-  if (isProtectedRoute && !token) {
-    const loginUrl = new URL('/login', request.url)
-    loginUrl.searchParams.set('redirect', pathname)
-    return NextResponse.redirect(loginUrl)
-  }
-  
-  // If accessing login page while already authenticated
-  if (isAuthRoute && token) {
-    const redirectUrl = request.nextUrl.searchParams.get('redirect') || '/dashboard'
-    return NextResponse.redirect(new URL(redirectUrl, request.url))
-  }
-  
+  // For now, let all routes pass through
+  // Client-side authentication will handle protection
   return NextResponse.next()
 }
 

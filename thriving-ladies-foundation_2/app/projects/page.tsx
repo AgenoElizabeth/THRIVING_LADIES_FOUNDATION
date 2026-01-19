@@ -35,7 +35,7 @@ export default function ProjectsPage() {
   const galleryImages = [
     { src: "https://images.unsplash.com/photo-1607142634950-c5e8b5a8b72c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", alt: "Girls learning in classroom" },
     { src: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Water facilities" },
-    { src: "https://images.unsplash.com/photo-1472162314594-a99fb7d962d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", alt: "Community meeting" },
+    { src: "/images/training3.jpeg", alt: "Community meeting" },
     { src: "https://images.unsplash.com/photo-1576077221130-691ce93e6b58?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Students studying" },
     { src: "https://images.unsplash.com/photo-1493555433180-6bdec08efad8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", alt: "Health education" },
     { src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Happy students" },
@@ -81,7 +81,7 @@ export default function ProjectsPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/image1.jpg"
+            src="/images/training2.jpeg"
             alt="Hero background"
             fill
             className="object-cover"
@@ -235,7 +235,7 @@ export default function ProjectsPage() {
                       <div className="aspect-square rounded-2xl relative overflow-hidden">
                         {/* Real Project Image */}
                         <Image
-                          src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2984&q=80"
+                          src="/images/training.jpeg"
                           alt="African school girls in classroom"
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-700"
@@ -300,7 +300,7 @@ export default function ProjectsPage() {
                 {/* Project Image */}
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+                    src="/images/outreach1.jpeg"
                     alt="Education program in action"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -369,7 +369,7 @@ export default function ProjectsPage() {
                 {/* Project Image */}
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+                    src="/images/water.jpeg"
                     alt="School infrastructure development"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -438,7 +438,7 @@ export default function ProjectsPage() {
                 {/* Project Image */}
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+                    src="/images/training4.jpeg"
                     alt="Community outreach and education"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -454,7 +454,7 @@ export default function ProjectsPage() {
                 <CardHeader className="p-6">
                   <CardTitle className="text-xl text-accent mb-3">Community Outreach</CardTitle>
                   <CardDescription className="text-sm text-muted-foreground leading-relaxed">
-                    Engaging parents, teachers, and community leaders in menstrual health awareness
+                    Engaging parents, girls,teachers, and community leaders in menstrual health awareness
                   </CardDescription>
                 </CardHeader>
 
@@ -647,7 +647,7 @@ export default function ProjectsPage() {
             <div onClick={() => openLightbox(0)} role="button" tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openLightbox(0)} className="break-inside-avoid relative group overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02] cursor-pointer">
               <div className="relative h-80 md:h-96">
                 <Image
-                  src="https://images.unsplash.com/photo-1607142634950-c5e8b5a8b72c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                  src="/images/training.jpeg"
                   alt="Girls learning in classroom"
                   fill
                   className="object-cover"
@@ -680,7 +680,7 @@ export default function ProjectsPage() {
             <div onClick={() => openLightbox(1)} role="button" tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openLightbox(1)} className="break-inside-avoid relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">
               <div className="relative h-64">
                 <Image
-                  src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  src="/images/water.jpeg"
                   alt="Water facilities"
                   fill
                   className="object-cover"
@@ -697,7 +697,7 @@ export default function ProjectsPage() {
             <div onClick={() => openLightbox(2)} role="button" tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openLightbox(2)} className="break-inside-avoid relative group overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer">
               <div className="relative h-48">
                 <Image
-                  src="https://images.unsplash.com/photo-1472162314594-a99fb7d962d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                  src="/images/training3.jpeg"
                   alt="Community meeting"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -713,7 +713,7 @@ export default function ProjectsPage() {
             <div onClick={() => openLightbox(3)} role="button" tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openLightbox(3)} className="break-inside-avoid relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
               <div className="relative h-72 md:h-80">
                 <Image
-                  src="https://images.unsplash.com/photo-1576077221130-691ce93e6b58?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  src="/images/training3.jpeg"
                   alt="Students studying"
                   fill
                   className="object-cover"
@@ -732,7 +732,7 @@ export default function ProjectsPage() {
             <div onClick={() => openLightbox(4)} role="button" tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openLightbox(4)} className="break-inside-avoid relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
               <div className="relative h-56">
                 <Image
-                  src="https://images.unsplash.com/photo-1493555433180-6bdec08efad8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  src="/images/making1.jpeg"
                   alt="Health education"
                   fill
                   className="object-cover"
@@ -749,7 +749,7 @@ export default function ProjectsPage() {
             <div onClick={() => openLightbox(5)} role="button" tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openLightbox(5)} className="break-inside-avoid relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
               <div className="relative h-60">
                 <Image
-                  src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  src="/images/distribution1.jpeg"
                   alt="Happy students"
                   fill
                   className="object-cover"
@@ -768,7 +768,7 @@ export default function ProjectsPage() {
             <div onClick={() => openLightbox(6)} role="button" tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openLightbox(6)} className="break-inside-avoid relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
               <div className="relative h-64">
                 <Image
-                  src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  src="/images/training4.jpeg"
                   alt="School facilities"
                   fill
                   className="object-cover"
@@ -790,7 +790,7 @@ export default function ProjectsPage() {
             <div onClick={() => openLightbox(7)} role="button" tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openLightbox(7)} className="break-inside-avoid relative group overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer">
               <div className="relative h-40">
                 <Image
-                  src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                  src="/images/training2.jpeg"
                   alt="Group activities"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -885,7 +885,7 @@ export default function ProjectsPage() {
       loop
       playsInline
       preload="metadata"
-      poster="/image1.jpg"
+      poster="/images/training4.jpeg"
       aria-hidden="true"
     >
       <source src="/hero.mp4" type="video/mp4" />

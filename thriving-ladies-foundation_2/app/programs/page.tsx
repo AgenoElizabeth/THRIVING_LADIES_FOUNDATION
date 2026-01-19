@@ -144,7 +144,7 @@ export default function ProgramsPage() {
               <div className="relative">
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                   <Image
-                    src="https://images.unsplash.com/photo-1607142634950-c5e8b5a8b72c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    src="/images/training.jpeg"
                     alt="Menstrual health education session"
                     width={600}
                     height={400}
@@ -173,7 +173,7 @@ export default function ProgramsPage() {
               <div className="relative lg:order-1">
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                   <Image
-                    src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    src="/images/water.jpeg"
                     alt="Water and sanitation facilities"
                     width={600}
                     height={400}
@@ -207,11 +207,11 @@ export default function ProgramsPage() {
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-secondary">15</div>
-                    <div className="text-sm text-muted-foreground">Water Points Built</div>
+                    <div className="text-2xl font-bold text-secondary">10</div>
+                    <div className="text-sm text-muted-foreground">Water Points Installed</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-accent">30</div>
+                    <div className="text-2xl font-bold text-accent">20</div>
                     <div className="text-sm text-muted-foreground">Toilets Constructed</div>
                   </div>
                   <div className="space-y-2">
@@ -228,7 +228,7 @@ export default function ProgramsPage() {
                   <h3 className="text-xl font-semibold text-foreground">Infrastructure Delivered:</h3>
                   <div className="space-y-3">
                     {[
-                      "Solar-powered water pumping systems",
+                      
                       "Gender-separated sanitation facilities",
                       "Handwashing stations with soap dispensers",
                       "Waste management and disposal systems"
@@ -258,10 +258,10 @@ export default function ProgramsPage() {
                     <span className="text-xs font-bold text-accent">Community</span>
                   </div>
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-                    Women's Empowerment
+                    Girl's Empowerment
                   </h2>
                   <p className="text-lg text-muted-foreground">
-                    Comprehensive programs that equip women with skills, knowledge, and resources 
+                    Comprehensive programs that equip girls with skills, knowledge, and resources 
                     to become leaders and change agents in their communities.
                   </p>
                 </div>
@@ -269,7 +269,7 @@ export default function ProgramsPage() {
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <div className="text-2xl font-bold text-accent">300+</div>
-                    <div className="text-sm text-muted-foreground">Women Trained</div>
+                    <div className="text-sm text-muted-foreground">Girls Trained</div>
                   </div>
                   <div className="space-y-2">
                     <div className="text-2xl font-bold text-primary">25</div>
@@ -312,8 +312,8 @@ export default function ProgramsPage() {
               <div className="relative">
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                   <Image
-                    src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Women empowerment training"
+                    src="/images/making.jpeg"
+                    alt="Girls empowerment training"
                     width={600}
                     height={400}
                     className="object-cover w-full h-[400px] md:h-[500px]"
@@ -412,25 +412,25 @@ export default function ProgramsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                name: "Amina Nakato",
+                name: "Achen Patricia",
                 role: "Student Leader",
                 program: "Menstrual Health Education",
                 quote: "This program gave me confidence to speak openly about health issues. Now I help other girls in my school.",
-                image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
+                // image: "/images/pi.webp"
               },
               {
                 name: "Grace Nalubega",
                 role: "Community Leader",
                 program: "Women's Empowerment",
                 quote: "I started my own business after the training. Now I employ 5 other women in my village.",
-                image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
+                // image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
               },
               {
                 name: "Sarah Mugisha",
                 role: "School Administrator",
                 program: "Water & Sanitation",
                 quote: "Girl's attendance increased by 40% after we got proper sanitation facilities at our school.",
-                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
+                // image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
               }
             ].map((story, index) => (
               <Card key={index} className="group relative overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
@@ -438,12 +438,12 @@ export default function ProgramsPage() {
                 <CardContent className="p-8 relative z-10">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="relative w-16 h-16 rounded-full overflow-hidden">
-                      <Image
+                      {/* <Image
                         src={story.image}
                         alt={story.name}
                         fill
                         className="object-cover"
-                      />
+                      /> */}
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground">{story.name}</h4>

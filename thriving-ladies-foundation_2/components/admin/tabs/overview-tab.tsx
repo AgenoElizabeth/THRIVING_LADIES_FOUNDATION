@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
@@ -14,7 +15,75 @@ import {
   TrendingUp
 } from "lucide-react"
 
+interface DashboardStats {
+  totalDonations: number
+  totalDonationAmount: number
+  activeProjects: number
+  totalProjects: number
+  galleryPhotos: number
+  videoContent: number
+}
+
 export function OverviewTab() {
+  const [stats, setStats] = useState<DashboardStats>({
+    totalDonations: 0,
+    totalDonationAmount: 0,
+    activeProjects: 0,
+    totalProjects: 0,
+    galleryPhotos: 0,
+    videoContent: 0
+  })
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        // Fetch donations
+        const donationsResponse = await fetch('/api/donations')
+        const donations = donationsResponse.ok ? await donationsResponse.json() : []
+
+        // Fetch projects
+        const projectsResponse = await fetch('/api/projects')
+        const projects = projectsResponse.ok ? await projectsResponse.json() : []
+
+        // Fetch gallery
+        const galleryResponse = await fetch('/api/gallery')
+        const gallery = galleryResponse.ok ? await galleryResponse.json() : []
+
+        // Fetch videos
+        const videosResponse = await fetch('/api/videos')
+        const videos = videosResponse.ok ? await videosResponse.json() : []
+
+        // Calculate stats
+        const totalDonationAmount = donations.reduce((sum: number, donation: any) => sum + (donation.amount || 0), 0)
+        const activeProjects = projects.filter((p: any) => p.status === 'active').length
+
+        setStats({
+          totalDonations: donations.length,
+          totalDonationAmount,
+          activeProjects,
+          totalProjects: projects.length,
+          galleryPhotos: gallery.length,
+          videoContent: videos.length
+        })
+      } catch (error) {
+        console.error('Error fetching dashboard stats:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchStats()
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -29,8 +98,8 @@ export function OverviewTab() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Total Donations</p>
-                <p className="text-2xl font-bold text-foreground">UGX 45,230,000</p>
-                <p className="text-xs text-green-600">+12% from last month</p>
+                <p className="text-2xl font-bold text-foreground">${stats.totalDonationAmount.toLocaleString()}</p>
+                <p className="text-xs text-green-600">{stats.totalDonations} donations recorded</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
                 <DollarSign className="h-6 w-6 text-white" />
@@ -44,8 +113,8 @@ export function OverviewTab() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Active Projects</p>
-                <p className="text-2xl font-bold text-foreground">8</p>
-                <p className="text-xs text-blue-600">2 completed this month</p>
+                <p className="text-2xl font-bold text-foreground">{stats.activeProjects}</p>
+                <p className="text-xs text-blue-600">of {stats.totalProjects} total projects</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-xl flex items-center justify-center">
                 <FolderPlus className="h-6 w-6 text-white" />
@@ -59,8 +128,8 @@ export function OverviewTab() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Gallery Photos</p>
-                <p className="text-2xl font-bold text-foreground">156</p>
-                <p className="text-xs text-purple-600">24 added this week</p>
+                <p className="text-2xl font-bold text-foreground">{stats.galleryPhotos}</p>
+                <p className="text-xs text-purple-600">photos in gallery</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-xl flex items-center justify-center">
                 <Camera className="h-6 w-6 text-white" />
@@ -74,8 +143,8 @@ export function OverviewTab() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Video Content</p>
-                <p className="text-2xl font-bold text-foreground">23</p>
-                <p className="text-xs text-orange-600">3 uploaded recently</p>
+                <p className="text-2xl font-bold text-foreground">{stats.videoContent}</p>
+                <p className="text-xs text-orange-600">videos uploaded</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-br from-primary via-secondary to-accent rounded-xl flex items-center justify-center">
                 <Video className="h-6 w-6 text-white" />

@@ -104,6 +104,7 @@ export default function Footer() {
               <h5 className="font-semibold text-foreground mb-4">Get Involved</h5>
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li><Link href="/donate" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Donate</Link></li>
+                <li><Link href="/questions" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />FAQ</Link></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Volunteer</Link></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Partner with Us</Link></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Contact Us</Link></li>
@@ -116,11 +117,11 @@ export default function Footer() {
               <div className="space-y-3 text-sm text-muted-foreground">
                 <div className="flex items-center gap-3">
                   <MapPin className="h-4 w-4 text-primary flex-shrink-0" />
-                  <span>Kamuli District, Uganda</span>
+                  <span>Kampala District, Uganda</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="h-4 w-4 text-primary flex-shrink-0" />
-                  <Link href="tel:+256123456789" className="hover:text-primary transition-colors">+256 123 456 789</Link>
+                  <Link href="tel:+256123456789" className="hover:text-primary transition-colors">+256 788 553 224</Link>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="h-4 w-4 text-primary flex-shrink-0" />

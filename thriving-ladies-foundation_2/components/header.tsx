@@ -69,6 +69,7 @@ export default function Header() {
               <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
               <Link href="/projects" className="text-muted-foreground hover:text-foreground transition-colors">Projects</Link>
               <Link href="/programs" className="text-muted-foreground hover:text-foreground transition-colors">Programs</Link>
+              <Link href="/questions" className="text-muted-foreground hover:text-foreground transition-colors">FAQ</Link>
               <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
               <Link href="/login" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Admin</Link>
             </nav>
@@ -133,15 +134,22 @@ export default function Header() {
                   >
                     Projects
                   </Link>
-                  <Link 
-                    href="/programs" 
+                  <Link
+                    href="/programs"
                     className="text-muted-foreground hover:text-foreground py-2 px-4 rounded-lg hover:bg-muted transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Programs
                   </Link>
-                  <Link 
-                    href="/contact" 
+                  <Link
+                    href="/questions"
+                    className="text-muted-foreground hover:text-foreground py-2 px-4 rounded-lg hover:bg-muted transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    FAQ
+                  </Link>
+                  <Link
+                    href="/contact"
                     className="text-muted-foreground hover:text-foreground py-2 px-4 rounded-lg hover:bg-muted transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

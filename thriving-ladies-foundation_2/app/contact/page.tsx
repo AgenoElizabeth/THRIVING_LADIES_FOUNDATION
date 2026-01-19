@@ -144,7 +144,7 @@ export default function ContactPage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image 
-            src="/images/lady-phone.jpeg" 
+            src="/images/distribution1.jpeg" 
             alt="Woman on phone providing support"
             fill
             priority
@@ -166,13 +166,17 @@ export default function ContactPage() {
               Ready to make a difference? We'd love to hear from you. Whether you want to volunteer, donate, or learn more about our programs.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:shadow-lg transition-all duration-300">
-                <Phone className="mr-2 h-4 w-4" />
-                Call Now
+              <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:shadow-lg transition-all duration-300" asChild>
+                <a href="tel:+256788553224">
+                  <Phone className="mr-2 h-4 w-4" />
+                  Call Now
+                </a>
               </Button>
-              <Button size="lg" variant="outline" className="hover:bg-primary/10 transition-all duration-300">
-                <Mail className="mr-2 h-4 w-4" />
-                Email Us
+              <Button size="lg" variant="outline" className="hover:bg-primary/10 transition-all duration-300" asChild>
+                <a href="mailto:info@thrivingladies.org">
+                  <Mail className="mr-2 h-4 w-4" />
+                  Email Us
+                </a>
               </Button>
             </div>
           </div>
@@ -200,7 +204,7 @@ export default function ContactPage() {
                   Speak directly with our team for immediate assistance and personalized support.
                 </p>
                 <div className="space-y-2">
-                  <p className="font-semibold text-primary text-lg">+1 (555) 123-4567</p>
+                  <p className="font-semibold text-primary text-lg">+256 788 553 224 / +256 779 153 111</p>
                   <p className="text-sm text-muted-foreground">Available 24/7</p>
                 </div>
               </CardContent>
@@ -216,7 +220,7 @@ export default function ContactPage() {
                   Send us a detailed message and we'll respond within 2 hours during business hours.
                 </p>
                 <div className="space-y-2">
-                  <p className="font-semibold text-secondary text-lg">hello@thrivingladies.org</p>
+                  <p className="font-semibold text-secondary text-lg">info@thrivingladies.org</p>
                   <p className="text-sm text-muted-foreground">Response within 2 hours</p>
                 </div>
               </CardContent>
@@ -232,7 +236,7 @@ export default function ContactPage() {
                   Come see our work in person and meet the amazing women we serve every day.
                 </p>
                 <div className="space-y-2">
-                  <p className="font-semibold text-accent text-lg">123 Foundation Avenue</p>
+                  <p className="font-semibold text-accent text-lg">Mutungo Avenue</p>
                   <p className="text-sm text-muted-foreground">Community Center, CC 12345</p>
                 </div>
               </CardContent>
@@ -308,7 +312,7 @@ export default function ContactPage() {
                   </p>
                   <Button variant="outline" className="font-semibold border-red-500/30 text-red-600 hover:bg-red-500/10">
                     <Phone className="mr-2 h-4 w-4" />
-                    (555) 911-HELP
+                    +256 788 553 224-HELP
                   </Button>
                 </div>
               </div>

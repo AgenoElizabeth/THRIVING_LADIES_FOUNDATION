@@ -1,4 +1,4 @@
-'use client'
+ 'use client'
 
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
@@ -24,8 +24,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 
 export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false)
-  const [email, setEmail] = useState('admin@thrivingladies.org') // Pre-filled for demo
-  const [password, setPassword] = useState('admin123') // Pre-filled for demo
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   
   const { login, isLoading } = useAuth()
@@ -38,20 +38,20 @@ export default function AdminLogin() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
-    
+
     if (!email || !password) {
       setError('Please enter both email and password')
       return
     }
 
     try {
-      const success = await login(email, password)
-      
-      if (success) {
+      const result = await login(email, password)
+
+      if (result.success) {
         // Successful login - redirect to dashboard or specified URL
         router.push(redirectUrl)
       } else {
-        setError('Invalid email or password. Please try again.')
+        setError(result.error || 'Invalid email or password. Please try again.')
       }
     } catch (error) {
       setError('An error occurred during login. Please try again.')
@@ -73,13 +73,13 @@ export default function AdminLogin() {
           <Link href="/" className="inline-flex items-center gap-3 mb-6 hover:opacity-80 transition-opacity">
             <div className="relative w-12 h-12">
               <Image
-                src="/image/logo.png"
-                alt="Thriving Ladies Foundation"
+                src="/images/logo.png"
+                alt="Thriving Lives Foundation"
                 fill
                 className="object-contain"
               />
             </div>
-            <span className="text-xl font-bold text-foreground">Thriving Ladies Foundation</span>
+            <span className="text-xl font-bold text-foreground">Thriving Lives Foundation</span>
           </Link>
           <h1 className="text-2xl font-bold text-foreground mb-2">Admin Portal</h1>
           <p className="text-muted-foreground">Sign in to access the dashboard</p>
@@ -107,7 +107,7 @@ export default function AdminLogin() {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="admin@thrivingladies.org"
+                    placeholder="admin@thrivinglives.org"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="pl-10 border-2 focus:border-primary transition-colors"
@@ -165,7 +165,7 @@ export default function AdminLogin() {
               )}
 
               {/* Login Button */}
-              <Button 
+              <Button
                 type="submit"
                 disabled={isLoading}
                 className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 group h-12 disabled:opacity-50"
@@ -184,14 +184,16 @@ export default function AdminLogin() {
                 )}
               </Button>
 
-              {/* Demo Credentials */}
-              <div className="bg-muted/50 rounded-lg p-4 text-center">
-                <p className="text-sm font-medium text-foreground mb-2">Demo Credentials</p>
-                <p className="text-xs text-muted-foreground">
-                  Email: admin@thrivingladies.org<br />
-                  Password: admin123
+              {/* Sign Up Link */}
+              <div className="text-center">
+                <p className="text-muted-foreground">
+                  Don't have an account?{' '}
+                  <Link href="/signup" className="text-primary hover:text-primary/80 transition-colors font-medium">
+                    Sign up here
+                  </Link>
                 </p>
               </div>
+
             </form>
           </CardContent>
         </Card>

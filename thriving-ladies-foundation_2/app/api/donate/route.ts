@@ -1,7 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// This is a demo API endpoint for Mobile Money integration
-// In production, you would integrate with actual payment providers
+// Environment variables
+const MTN_API_KEY = process.env.MTN_API_KEY!
+const MTN_API_SECRET = process.env.MTN_API_SECRET!
+const MTN_SUBSCRIPTION_KEY = process.env.MTN_SUBSCRIPTION_KEY!
+const MTN_ENVIRONMENT = process.env.MTN_ENVIRONMENT || 'sandbox'
+
+const AIRTEL_API_KEY = process.env.AIRTEL_API_KEY!
+const AIRTEL_API_SECRET = process.env.AIRTEL_API_SECRET!
+const AIRTEL_ENVIRONMENT = process.env.AIRTEL_ENVIRONMENT || 'sandbox'
+
+const FLUTTERWAVE_PUBLIC_KEY = process.env.FLUTTERWAVE_PUBLIC_KEY!
+const FLUTTERWAVE_SECRET_KEY = process.env.FLUTTERWAVE_SECRET_KEY!
+const FLUTTERWAVE_ENCRYPTION_KEY = process.env.FLUTTERWAVE_ENCRYPTION_KEY!
+const FLUTTERWAVE_ENVIRONMENT = process.env.FLUTTERWAVE_ENVIRONMENT || 'sandbox'
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,17 +28,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Simulate payment processing based on method
+    // Process payment based on method
     let paymentResponse
-    
+
     if (paymentMethod === 'MTN_MOBILE_MONEY') {
-      // MTN Mobile Money API integration would go here
       paymentResponse = await processMTNPayment(amount, phoneNumber)
     } else if (paymentMethod === 'AIRTEL_MONEY') {
-      // Airtel Money API integration would go here
       paymentResponse = await processAirtelPayment(amount, phoneNumber)
     } else if (paymentMethod === 'BANK_TRANSFER') {
-      // Bank API integration would go here
       paymentResponse = await processBankTransfer(amount, donorInfo)
     } else {
       return NextResponse.json(
@@ -69,41 +78,184 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Mock MTN Mobile Money processing
+// MTN Mobile Money processing
 async function processMTNPayment(amount: string, phoneNumber: string) {
-  // In production, this would call MTN MoMo API
-  // https://momodeveloper.mtn.com/
-  
-  return {
-    status: 'pending',
-    transactionId: 'MTN_' + Date.now(),
-    reference: 'TLF_' + generateTransactionId(),
-    message: 'Please check your phone for payment prompt'
+  try {
+    const baseUrl = MTN_ENVIRONMENT === 'production'
+      ? 'https://proxy.momoapi.mtn.com'
+      : 'https://sandbox.momodeveloper.mtn.com'
+
+    // Get access token
+    const tokenResponse = await fetch(`${baseUrl}/collection/token/`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Basic ${Buffer.from(`${MTN_API_KEY}:${MTN_API_SECRET}`).toString('base64')}`,
+        'Ocp-Apim-Subscription-Key': MTN_SUBSCRIPTION_KEY,
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if (!tokenResponse.ok) {
+      throw new Error('Failed to get MTN access token')
+    }
+
+    const tokenData = await tokenResponse.json()
+    const accessToken = tokenData.access_token
+
+    // Create collection request
+    const reference = 'TLF_' + generateTransactionId()
+    const collectionResponse = await fetch(`${baseUrl}/collection/v1_0/requesttopay`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'X-Reference-Id': reference,
+        'X-Target-Environment': MTN_ENVIRONMENT,
+        'Ocp-Apim-Subscription-Key': MTN_SUBSCRIPTION_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        amount: amount,
+        currency: 'UGX',
+        externalId: reference,
+        payer: {
+          partyIdType: 'MSISDN',
+          partyId: phoneNumber
+        },
+        payerMessage: 'Donation to Thriving Ladies Foundation',
+        payeeNote: 'Thank you for your donation'
+      })
+    })
+
+    if (!collectionResponse.ok) {
+      throw new Error('Failed to initiate MTN payment')
+    }
+
+    return {
+      status: 'pending',
+      transactionId: reference,
+      reference: reference,
+      message: 'Please check your phone for payment prompt'
+    }
+  } catch (error) {
+    console.error('MTN Payment error:', error)
+    throw error
   }
 }
 
-// Mock Airtel Money processing
+// Airtel Money processing
 async function processAirtelPayment(amount: string, phoneNumber: string) {
-  // In production, this would call Airtel Money API
-  // https://developers.airtel.africa/
-  
-  return {
-    status: 'pending',
-    transactionId: 'AIRTEL_' + Date.now(),
-    reference: 'TLF_' + generateTransactionId(),
-    message: 'Please check your phone for payment prompt'
+  try {
+    const baseUrl = AIRTEL_ENVIRONMENT === 'production'
+      ? 'https://openapi.airtel.africa'
+      : 'https://openapi-sandbox.airtel.africa'
+
+    // Get access token
+    const tokenResponse = await fetch(`${baseUrl}/auth/oauth2/token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        client_id: AIRTEL_API_KEY,
+        client_secret: AIRTEL_API_SECRET,
+        grant_type: 'client_credentials'
+      })
+    })
+
+    if (!tokenResponse.ok) {
+      throw new Error('Failed to get Airtel access token')
+    }
+
+    const tokenData = await tokenResponse.json()
+    const accessToken = tokenData.access_token
+
+    // Initiate payment
+    const reference = 'TLF_' + generateTransactionId()
+    const paymentResponse = await fetch(`${baseUrl}/merchant/v1/payments/`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+        'X-Country': 'UG',
+        'X-Currency': 'UGX'
+      },
+      body: JSON.stringify({
+        reference: reference,
+        subscriber: {
+          country: 'UG',
+          currency: 'UGX',
+          msisdn: phoneNumber
+        },
+        transaction: {
+          amount: parseFloat(amount),
+          country: 'UG',
+          currency: 'UGX',
+          id: reference
+        }
+      })
+    })
+
+    if (!paymentResponse.ok) {
+      throw new Error('Failed to initiate Airtel payment')
+    }
+
+    const paymentData = await paymentResponse.json()
+
+    return {
+      status: 'pending',
+      transactionId: paymentData.data?.transaction?.id || reference,
+      reference: reference,
+      message: 'Please check your phone for payment prompt'
+    }
+  } catch (error) {
+    console.error('Airtel Payment error:', error)
+    throw error
   }
 }
 
-// Mock Bank Transfer processing
+// Bank Transfer processing via Flutterwave
 async function processBankTransfer(amount: string, donorInfo: any) {
-  // In production, this would integrate with bank APIs
-  
-  return {
-    status: 'pending',
-    transactionId: 'BANK_' + Date.now(),
-    reference: 'TLF_' + generateTransactionId(),
-    message: 'Bank transfer instructions sent to email'
+  try {
+    const baseUrl = FLUTTERWAVE_ENVIRONMENT === 'production'
+      ? 'https://api.flutterwave.com'
+      : 'https://api.flutterwave.com'  // Flutterwave uses same URL for sandbox
+
+    const reference = 'TLF_' + generateTransactionId()
+
+    // Create bank transfer
+    const transferResponse = await fetch(`${baseUrl}/v3/transfers`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${FLUTTERWAVE_SECRET_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        account_bank: '044', // Stanbic Bank Uganda code
+        account_number: '9030012345678', // Foundation's account
+        amount: parseFloat(amount),
+        currency: 'UGX',
+        beneficiary_name: 'Thriving Ladies Foundation',
+        reference: reference,
+        callback_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/donate/webhook`,
+        debit_currency: 'UGX'
+      })
+    })
+
+    if (!transferResponse.ok) {
+      throw new Error('Failed to initiate bank transfer')
+    }
+
+    const transferData = await transferResponse.json()
+
+    return {
+      status: 'pending',
+      transactionId: transferData.data?.id || reference,
+      reference: reference,
+      message: 'Bank transfer initiated. Check your email for details.'
+    }
+  } catch (error) {
+    console.error('Bank Transfer error:', error)
+    throw error
   }
 }
 
