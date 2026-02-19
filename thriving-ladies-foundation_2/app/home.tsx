@@ -419,6 +419,18 @@ export default function Home() {
             </div>
           </div>
 
+          <div className="mt-16 rounded-2xl overflow-hidden shadow-2xl h-[400px] w-full animate-fade-in-up animation-delay-300">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3989.7576595460515!2d32.64315561110901!3d0.32043112954319564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMMKwMTknMTMuNiJOIDMywrAzOC'NDQuNiJF!5e0!3m2!1sen!2suk!4v1715690000000!5m2!1sen!2suk"
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+
           <div className="text-center mt-12 animate-fade-in-up animation-delay-400">
             <Button variant="outline" className="btn-outline-gradient shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105" asChild>
               <Link href="/where-we-work">
