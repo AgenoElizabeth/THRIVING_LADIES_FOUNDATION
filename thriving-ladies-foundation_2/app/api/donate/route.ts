@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
 
     const txRef = generateTxRef()
 
-    // ── 1. Register IPN (idempotent �?PesaPal deduplicates) ──────────
+    // ── 1. Register IPN (idempotent PesaPal deduplicates) ──────────
     let ipnId: string
     try {
       ipnId = await registerIPN()
