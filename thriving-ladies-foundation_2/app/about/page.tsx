@@ -37,6 +37,7 @@ import {
   Moon,
   Home
 } from "lucide-react"
+import { supabase } from "@/lib/supabase"
 
 export default function AboutPage() {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
@@ -80,20 +81,39 @@ export default function AboutPage() {
 
   useEffect(() => {
     if (visibleSections.has('impact-numbers')) {
-      const animateCounter = (key: keyof typeof counters, target: number, duration: number = 2000) => {
-        const start = Date.now()
-        const step = () => {
-          const progress = Math.min((Date.now() - start) / duration, 1)
-          setCounters(prev => ({ ...prev, [key]: Math.floor(progress * target) }))
-          if (progress < 1) requestAnimationFrame(step)
+      const fetchAndAnimate = async () => {
+        const { data: metrics } = await supabase
+          .from('impact_metrics')
+          .select('*')
+          .eq('is_published', true);
+
+        const getMetricValue = (key: string, def: number) => {
+          const m = metrics?.find(m => m.metric_key === key);
+          return m ? Number(m.value) : def;
+        };
+
+        const girlsVal = getMetricValue('girls_supported', 1000);
+        const schoolsVal = getMetricValue('schools_partnered', 20);
+        const projectsVal = getMetricValue('water_projects', 10); // Note: assuming key from context
+        const successVal = getMetricValue('program_completion', 98);
+
+        const animateCounter = (key: keyof typeof counters, target: number, duration: number = 2000) => {
+          const start = Date.now()
+          const step = () => {
+            const progress = Math.min((Date.now() - start) / duration, 1)
+            setCounters(prev => ({ ...prev, [key]: Math.floor(progress * target) }))
+            if (progress < 1) requestAnimationFrame(step)
+          }
+          requestAnimationFrame(step)
         }
-        requestAnimationFrame(step)
+
+        animateCounter('girls', girlsVal)
+        animateCounter('schools', schoolsVal)
+        animateCounter('projects', projectsVal)
+        animateCounter('rate', successVal)
       }
 
-      animateCounter('girls', 1000)
-      animateCounter('schools', 20)
-      animateCounter('projects', 10)
-      animateCounter('rate', 98)
+      fetchAndAnimate()
     }
   }, [visibleSections])
 
@@ -112,14 +132,14 @@ export default function AboutPage() {
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl animate-pulse" style={{ transform: `translateY(${scrollY * 0.5}px)` }}></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-full blur-3xl animate-pulse delay-700" style={{ transform: `translateY(${scrollY * -0.3}px)` }}></div>
-        
+
         <div className="container mx-auto max-w-7xl relative z-10">
           <div className="text-center space-y-8">
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500/10 via-green-500/10 to-cyan-500/10 rounded-full px-8 py-4 border-2 border-blue-300/30 dark:border-blue-500/30 shadow-lg backdrop-blur-sm">
               <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400 animate-pulse" />
               <span className="text-base font-bold bg-gradient-to-r from-blue-600 via-green-600 to-cyan-600 bg-clip-text text-transparent">Our Inspiring Story</span>
             </div>
-            
+
             <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight">
               <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-green-600 bg-clip-text text-transparent drop-shadow-lg">
                 Empowering
@@ -129,7 +149,7 @@ export default function AboutPage() {
                 Uganda's Future
               </span>
             </h1>
-            
+
             <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
               Revolutionary approach to menstrual health education and women's empowerment,
               creating lasting change in communities across Uganda.
@@ -167,7 +187,7 @@ export default function AboutPage() {
                 priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 via-transparent to-green-900/20"></div>
-              
+
               {/* Enhanced Floating Stats */}
               <div className="absolute bottom-8 left-8 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-3xl p-6 shadow-2xl border-2 border-blue-300/50 dark:border-blue-500/30 transform hover:scale-110 transition-all duration-300">
                 <div className="text-center">
@@ -175,7 +195,7 @@ export default function AboutPage() {
                   <div className="text-sm font-semibold text-gray-600 dark:text-gray-400">Years of Impact</div>
                 </div>
               </div>
-              
+
               <div className="absolute top-8 right-8 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-3xl p-6 shadow-2xl border-2 border-green-300/50 dark:border-green-500/30 transform hover:scale-110 transition-all duration-300">
                 <div className="text-center">
                   <div className="text-4xl font-extrabold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">1000+</div>
@@ -192,14 +212,14 @@ export default function AboutPage() {
         {/* Decorative Elements */}
         <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-green-300/20 to-emerald-300/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-10 right-10 w-72 h-72 bg-gradient-to-br from-blue-300/20 to-cyan-300/20 rounded-full blur-3xl"></div>
-        
+
         <div className="container mx-auto max-w-7xl relative z-10">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500/10 via-blue-500/10 to-cyan-500/10 rounded-full px-8 py-4 border-2 border-green-300/30 dark:border-green-500/30 shadow-lg backdrop-blur-sm mb-6">
               <Target className="h-5 w-5 text-green-600 dark:text-green-400 animate-pulse" />
               <span className="text-base font-bold bg-gradient-to-r from-green-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">Our Purpose & Direction</span>
             </div>
-            
+
             <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-6">
               <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-green-600 bg-clip-text text-transparent">
                 Mission
@@ -218,7 +238,7 @@ export default function AboutPage() {
             {/* Mission */}
             <Card className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 bg-gradient-to-br from-white via-blue-50 to-cyan-50 dark:from-gray-800 dark:via-blue-900/20 dark:to-cyan-900/20 backdrop-blur-sm transform hover:scale-105 flex flex-col">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-cyan-400/10 to-green-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               <CardHeader className="relative z-10 pb-6">
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 via-cyan-500 to-green-500 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-xl">
                   <Rocket className="h-10 w-10 text-white animate-pulse" />
@@ -240,7 +260,7 @@ export default function AboutPage() {
             {/* Vision */}
             <Card className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 bg-gradient-to-br from-white via-green-50 to-emerald-50 dark:from-gray-800 dark:via-green-900/20 dark:to-emerald-900/20 backdrop-blur-sm transform hover:scale-105 flex flex-col">
               <div className="absolute inset-0 bg-gradient-to-br from-green-400/10 via-emerald-400/10 to-teal-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               <CardHeader className="relative z-10 pb-6">
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300 shadow-xl">
                   <Eye className="h-10 w-10 text-white animate-pulse" />
@@ -278,7 +298,7 @@ export default function AboutPage() {
               <Users className="h-5 w-5 text-cyan-600 dark:text-cyan-400 animate-pulse" />
               <span className="text-base font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent">Our Amazing Team</span>
             </div>
-            
+
             <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-6">
               <span className="text-gray-800 dark:text-gray-200">Meet Our</span>{" "}
               <span className="bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent">Dream Team</span>
@@ -365,7 +385,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-     {/* Video Story Section */}
+      {/* Video Story Section */}
       <section id="video" ref={(el) => { sectionRefs.current.video = el }} className={`py-20 px-6 bg-gradient-to-br from-gray-50 via-slate-50 to-zinc-50 dark:from-gray-900 dark:via-slate-900/10 dark:to-zinc-900/10 relative overflow-hidden transition-all duration-1000 ${visibleSections.has('video') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-16">
@@ -508,9 +528,9 @@ export default function AboutPage() {
                 description: "We embrace growth through education and adaptation, ensuring our methods evolve with the changing needs of our communities.",
                 icon: BookOpen,
                 color: "from-red-500 to-orange-500",
-                image:  "https://ik.imagekit.io/xjtx0zx5v/images/class1.jpeg"
+                image: "https://ik.imagekit.io/xjtx0zx5v/images/class1.jpeg"
               },
-              
+
               {
                 value: "Self Leadership",
                 description: "We lead by example, taking ownership of our actions and inspiring others to become confident, capable leaders in their own right.",
@@ -750,14 +770,14 @@ export default function AboutPage() {
         {/* Decorative Elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-green-300/20 to-blue-300/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-300/20 to-orange-300/20 rounded-full blur-3xl"></div>
-        
+
         <div className="container mx-auto max-w-7xl relative z-10">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500/10 via-blue-500/10 to-purple-500/10 rounded-full px-8 py-4 border-2 border-green-300/30 dark:border-green-500/30 shadow-lg backdrop-blur-sm mb-6">
               <TrendingUp className="h-5 w-5 text-green-600 dark:text-green-400 animate-pulse" />
               <span className="text-base font-bold bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">Measurable Impact</span>
             </div>
-            
+
             <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-6">
               <span className="text-gray-800 dark:text-gray-200">Our</span>{" "}
               <span className="bg-gradient-to-r from-green-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">Impact Story</span>
@@ -776,7 +796,7 @@ export default function AboutPage() {
             ].map((stat, index) => (
               <Card key={index} className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-3 text-center bg-white dark:bg-gray-800 backdrop-blur-sm">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-pink-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
+
                 <CardContent className="p-8 relative z-10">
                   <div className={`w-20 h-20 bg-gradient-to-br ${stat.gradient} rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-xl`}>
                     <stat.icon className="h-10 w-10 text-white" />
@@ -798,7 +818,7 @@ export default function AboutPage() {
           <div className="absolute bottom-10 right-10 w-80 h-80 bg-green-300/20 rounded-full blur-3xl animate-pulse delay-700"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-300/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
-        
+
         <div className="container mx-auto max-w-5xl text-center relative z-10">
           <div className="space-y-10">
             <div className="space-y-6">
@@ -806,7 +826,7 @@ export default function AboutPage() {
                 <Sparkles className="h-6 w-6 text-white animate-pulse" />
                 <span className="text-lg font-bold text-white">Join Our Movement</span>
               </div>
-              
+
               <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight">
                 Ready to{" "}
                 <span className="bg-gradient-to-r from-green-300 via-emerald-300 to-teal-300 bg-clip-text text-transparent">
@@ -842,7 +862,7 @@ export default function AboutPage() {
                 </Link>
               </Button>
             </div>
-            
+
             {/* Trust Indicators */}
             <div className="flex flex-wrap items-center justify-center gap-8 pt-8 text-white/90">
               <div className="flex items-center gap-3">

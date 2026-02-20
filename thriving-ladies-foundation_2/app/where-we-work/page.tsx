@@ -1,3 +1,6 @@
+"use client"
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -17,6 +20,31 @@ import {
 } from "lucide-react";
 
 export default function WhereWeWork() {
+  const [impactMetrics, setImpactMetrics] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchImpact = async () => {
+      try {
+        const res = await fetch('/api/impact')
+        if (res.ok) {
+          const data = await res.json()
+          setImpactMetrics(data)
+        }
+      } catch (error) {
+        console.error('Error fetching impact metrics:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchImpact()
+  }, [])
+
+  const getMetric = (key: string, fallback: string) => {
+    const metric = impactMetrics.find(m => m.metric_key === key)
+    return metric ? metric.display_value : fallback
+  }
+
   return (
     <main className="flex-1">
       {/* Hero Section */}
@@ -359,19 +387,19 @@ export default function WhereWeWork() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center space-y-4 p-6 rounded-xl bg-background/80 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <MapPin className="h-12 w-12 text-primary mx-auto" />
-              <h3 className="text-2xl font-bold text-primary">10+</h3>
+              <h3 className="text-2xl font-bold text-primary">{getMetric('schools_reached', '10+')}</h3>
               <p className="text-sm text-muted-foreground font-medium">Schools Served</p>
               <p className="text-xs text-muted-foreground">Across rural and urban areas</p>
             </div>
             <div className="text-center space-y-4 p-6 rounded-xl bg-background/80 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <Users className="h-12 w-12 text-secondary mx-auto" />
-              <h3 className="text-2xl font-bold text-secondary">500+</h3>
+              <h3 className="text-2xl font-bold text-secondary">{getMetric('children_reached', '500+')}</h3>
               <p className="text-sm text-muted-foreground font-medium">Children Reached</p>
               <p className="text-xs text-muted-foreground">Direct program beneficiaries</p>
             </div>
             <div className="text-center space-y-4 p-6 rounded-xl bg-background/80 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <Home className="h-12 w-12 text-accent mx-auto" />
-              <h3 className="text-2xl font-bold text-accent">50+</h3>
+              <h3 className="text-2xl font-bold text-accent">{getMetric('communities_impacted', '50+')}</h3>
               <p className="text-sm text-muted-foreground font-medium">Communities Impacted</p>
               <p className="text-xs text-muted-foreground">Families and neighborhoods</p>
             </div>

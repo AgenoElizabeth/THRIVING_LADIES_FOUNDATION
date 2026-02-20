@@ -13,17 +13,13 @@ type PaymentMethod = "MTN_MOBILE_MONEY" | "AIRTEL_MONEY" | "BANK_TRANSFER" | nul
 interface DonationResponse {
   success: boolean
   message: string
-  donation: {
-    id: string
-    amount: number
-    status: string
-    transactionId: string
-    reference: string
-  }
-  instructions: {
+  txRef: string
+  orderTrackingId?: string
+  redirectUrl?: string     // PesaPal hosted payment page
+  instructions?: {
     title: string
     steps: string[]
-    reference: string
+    reference?: string
     helpText?: string
   }
 }
@@ -75,55 +71,46 @@ export default function PaymentDashboards() {
         setPaymentResponse(data)
         setPaymentStatus('pending')
         toast({
-          title: "Payment Initiated",
-          description: data.message
+          title: 'Payment Initiated',
+          description: 'Redirecting you to PesaPal to complete your donation...',
         })
 
-        // If there's a payment link, redirect to Flutterwave
-        if (data.instructions?.paymentLink) {
-          // Small delay to show the success message
+        // Redirect to PesaPal hosted payment page
+        if (data.redirectUrl) {
           setTimeout(() => {
-            window.location.href = data.instructions.paymentLink
-          }, 2000)
+            window.location.href = data.redirectUrl
+          }, 1500)
         } else {
-          // Start polling for status if no redirect link
-          pollPaymentStatus(data.donation.transactionId)
+          // Fallback: poll our DB for status
+          pollPaymentStatus(data.txRef)
         }
       } else {
         throw new Error(data.error)
       }
     } catch (error) {
       toast({
-        title: "Payment Failed",
-        description: error instanceof Error ? error.message : "Something went wrong",
-        variant: "destructive"
+        title: 'Payment Failed',
+        description: error instanceof Error ? error.message : 'Something went wrong',
+        variant: 'destructive',
       })
     } finally {
       setIsLoading(false)
     }
   }
 
-  const pollPaymentStatus = async (transactionId: string) => {
+  const pollPaymentStatus = async (txRef: string) => {
     const poll = async () => {
       try {
-        const response = await fetch(`/api/donate?transactionId=${transactionId}`)
+        const response = await fetch(`/api/donate?tx_ref=${txRef}`)
         const data = await response.json()
         if (data.status === 'completed') {
           setPaymentStatus('completed')
-          toast({
-            title: "Payment Completed",
-            description: "Thank you for your donation!"
-          })
+          toast({ title: 'Payment Completed', description: 'Thank you for your donation!' })
         } else if (data.status === 'failed') {
           setPaymentStatus('failed')
-          toast({
-            title: "Payment Failed",
-            description: "Please try again or contact support.",
-            variant: "destructive"
-          })
+          toast({ title: 'Payment Failed', description: 'Please try again or contact support.', variant: 'destructive' })
         } else {
-          // Continue polling
-          setTimeout(poll, 5000) // Poll every 5 seconds
+          setTimeout(poll, 5000)
         }
       } catch (error) {
         console.error('Status check failed:', error)
@@ -138,35 +125,15 @@ export default function PaymentDashboards() {
         <Card className="border-0 shadow-2xl bg-green-50 text-green-900">
           <CardHeader>
             <div className="flex items-center gap-2">
-              {paymentStatus === 'completed' ? (
-                <CheckCircle className="h-6 w-6 text-green-600" />
-              ) : (
-                <Clock className="h-6 w-6 text-yellow-600" />
-              )}
-              <CardTitle className="text-2xl">
-                {paymentStatus === 'completed' ? 'Payment Completed!' : 'Payment Processing'}
-              </CardTitle>
+              <Clock className="h-6 w-6 text-yellow-600 animate-spin" />
+              <CardTitle className="text-2xl">Redirecting to PesaPal...</CardTitle>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="bg-white/50 rounded-lg p-4">
-              <p className="font-semibold">Amount: UGX {paymentResponse.donation.amount.toLocaleString()}</p>
-              <p className="text-sm">Reference: {paymentResponse.donation.reference}</p>
-              <p className="text-sm">Transaction ID: {paymentResponse.donation.transactionId}</p>
+              <p className="font-semibold">Reference: {paymentResponse.txRef}</p>
+              <p className="text-sm text-green-700 mt-1">You will be redirected to PesaPal to complete your payment securely.</p>
             </div>
-            {paymentResponse.instructions && (
-              <div className="space-y-2">
-                <h4 className="font-semibold">{paymentResponse.instructions.title}</h4>
-                <ul className="list-disc list-inside text-sm space-y-1">
-                  {paymentResponse.instructions.steps.map((step, index) => (
-                    <li key={index}>{step}</li>
-                  ))}
-                </ul>
-                {paymentResponse.instructions.helpText && (
-                  <p className="text-sm text-green-700 italic">{paymentResponse.instructions.helpText}</p>
-                )}
-              </div>
-            )}
             <Button
               onClick={() => {
                 setPaymentResponse(null)
@@ -174,8 +141,9 @@ export default function PaymentDashboards() {
                 setSelectedMethod(null)
               }}
               className="w-full"
+              variant="outline"
             >
-              Make Another Donation
+              Cancel and go back
             </Button>
           </CardContent>
         </Card>

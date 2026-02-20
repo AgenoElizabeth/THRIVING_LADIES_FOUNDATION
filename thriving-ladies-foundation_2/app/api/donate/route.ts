@@ -1,260 +1,138 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { supabaseAdmin } from '@/lib/supabase-admin'
+import {
+  getPesaPalToken,
+  registerIPN,
+  submitOrder,
+  generateTxRef,
+  mapPesaPalStatus,
+} from '@/lib/pesapal'
 
-// Environment variables
-const FLUTTERWAVE_PUBLIC_KEY = process.env.FLUTTERWAVE_PUBLIC_KEY!
-const FLUTTERWAVE_SECRET_KEY = process.env.FLUTTERWAVE_SECRET_KEY!
-const FLUTTERWAVE_ENCRYPTION_KEY = process.env.FLUTTERWAVE_ENCRYPTION_KEY!
-const FLUTTERWAVE_ENVIRONMENT = process.env.FLUTTERWAVE_ENVIRONMENT || 'sandbox'
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
 
+// ─── POST /api/donate ────────────────────────────────────────────────────────
+// Initiates a PesaPal payment and returns a redirect URL for the donor
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { amount, phoneNumber, paymentMethod, donorInfo, purpose } = body
 
-    // Validate required fields
-    if (!amount || !phoneNumber || !paymentMethod) {
+    if (!amount) {
+      return NextResponse.json({ error: 'Amount is required' }, { status: 400 })
+    }
+
+    const txRef = generateTxRef()
+
+    // ── 1. Register IPN (idempotent �?PesaPal deduplicates) ──────────
+    let ipnId: string
+    try {
+      ipnId = await registerIPN()
+    } catch (err) {
+      console.error('IPN registration error:', err)
       return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
+        { error: 'Payment gateway configuration error. Please contact support.' },
+        { status: 500 }
       )
     }
 
-    // Process payment using Flutterwave
-    const paymentResponse = await processFlutterwavePayment(amount, phoneNumber, paymentMethod, donorInfo)
-
-    // Store donation record in database
-    const donationRecord = {
-      id: generateTransactionId(),
-      amount: parseFloat(amount),
-      currency: 'UGX',
-      phoneNumber,
-      paymentMethod,
-      donorInfo: donorInfo || { anonymous: true },
-      purpose: purpose || 'General Fund',
-      status: paymentResponse.status,
-      transactionId: paymentResponse.transactionId,
-      timestamp: new Date().toISOString(),
-      paymentReference: paymentResponse.reference
+    // ── 2. Build billing address ──────────────────────────────────────
+    const billing = {
+      email_address: donorInfo?.email || '',
+      phone_number: phoneNumber || donorInfo?.phone || '',
+      country_code: 'UG',
+      first_name: donorInfo?.name?.split(' ')[0] || 'Anonymous',
+      last_name: donorInfo?.name?.split(' ').slice(1).join(' ') || 'Donor',
     }
 
-    // In production, save to database
-    // await saveDonationToDatabase(donationRecord)
+    // ── 3. Submit order to PesaPal ────────────────────────────────────
+    const orderResponse = await submitOrder({
+      id: txRef,
+      currency: 'UGX',
+      amount: parseFloat(amount),
+      description: purpose || 'Donation to Thriving Ladies Foundation',
+      callback_url: `${BASE_URL}/donate/success?tx_ref=${txRef}`,
+      notification_id: ipnId,
+      billing_address: billing,
+    })
+
+    // ── 4. Upsert donor record ────────────────────────────────────────
+    let donorId: string | null = null
+    if (donorInfo && !donorInfo.anonymous) {
+      const donorPayload = {
+        first_name: billing.first_name,
+        last_name: billing.last_name,
+        email: donorInfo.email || null,
+        phone: phoneNumber || donorInfo.phone || null,
+        donor_type: donorInfo.email ? 'individual' : 'anonymous',
+        is_anonymous: false,
+        preferred_payment: paymentMethod || 'pesapal',
+      }
+
+      const { data: donorData } = donorInfo.email
+        ? await supabaseAdmin
+          .from('donors')
+          .upsert(donorPayload, { onConflict: 'email' })
+          .select('id')
+        : await supabaseAdmin
+          .from('donors')
+          .insert(donorPayload)
+          .select('id')
+
+      if (donorData?.[0]) donorId = donorData[0].id
+    }
+
+    // ── 5. Save pending donation record ───────────────────────────────
+    await supabaseAdmin.from('donations').insert({
+      tx_ref: txRef,
+      flw_ref: orderResponse.order_tracking_id, // reusing column for tracking id
+      flw_transaction_id: null,
+      donor_id: donorId,
+      amount: parseFloat(amount),
+      currency: 'UGX',
+      payment_method: paymentMethod || 'pesapal',
+      payment_provider: 'pesapal',
+      status: 'pending',
+      purpose: purpose || 'General Fund',
+      donor_snapshot: { ...donorInfo, phone: phoneNumber },
+      payment_meta: orderResponse,
+    })
 
     return NextResponse.json({
       success: true,
-      message: 'Payment initiated successfully',
-      donation: donationRecord,
-      instructions: getPaymentInstructions(paymentMethod, paymentResponse)
+      message: 'Payment initiated. Redirecting to PesaPal...',
+      txRef,
+      orderTrackingId: orderResponse.order_tracking_id,
+      redirectUrl: orderResponse.redirect_url,
     })
-
   } catch (error) {
-    console.error('Payment processing error:', error)
+    console.error('Donation error:', error)
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Payment processing failed' },
+      { error: error instanceof Error ? error.message : 'Payment initiation failed' },
       { status: 500 }
     )
   }
 }
 
-// Flutterwave payment processing for Uganda
-async function processFlutterwavePayment(amount: string, phoneNumber: string, paymentMethod: string, donorInfo: any) {
-  try {
-    const baseUrl = 'https://api.flutterwave.com' // Same for sandbox and production
-
-    const reference = 'TLF_' + generateTransactionId()
-
-    let paymentData: any
-
-    if (paymentMethod === 'BANK_TRANSFER') {
-      // For Centenary Bank transfer
-      paymentData = {
-        account_bank: '31', // Centenary Bank Uganda
-        account_number: '1234567890', // Foundation's account number
-        amount: parseFloat(amount),
-        currency: 'UGX',
-        beneficiary_name: 'Thriving Ladies Foundation',
-        reference: reference,
-        callback_url: `${BASE_URL}/api/donate/webhook`,
-        debit_currency: 'UGX'
-      }
-
-      const transferResponse = await fetch(`${baseUrl}/v3/transfers`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${FLUTTERWAVE_SECRET_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(paymentData)
-      })
-
-      if (!transferResponse.ok) {
-        const errorData = await transferResponse.json()
-        throw new Error(`Bank transfer failed: ${errorData.message}`)
-      }
-
-      const transferResult = await transferResponse.json()
-
-      return {
-        status: 'pending',
-        transactionId: transferResult.data?.id || reference,
-        reference: reference,
-        message: 'Bank transfer initiated. Please check your banking app for details.'
-      }
-    } else {
-      // For Mobile Money (MTN and Airtel)
-      paymentData = {
-        tx_ref: reference,
-        amount: parseFloat(amount),
-        currency: 'UGX',
-        redirect_url: `${BASE_URL}/donate/success`,
-        payment_options: 'mobilemoneyuganda',
-        customer: {
-          email: donorInfo?.email || 'donor@thrivingladies.org',
-          phone_number: phoneNumber,
-          name: donorInfo?.name || 'Anonymous Donor'
-        },
-        customizations: {
-          title: 'Donation to Thriving Ladies Foundation',
-          description: 'Supporting girls\' education and health in Uganda',
-          logo: `${BASE_URL}/placeholder-logo.png`
-        },
-        meta: {
-          consumer_id: phoneNumber,
-          consumer_mac: generateTransactionId().substring(0, 12)
-        }
-      }
-
-      // Initiate payment
-      const paymentResponse = await fetch(`${baseUrl}/v3/payments`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${FLUTTERWAVE_SECRET_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(paymentData)
-      })
-
-      if (!paymentResponse.ok) {
-        const errorData = await paymentResponse.json()
-        console.error('Flutterwave API Error:', errorData)
-        throw new Error(`Payment initiation failed: ${errorData.message || 'Unknown error'}`)
-      }
-
-      const paymentResult = await paymentResponse.json()
-
-      if (paymentResult.status === 'success') {
-        return {
-          status: 'pending',
-          transactionId: paymentResult.data.id,
-          reference: reference,
-          flutterwaveRef: paymentResult.data.flw_ref,
-          paymentLink: paymentResult.data.link,
-          message: 'Payment initiated successfully. Please complete the payment on the next page.'
-        }
-      } else {
-        throw new Error(`Payment initiation failed: ${paymentResult.message}`)
-      }
-    }
-  } catch (error) {
-    console.error('Flutterwave Payment error:', error)
-    throw error
-  }
-}
-
-// Generate unique transaction ID
-function generateTransactionId(): string {
-  const timestamp = Date.now()
-  const random = Math.random().toString(36).substring(2, 8).toUpperCase()
-  return `${timestamp}_${random}`
-}
-
-// Get payment instructions based on method
-function getPaymentInstructions(method: string, response: any) {
-  switch (method) {
-    case 'MTN_MOBILE_MONEY':
-      return {
-        title: 'Complete your MTN Mobile Money payment',
-        steps: [
-          'You will be redirected to Flutterwave\'s secure payment page',
-          'Select MTN Mobile Money as your payment method',
-          'Enter your MTN number if prompted',
-          'Check your phone for a payment prompt',
-          'Enter your MTN Mobile Money PIN',
-          'Confirm the payment',
-          'You will receive a confirmation SMS'
-        ],
-        reference: response.reference,
-        paymentLink: response.paymentLink,
-        helpText: 'If you don\'t receive a prompt, dial *165# and follow the instructions'
-      }
-
-    case 'AIRTEL_MONEY':
-      return {
-        title: 'Complete your Airtel Money payment',
-        steps: [
-          'You will be redirected to Flutterwave\'s secure payment page',
-          'Select Airtel Money as your payment method',
-          'Enter your Airtel number if prompted',
-          'Check your phone for a payment prompt',
-          'Enter your Airtel Money PIN',
-          'Confirm the payment',
-          'You will receive a confirmation SMS'
-        ],
-        reference: response.reference,
-        paymentLink: response.paymentLink,
-        helpText: 'If you don\'t receive a prompt, dial *185# and follow the instructions'
-      }
-
-    case 'BANK_TRANSFER':
-      return {
-        title: 'Complete your Centenary Bank transfer',
-        steps: [
-          'You will be redirected to Flutterwave\'s secure payment page',
-          'Select Bank Transfer as your payment method',
-          'Choose Centenary Bank from the list',
-          'Complete the transfer using your banking app or online banking',
-          'Use the provided reference number for the transfer',
-          'Payment will be confirmed automatically'
-        ],
-        reference: response.reference,
-        paymentLink: response.paymentLink,
-        helpText: 'Please use the reference number for faster processing'
-      }
-
-    default:
-      return {
-        title: 'Payment Processing',
-        steps: ['Follow the instructions provided'],
-        reference: response.reference,
-        paymentLink: response.paymentLink
-      }
-  }
-}
-
-// GET endpoint to check payment status
+// ─── GET /api/donate?transactionId=xxx ───────────────────────────────────────
+// Check donation status by tx_ref or order_tracking_id
 export async function GET(request: NextRequest) {
   const url = new URL(request.url)
-  const transactionId = url.searchParams.get('transactionId')
-  
-  if (!transactionId) {
-    return NextResponse.json(
-      { error: 'Transaction ID required' },
-      { status: 400 }
-    )
+  const txRef = url.searchParams.get('tx_ref') || url.searchParams.get('transactionId')
+
+  if (!txRef) {
+    return NextResponse.json({ error: 'tx_ref or transactionId required' }, { status: 400 })
   }
 
-  // In production, check status with payment provider APIs
-  // For demo, return mock status
-  const mockStatus = Math.random() > 0.3 ? 'completed' : 'pending'
-  
-  return NextResponse.json({
-    transactionId,
-    status: mockStatus,
-    timestamp: new Date().toISOString(),
-    amount: 'UGX 100,000', // Would be from database
-    message: mockStatus === 'completed' 
-      ? 'Payment completed successfully' 
-      : 'Payment is being processed'
-  })
+  const { data, error } = await supabaseAdmin
+    .from('donations')
+    .select('id, tx_ref, status, amount, currency, purpose, created_at, paid_at, payment_provider')
+    .eq('tx_ref', txRef)
+    .single()
+
+  if (error || !data) {
+    return NextResponse.json({ error: 'Donation not found' }, { status: 404 })
+  }
+
+  return NextResponse.json(data)
 }
+

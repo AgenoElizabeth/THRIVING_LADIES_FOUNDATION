@@ -1,41 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase-admin'
 
 export async function GET() {
   try {
-    console.log('Testing Supabase connection...')
-    console.log('URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
-    console.log('Key exists:', !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+    const { data, error } = await supabaseAdmin
+      .from('donations')
+      .select(`
+        *,
+        donor:donors(id, first_name, last_name, email, phone, donor_type),
+        project:projects(id, title, slug)
+      `)
+      .order('created_at', { ascending: false })
 
-    // Try different possible table names for donations
-    const possibleTables = ['donations', 'donation']
-
-    for (const tableName of possibleTables) {
-      try {
-        console.log(`Trying table: ${tableName}`)
-        const { data, error } = await supabase
-          .from(tableName)
-          .select('*')
-          .order('created_at', { ascending: false })
-
-        console.log(`Table ${tableName} - Error:`, error)
-        console.log(`Table ${tableName} - Data length:`, data?.length || 0)
-
-        if (!error && data) {
-          console.log(`Success with table: ${tableName}`)
-          return NextResponse.json(data)
-        }
-      } catch (error) {
-        console.log(`Exception with table ${tableName}:`, error)
-        continue
-      }
-    }
-
-    console.log('No tables found, returning empty array')
-    // If no table found, return empty array
-    return NextResponse.json([])
-  } catch (error) {
-    console.error('Internal server error:', error)
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data)
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
@@ -43,27 +22,14 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
+    const { data, error } = await supabaseAdmin
+      .from('donations')
+      .insert(body)
+      .select()
 
-    // Try different possible table names
-    const possibleTables = ['donations', 'donation']
-
-    for (const tableName of possibleTables) {
-      try {
-        const { data, error } = await supabase
-          .from(tableName)
-          .insert(body)
-          .select()
-
-        if (!error && data) {
-          return NextResponse.json(data[0], { status: 201 })
-        }
-      } catch (error) {
-        continue
-      }
-    }
-
-    return NextResponse.json({ error: 'No suitable table found' }, { status: 500 })
-  } catch (error) {
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data[0], { status: 201 })
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

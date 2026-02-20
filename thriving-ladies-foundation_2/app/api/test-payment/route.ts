@@ -1,36 +1,26 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
+import { getPesaPalToken } from '@/lib/pesapal'
 
-const FLUTTERWAVE_SECRET_KEY = process.env.FLUTTERWAVE_SECRET_KEY!
-
+/**
+ * GET /api/test-payment
+ * Verifies PesaPal connection using stored credentials
+ */
 export async function GET() {
   try {
-    // Test Flutterwave connection
-    const response = await fetch('https://api.flutterwave.com/v3/banks/UG', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${FLUTTERWAVE_SECRET_KEY}`,
-        'Content-Type': 'application/json'
-      }
-    })
-
-    if (!response.ok) {
-      throw new Error(`Flutterwave API test failed: ${response.status}`)
-    }
-
-    const data = await response.json()
-
+    const token = await getPesaPalToken()
     return NextResponse.json({
       success: true,
-      message: 'Flutterwave API connection successful',
-      data: data
+      message: 'PesaPal API connection successful',
+      environment: process.env.PESAPAL_ENVIRONMENT || 'sandbox',
+      tokenPreview: token.substring(0, 20) + '...',
     })
-
   } catch (error) {
-    console.error('Flutterwave test error:', error)
+    console.error('PesaPal test error:', error)
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Test failed'
+        message: error instanceof Error ? error.message : 'PesaPal connection failed',
+        hint: 'Check PESAPAL_CONSUMER_KEY and PESAPAL_CONSUMER_SECRET in .env.local',
       },
       { status: 500 }
     )

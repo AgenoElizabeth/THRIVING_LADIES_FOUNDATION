@@ -1,29 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase-admin'
 
 export async function GET() {
   try {
-    // Try different possible table names for gallery/media
-    const possibleTables = ['gallery', 'media', 'images', 'photos']
+    const { data, error } = await supabaseAdmin
+      .from('gallery')
+      .select(`
+        *,
+        project:projects(id, title, slug),
+        school:schools(id, name)
+      `)
+      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: false })
 
-    for (const tableName of possibleTables) {
-      try {
-        const { data, error } = await supabase
-          .from(tableName)
-          .select('*')
-          .order('created_at', { ascending: false })
-
-        if (!error && data) {
-          return NextResponse.json(data)
-        }
-      } catch (error) {
-        continue
-      }
-    }
-
-    // If no table found, return empty array
-    return NextResponse.json([])
-  } catch (error) {
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data)
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
@@ -31,27 +23,14 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
+    const { data, error } = await supabaseAdmin
+      .from('gallery')
+      .insert(body)
+      .select()
 
-    // Try different possible table names
-    const possibleTables = ['gallery', 'media', 'images', 'photos']
-
-    for (const tableName of possibleTables) {
-      try {
-        const { data, error } = await supabase
-          .from(tableName)
-          .insert(body)
-          .select()
-
-        if (!error && data) {
-          return NextResponse.json(data[0], { status: 201 })
-        }
-      } catch (error) {
-        continue
-      }
-    }
-
-    return NextResponse.json({ error: 'No suitable table found' }, { status: 500 })
-  } catch (error) {
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data[0], { status: 201 })
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

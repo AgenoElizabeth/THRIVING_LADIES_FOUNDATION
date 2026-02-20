@@ -1,71 +1,83 @@
 import { NextRequest, NextResponse } from 'next/server'
-import crypto from 'crypto'
+import { supabaseAdmin } from '@/lib/supabase-admin'
+import { getTransactionStatus, mapPesaPalStatus } from '@/lib/pesapal'
 
-const FLUTTERWAVE_SECRET_KEY = process.env.FLUTTERWAVE_SECRET_KEY!
-
-export async function POST(request: NextRequest) {
+/**
+ * PesaPal IPN Webhook Handler
+ * GET /api/donate/webhook?OrderTrackingId=xxx&OrderMerchantReference=TLF_xxx&OrderNotificationType=IPNCHANGE
+ *
+ * PesaPal calls this URL (GET) whenever a payment status changes.
+ * We verify the payment status directly from PesaPal and update our DB.
+ */
+export async function GET(request: NextRequest) {
   try {
-    const body = await request.json()
-    const signature = request.headers.get('verif-hash')
+    const url = new URL(request.url)
+    const orderTrackingId = url.searchParams.get('OrderTrackingId')
+    const merchantReference = url.searchParams.get('OrderMerchantReference') // our tx_ref
+    const notificationType = url.searchParams.get('OrderNotificationType')
 
-    // Verify Flutterwave webhook signature
-    if (!signature) {
-      return NextResponse.json(
-        { error: 'No signature provided' },
-        { status: 400 }
-      )
+    console.log('[PesaPal IPN]', { orderTrackingId, merchantReference, notificationType })
+
+    if (!orderTrackingId || !merchantReference) {
+      // PesaPal requires a 200 OK even for bad requests
+      return NextResponse.json({ orderNotificationType: 'IPNCHANGE', orderTrackingId, orderMerchantReference: merchantReference, status: '200' })
     }
 
-    // Create expected signature
-    const expectedSignature = crypto
-      .createHmac('sha256', FLUTTERWAVE_SECRET_KEY)
-      .update(JSON.stringify(body))
-      .digest('hex')
+    // ── Fetch real status from PesaPal ──────────────────────────────
+    const statusData = await getTransactionStatus(orderTrackingId)
+    const dbStatus = mapPesaPalStatus(statusData.payment_status_description)
 
-    if (signature !== expectedSignature) {
-      return NextResponse.json(
-        { error: 'Invalid signature' },
-        { status: 400 }
-      )
-    }
+    // ── Update donation record ──────────────────────────────────────
+    await supabaseAdmin
+      .from('donations')
+      .update({
+        status: dbStatus,
+        flw_transaction_id: statusData.confirmation_code || null,
+        payment_meta: statusData,
+        webhook_verified: true,
+        paid_at: dbStatus === 'completed' ? new Date().toISOString() : null,
+      })
+      .eq('tx_ref', merchantReference)
 
-    const { event, data } = body
+    // ── If completed, update donor totals ──────────────────────────
+    if (dbStatus === 'completed') {
+      const { data: donation } = await supabaseAdmin
+        .from('donations')
+        .select('donor_id, amount')
+        .eq('tx_ref', merchantReference)
+        .single()
 
-    console.log(`Webhook received: ${event}`, data)
+      if (donation?.donor_id) {
+        const { data: donor } = await supabaseAdmin
+          .from('donors')
+          .select('total_donations, total_amount, first_donation_at')
+          .eq('id', donation.donor_id)
+          .single()
 
-    if (event === 'charge.completed') {
-      // Payment was successful
-      const transactionId = data.tx_ref
-      const flutterwaveId = data.id
-      const amount = data.amount
-      const currency = data.currency
-      const status = data.status
-
-      if (status === 'successful') {
-        // Update payment status in database
-        console.log(`Payment completed: ${transactionId}, Amount: ${amount} ${currency}`)
-
-        // In production, update database status to 'completed'
-        // await updatePaymentStatus(transactionId, 'completed', flutterwaveId)
-
-        // Send confirmation email, etc.
-        // await sendConfirmationEmail(data.customer.email, amount, transactionId)
+        if (donor) {
+          await supabaseAdmin
+            .from('donors')
+            .update({
+              total_donations: (donor.total_donations || 0) + 1,
+              total_amount: (donor.total_amount || 0) + (donation.amount || 0),
+              last_donation_at: new Date().toISOString(),
+              first_donation_at: donor.first_donation_at || new Date().toISOString(),
+            })
+            .eq('id', donation.donor_id)
+        }
       }
-    } else if (event === 'transfer.completed') {
-      // Bank transfer completed
-      console.log(`Bank transfer completed: ${data.reference}`)
     }
 
+    // PesaPal IPN requires this exact response format
     return NextResponse.json({
-      status: 'success',
-      message: 'Webhook processed successfully'
+      orderNotificationType: notificationType,
+      orderTrackingId,
+      orderMerchantReference: merchantReference,
+      status: '200',
     })
-
   } catch (error) {
-    console.error('Webhook processing error:', error)
-    return NextResponse.json(
-      { error: 'Webhook processing failed' },
-      { status: 500 }
-    )
+    console.error('[PesaPal IPN Error]', error)
+    // Return 200 to prevent PesaPal from retrying endlessly
+    return NextResponse.json({ status: '200' })
   }
 }

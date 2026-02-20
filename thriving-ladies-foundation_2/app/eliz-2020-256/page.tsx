@@ -1,4 +1,4 @@
- 'use client'
+'use client'
 
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
@@ -27,11 +27,11 @@ export default function AdminLogin() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  
-  const { login, isLoading } = useAuth()
+
+  const { signIn, isLoading } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
-  
+
   // Get the redirect URL from search params, default to dashboard
   const redirectUrl = searchParams.get('redirect') || '/dashboard'
 
@@ -40,18 +40,18 @@ export default function AdminLogin() {
     setError('')
 
     if (!email || !password) {
-      setError('Please enter both email and password')
+      setError('Please enter both username/email and password')
       return
     }
 
     try {
-      const result = await login(email, password)
+      const { error } = await signIn(email, password)
 
-      if (result.success) {
+      if (!error) {
         // Successful login - redirect to dashboard or specified URL
         router.push(redirectUrl)
       } else {
-        setError(result.error || 'Invalid email or password. Please try again.')
+        setError(error || 'Invalid email or password. Please try again.')
       }
     } catch (error) {
       setError('An error occurred during login. Please try again.')
@@ -96,18 +96,18 @@ export default function AdminLogin() {
               Enter your credentials to access the admin dashboard
             </CardDescription>
           </CardHeader>
-          
+
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-6">
               {/* Email Field */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium text-foreground">Email Address</Label>
+                <Label htmlFor="email" className="text-sm font-medium text-foreground">Username or Email</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Input
                     id="email"
-                    type="email"
-                    placeholder="admin@thrivinglives.org"
+                    type="text"
+                    placeholder="admin or admin@thrivinglives.org"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="pl-10 border-2 focus:border-primary transition-colors"
@@ -143,9 +143,9 @@ export default function AdminLogin() {
               {/* Remember Me & Forgot Password */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <input 
-                    type="checkbox" 
-                    id="remember" 
+                  <input
+                    type="checkbox"
+                    id="remember"
                     className="w-4 h-4 text-primary rounded"
                     aria-label="Remember me for future logins"
                   />
@@ -200,8 +200,8 @@ export default function AdminLogin() {
 
         {/* Back to Website */}
         <div className="text-center mt-6">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           >
             <Home className="h-4 w-4" />

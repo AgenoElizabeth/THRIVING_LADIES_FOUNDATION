@@ -1,29 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase-admin'
 
 export async function GET() {
   try {
-    // Try different possible table names for videos
-    const possibleTables = ['videos', 'media', 'video_library', 'video_files']
+    const { data, error } = await supabaseAdmin
+      .from('videos')
+      .select(`
+        *,
+        project:projects(id, title, slug)
+      `)
+      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: false })
 
-    for (const tableName of possibleTables) {
-      try {
-        const { data, error } = await supabase
-          .from(tableName)
-          .select('*')
-          .order('created_at', { ascending: false })
-
-        if (!error && data) {
-          return NextResponse.json(data)
-        }
-      } catch (error) {
-        continue
-      }
-    }
-
-    // If no table found, return empty array
-    return NextResponse.json([])
-  } catch (error) {
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data)
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
@@ -31,27 +22,47 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
+    const { data, error } = await supabaseAdmin
+      .from('videos')
+      .insert(body)
+      .select()
 
-    // Try different possible table names
-    const possibleTables = ['videos', 'media', 'video_library', 'video_files']
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data[0], { status: 201 })
+  } catch {
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
 
-    for (const tableName of possibleTables) {
-      try {
-        const { data, error } = await supabase
-          .from(tableName)
-          .insert(body)
-          .select()
+export async function PUT(request: NextRequest) {
+  try {
+    const body = await request.json()
+    const { id, ...updates } = body
+    if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 })
 
-        if (!error && data) {
-          return NextResponse.json(data[0], { status: 201 })
-        }
-      } catch (error) {
-        continue
-      }
-    }
+    const { data, error } = await supabaseAdmin
+      .from('videos')
+      .update(updates)
+      .eq('id', id)
+      .select()
 
-    return NextResponse.json({ error: 'No suitable table found' }, { status: 500 })
-  } catch (error) {
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data[0])
+  } catch {
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const url = new URL(request.url)
+    const id = url.searchParams.get('id')
+    if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 })
+
+    const { error } = await supabaseAdmin.from('videos').delete().eq('id', id)
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ message: 'Video deleted' })
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

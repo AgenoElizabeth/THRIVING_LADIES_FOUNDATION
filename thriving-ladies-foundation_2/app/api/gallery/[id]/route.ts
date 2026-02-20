@@ -1,55 +1,63 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase-admin'
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
-    const body = await request.json()
-    // Try different possible table names
-    const possibleTables = ['gallery', 'media', 'images', 'photos']
+    const { id } = params
+    const { data, error } = await supabaseAdmin
+      .from('gallery')
+      .select(`
+        *,
+        project:projects(id, title, slug),
+        school:schools(id, name)
+      `)
+      .eq('id', id)
+      .single()
 
-    for (const tableName of possibleTables) {
-      try {
-        const { error } = await supabase
-          .from(tableName)
-          .update(body)
-          .eq('id', params.id)
-
-        if (!error) {
-          return NextResponse.json({ message: 'Item updated successfully' })
-        }
-      } catch (error) {
-        continue
-      }
-    }
-
-    return NextResponse.json({ error: 'Item not found or no suitable table' }, { status: 404 })
-  } catch (error) {
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data)
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
-    // Try different possible table names
-    const possibleTables = ['gallery', 'media', 'images', 'photos']
+    const { id } = params
+    const body = await request.json()
+    const { data, error } = await supabaseAdmin
+      .from('gallery')
+      .update(body)
+      .eq('id', id)
+      .select()
 
-    for (const tableName of possibleTables) {
-      try {
-        const { error } = await supabase
-          .from(tableName)
-          .delete()
-          .eq('id', params.id)
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data[0])
+  } catch {
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
 
-        if (!error) {
-          return NextResponse.json({ message: 'Item deleted successfully' })
-        }
-      } catch (error) {
-        continue
-      }
-    }
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const { id } = params
+    const { error } = await supabaseAdmin
+      .from('gallery')
+      .delete()
+      .eq('id', id)
 
-    return NextResponse.json({ error: 'Item not found or no suitable table' }, { status: 404 })
-  } catch (error) {
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return new NextResponse(null, { status: 204 })
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

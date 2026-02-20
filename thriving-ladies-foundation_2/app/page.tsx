@@ -12,8 +12,27 @@ import {
   Target,
   Trophy,
 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
-export default function Home() {
+export default async function Home() {
+  // Fetch impact metrics from Supabase
+  const { data: metrics } = await supabase
+    .from('impact_metrics')
+    .select('*')
+    .eq('is_published', true)
+    .order('sort_order', { ascending: true });
+
+  // Map metrics for easy access with fallbacks to avoid "0" on fresh install
+  const getMetric = (key: string, defaultValue: string) => {
+    const metric = metrics?.find(m => m.metric_key === key);
+    return metric ? metric.display_value : defaultValue;
+  };
+
+  const girlsSupported = getMetric('girls_supported', '50+');
+  const programCompletion = getMetric('program_completion', '100%');
+  const improvedHygiene = getMetric('improved_hygiene', '61.6%');
+  const familiesReached = getMetric('families_reached', '50+');
+
   return (
     <main className="flex-1 relative">
       {/* Office Interior Background for entire page */}
@@ -38,7 +57,7 @@ export default function Home() {
             backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
           }}
         />
-        
+
         <div className="container mx-auto px-6 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
@@ -49,7 +68,7 @@ export default function Home() {
                   A World Free From Poverty
                 </span>
               </div>
-              
+
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight animate-fade-in-up">
                 Empowering Girls, Widows and Boys Through{" "}
                 <span className="text-gradient bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
@@ -76,15 +95,15 @@ export default function Home() {
               {/* Enhanced Stats with animations */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-8 animate-fade-in-up animation-delay-600">
                 <div className="space-y-2 p-4 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 hover:scale-105 transition-transform duration-300 cursor-pointer">
-                  <h3 className="text-3xl font-bold text-primary">50+</h3>
+                  <h3 className="text-3xl font-bold text-primary">{girlsSupported}</h3>
                   <p className="text-sm text-muted-foreground font-medium">Girls Supported</p>
                 </div>
                 <div className="space-y-2 p-4 rounded-xl bg-gradient-to-br from-secondary/10 to-secondary/5 hover:scale-105 transition-transform duration-300 cursor-pointer">
-                  <h3 className="text-3xl font-bold text-secondary">100%</h3>
+                  <h3 className="text-3xl font-bold text-secondary">{programCompletion}</h3>
                   <p className="text-sm text-muted-foreground font-medium">Program Completion</p>
                 </div>
                 <div className="space-y-2 p-4 rounded-xl bg-gradient-to-br from-accent/10 to-accent/5 hover:scale-105 transition-transform duration-300 cursor-pointer">
-                  <h3 className="text-3xl font-bold text-accent">61.6%</h3>
+                  <h3 className="text-3xl font-bold text-accent">{improvedHygiene}</h3>
                   <p className="text-sm text-muted-foreground font-medium">Improved Hygiene</p>
                 </div>
               </div>
@@ -108,7 +127,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-medium">Community Impact</p>
-                    <p className="text-sm text-muted-foreground">50+ Families Reached</p>
+                    <p className="text-sm text-muted-foreground">{familiesReached} Families Reached</p>
                   </div>
                 </div>
               </Card>
@@ -133,7 +152,7 @@ export default function Home() {
         {/* Decorative background elements */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        
+
         <div className="container mx-auto px-6 relative">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative group">
@@ -141,7 +160,7 @@ export default function Home() {
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500">
                 {/* Beautiful gradient background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-secondary/20" />
-                
+
                 <Image
                   src="https://ik.imagekit.io/xjtx0zx5v/images/Victoria.jpg"
                   alt="Awino Victoria - Founder & Director"
@@ -149,14 +168,14 @@ export default function Home() {
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                   priority
                 />
-                
+
                 {/* Subtle overlay for better text contrast */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                
+
                 {/* Decorative border effect */}
                 <div className="absolute inset-0 rounded-3xl ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all duration-500" />
               </div>
-              
+
               {/* Decorative floating element */}
               <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 blur-2xl animate-pulse" />
               <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-accent to-primary rounded-full opacity-20 blur-2xl animate-pulse delay-700" />
@@ -172,13 +191,13 @@ export default function Home() {
                   className="object-contain dark:brightness-150"
                 />
               </div>
-              
+
               {/* Section title */}
               <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-4 relative z-10">
                 <Heart className="h-4 w-4 text-primary" />
                 <span className="text-sm font-semibold text-primary">Message from Our Founder</span>
               </div>
-              
+
               <blockquote className="text-2xl lg:text-3xl font-bold text-primary italic border-l-4 border-primary pl-6 hover:border-l-8 transition-all duration-300 relative z-10">
                 "Poverty is gender-blind, and so is our compassion."
               </blockquote>
@@ -447,21 +466,21 @@ export default function Home() {
         {/* Animated background elements */}
         <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
-        
+
         <div className="container mx-auto px-6 text-center relative">
           <div className="max-w-4xl mx-auto space-y-8 animate-fade-in-up">
             <div className="inline-flex items-center gap-2 bg-background/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg mb-4">
               <Heart className="h-5 w-5 text-primary animate-heartbeat" />
               <span className="text-sm font-semibold text-primary">Make an Impact Today</span>
             </div>
-            
+
             <h2 className="text-3xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
               Join Us in Making a Difference
             </h2>
             <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-            Support our mission to improve menstrual hygiene management and education
-            for primary school girls and boys in Uganda.
-          </p>
+              Support our mission to improve menstrual hygiene management and education
+              for primary school girls and boys in Uganda.
+            </p>
             <div className="flex flex-wrap justify-center gap-6">
               <Button className="btn-demo text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110" asChild>
                 <Link href="/donate">

@@ -46,6 +46,31 @@ export default function ProgramsPage() {
   const [api, setApi] = useState<CarouselApi>()
   const [currentSlide, setCurrentSlide] = useState(0)
 
+  const [impactMetrics, setImpactMetrics] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchImpact = async () => {
+      try {
+        const res = await fetch('/api/impact')
+        if (res.ok) {
+          const data = await res.json()
+          setImpactMetrics(data)
+        }
+      } catch (error) {
+        console.error('Error fetching impact metrics:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchImpact()
+  }, [])
+
+  const getMetric = (key: string, fallback: string) => {
+    const metric = impactMetrics.find(m => m.metric_key === key)
+    return metric ? metric.display_value : fallback
+  }
+
   useEffect(() => {
     if (!api) return
 
@@ -53,12 +78,12 @@ export default function ProgramsPage() {
     api.on("select", () => {
       const slideIndex = api.selectedScrollSnap()
       setCurrentSlide(slideIndex)
-      
+
       // If we're on the last slide (video slide - index 27)
       if (slideIndex === 27) {
         // Stop autoplay
         autoplay.stop()
-        
+
         // Play video with volume
         if (videoRef.current) {
           videoRef.current.volume = 1.0
@@ -84,7 +109,7 @@ export default function ProgramsPage() {
   }, [autoplay])
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/10">
-    
+
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-4 md:px-6">
         <div className="container mx-auto max-w-7xl">
@@ -101,7 +126,7 @@ export default function ProgramsPage() {
                 </span>
               </h1>
               <p className="text-lg md:text-xl xl:text-2xl text-muted-foreground max-w-4xl mx-auto">
-                Comprehensive initiatives designed to empower women and girls through education, 
+                Comprehensive initiatives designed to empower women and girls through education,
                 health, and sustainable community development across Uganda.
               </p>
             </div>
@@ -125,7 +150,7 @@ export default function ProgramsPage() {
       <section className="py-16 md:py-24 px-4 md:px-6">
         <div className="container mx-auto max-w-7xl">
           <div className="space-y-16">
-            
+
             {/* Program 1: Menstrual Health Education */}
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-8">
@@ -138,26 +163,26 @@ export default function ProgramsPage() {
                     Menstrual Health Education
                   </h2>
                   <p className="text-lg text-muted-foreground">
-                    Comprehensive education programs that break taboos and provide girls with the knowledge, 
+                    Comprehensive education programs that break taboos and provide girls with the knowledge,
                     resources, and confidence to manage their menstrual health with dignity.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-primary">850+</div>
+                    <div className="text-2xl font-bold text-primary">{getMetric('girls_educated', '850+')}</div>
                     <div className="text-sm text-muted-foreground">Girls Educated</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-secondary">20</div>
+                    <div className="text-2xl font-bold text-secondary">{getMetric('schools_reached', '20')}</div>
                     <div className="text-sm text-muted-foreground">Schools Reached</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-accent">95%</div>
+                    <div className="text-2xl font-bold text-accent">{getMetric('attendance_rate', '95%')}</div>
                     <div className="text-sm text-muted-foreground">Attendance Rate</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-primary">12</div>
+                    <div className="text-2xl font-bold text-primary">{getMetric('districts_covered', '12')}</div>
                     <div className="text-sm text-muted-foreground">Districts Covered</div>
                   </div>
                 </div>
@@ -197,7 +222,7 @@ export default function ProgramsPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
-                
+
                 {/* Floating Achievement */}
                 <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/20">
                   <div className="flex items-center gap-3">
@@ -289,7 +314,7 @@ export default function ProgramsPage() {
                       <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center mx-auto mb-3">
                         <Users className="h-6 w-6 text-white" />
                       </div>
-                      <h3 className="font-bold text-foreground mb-2">50+ Girls Trained</h3>
+                      <h3 className="font-bold text-foreground mb-2">{getMetric('girls_trained_pads', '50+')} Girls Trained</h3>
                       <p className="text-sm text-muted-foreground">At Buwaiswa Primary School</p>
                     </CardContent>
                   </Card>
@@ -328,7 +353,7 @@ export default function ProgramsPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
-                
+
                 {/* Video Play Button */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <button className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors group">
@@ -347,26 +372,26 @@ export default function ProgramsPage() {
                     Water & Sanitation Access
                   </h2>
                   <p className="text-lg text-muted-foreground">
-                    Building sustainable water systems and modern sanitation facilities to ensure 
+                    Building sustainable water systems and modern sanitation facilities to ensure
                     girls have access to clean, private spaces for personal hygiene management.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-secondary">10</div>
+                    <div className="text-2xl font-bold text-secondary">{getMetric('water_points', '10')}</div>
                     <div className="text-sm text-muted-foreground">Water Points Installed</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-accent">20</div>
+                    <div className="text-2xl font-bold text-accent">{getMetric('toilets_constructed', '20')}</div>
                     <div className="text-sm text-muted-foreground">Toilets Constructed</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-primary">5,000+</div>
+                    <div className="text-2xl font-bold text-primary">{getMetric('people_served', '5,000+')}</div>
                     <div className="text-sm text-muted-foreground">People Served</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-secondary">100%</div>
+                    <div className="text-2xl font-bold text-secondary">{getMetric('operational_rate', '100%')}</div>
                     <div className="text-sm text-muted-foreground">Operational Rate</div>
                   </div>
                 </div>
@@ -375,7 +400,7 @@ export default function ProgramsPage() {
                   <h3 className="text-xl font-semibold text-foreground">Infrastructure Delivered:</h3>
                   <div className="space-y-3">
                     {[
-                      
+
                       "Gender-separated sanitation facilities",
                       "Handwashing stations with soap dispensers",
                       "Waste management and disposal systems"
@@ -408,26 +433,26 @@ export default function ProgramsPage() {
                     Girl's Empowerment
                   </h2>
                   <p className="text-lg text-muted-foreground">
-                    Comprehensive programs that equip girls with skills, knowledge, and resources 
+                    Comprehensive programs that equip girls with skills, knowledge, and resources
                     to become leaders and change agents in their communities.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-accent">300+</div>
+                    <div className="text-2xl font-bold text-accent">{getMetric('girls_empowered', '300+')}</div>
                     <div className="text-sm text-muted-foreground">Girls Trained</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-primary">25</div>
+                    <div className="text-2xl font-bold text-primary">{getMetric('support_groups', '25')}</div>
                     <div className="text-sm text-muted-foreground">Support Groups</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-secondary">80%</div>
+                    <div className="text-2xl font-bold text-secondary">{getMetric('income_increase', '80%')}</div>
                     <div className="text-sm text-muted-foreground">Income Increase</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-2xl font-bold text-accent">15</div>
+                    <div className="text-2xl font-bold text-accent">{getMetric('new_businesses', '15')}</div>
                     <div className="text-sm text-muted-foreground">New Businesses</div>
                   </div>
                 </div>
@@ -467,7 +492,7 @@ export default function ProgramsPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
-                
+
                 {/* Success Story Badge */}
                 <div className="absolute -top-6 -left-6 bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/20">
                   <div className="text-center">
@@ -505,7 +530,7 @@ export default function ProgramsPage() {
                 color: "primary"
               },
               {
-                step: "02", 
+                step: "02",
                 title: "Planning",
                 description: "Collaborative program design with community input",
                 icon: Calendar,
@@ -598,14 +623,14 @@ export default function ProgramsPage() {
                       <p className="text-xs text-primary font-medium">{story.program}</p>
                     </div>
                   </div>
-                  
+
                   <blockquote className="text-muted-foreground italic leading-relaxed mb-4">
                     "{story.quote}"
                   </blockquote>
-                  
+
                   <div className="flex justify-between items-center">
                     <div className="flex text-yellow-400">
-                      {[1,2,3,4,5].map((star) => (
+                      {[1, 2, 3, 4, 5].map((star) => (
                         <Star key={star} className="h-4 w-4 fill-current" />
                       ))}
                     </div>
@@ -634,7 +659,7 @@ export default function ProgramsPage() {
                 </span>
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Whether as a participant, volunteer, or partner, there are many ways to get involved 
+                Whether as a participant, volunteer, or partner, there are many ways to get involved
                 and make a lasting impact in communities across Uganda.
               </p>
             </div>

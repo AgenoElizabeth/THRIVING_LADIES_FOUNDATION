@@ -1,82 +1,61 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase-admin'
+
+export async function GET() {
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('inquiries')
+      .select(`
+        *,
+        assigned_admin:admin_users(id, full_name, email)
+      `)
+      .order('created_at', { ascending: false })
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data)
+  } catch {
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, phone, subject, message, category } = body
-
-    // Validate required fields
-    if (!name || !email || !subject || !message) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
-    }
-
-    // Insert inquiry into database
-    const { data, error } = await supabase
-      .from('inquiry')
-      .insert([
-        {
-          name,
-          email,
-          phone,
-          subject,
-          message,
-          category: category || 'general',
-          status: 'pending',
-          created_at: new Date().toISOString()
-        }
-      ])
+    const { data, error } = await supabaseAdmin
+      .from('inquiries')
+      .insert({
+        full_name: body.full_name || body.name,
+        email: body.email,
+        phone: body.phone,
+        subject: body.subject,
+        inquiry_type: body.inquiry_type || 'general',
+        message: body.message,
+        status: 'new',
+      })
       .select()
 
-    if (error) {
-      console.error('Database error:', error)
-      return NextResponse.json(
-        { error: 'Failed to save inquiry' },
-        { status: 500 }
-      )
-    }
-
-    return NextResponse.json({
-      success: true,
-      message: 'Inquiry submitted successfully',
-      data
-    })
-
-  } catch (error) {
-    console.error('Inquiry submission error:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data[0], { status: 201 })
+  } catch {
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
 
-export async function GET() {
+export async function PUT(request: NextRequest) {
   try {
-    // Try different possible table names for inquiries
-    const possibleTables = ['inquiries', 'inquiry', 'contacts', 'contact']
+    const body = await request.json()
+    const { id, ...updates } = body
+    if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 })
 
-    for (const tableName of possibleTables) {
-      try {
-        const { data, error } = await supabase
-          .from(tableName)
-          .select('*')
-          .order('created_at', { ascending: false })
+    const { data, error } = await supabaseAdmin
+      .from('inquiries')
+      .update(updates)
+      .eq('id', id)
+      .select()
 
-        if (!error && data) {
-          return NextResponse.json(data)
-        }
-      } catch (error) {
-        continue
-      }
-    }
-
-    // If no table found, return empty array
-    return NextResponse.json([])
-  } catch (error) {
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(data[0])
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

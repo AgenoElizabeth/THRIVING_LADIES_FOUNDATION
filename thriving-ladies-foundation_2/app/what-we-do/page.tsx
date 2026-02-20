@@ -15,8 +15,25 @@ import {
   MessageCircle,
   HandHeart,
 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
-export default function WhatWeDo() {
+export default async function WhatWeDo() {
+  // Fetch impact metrics from Supabase
+  const { data: metrics } = await supabase
+    .from('impact_metrics')
+    .select('*')
+    .eq('is_published', true);
+
+  const getMetric = (key: string, defaultValue: string) => {
+    const metric = metrics?.find(m => m.metric_key === key);
+    return metric ? metric.display_value : defaultValue;
+  };
+
+  const childrenEducated = getMetric('children_educated', '500+');
+  const counselingSessions = getMetric('counseling_sessions', '200+');
+  const familiesSupported = getMetric('families_supported', '50+');
+  const schoolsReached = getMetric('schools_partnered', '10+');
+
   return (
     <main className="flex-1">
       {/* Hero Section */}
@@ -246,19 +263,19 @@ export default function WhatWeDo() {
           </h2>
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-2 p-6 rounded-xl bg-background/80 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-              <h3 className="text-3xl font-bold text-primary">500+</h3>
+              <h3 className="text-3xl font-bold text-primary">{childrenEducated}</h3>
               <p className="text-sm text-muted-foreground font-medium">Children Educated</p>
             </div>
             <div className="space-y-2 p-6 rounded-xl bg-background/80 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-              <h3 className="text-3xl font-bold text-secondary">200+</h3>
+              <h3 className="text-3xl font-bold text-secondary">{counselingSessions}</h3>
               <p className="text-sm text-muted-foreground font-medium">Counseling Sessions</p>
             </div>
             <div className="space-y-2 p-6 rounded-xl bg-background/80 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-              <h3 className="text-3xl font-bold text-accent">50+</h3>
+              <h3 className="text-3xl font-bold text-accent">{familiesSupported}</h3>
               <p className="text-sm text-muted-foreground font-medium">Families Supported</p>
             </div>
             <div className="space-y-2 p-6 rounded-xl bg-background/80 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-              <h3 className="text-3xl font-bold text-primary">10+</h3>
+              <h3 className="text-3xl font-bold text-primary">{schoolsReached}</h3>
               <p className="text-sm text-muted-foreground font-medium">Schools Reached</p>
             </div>
           </div>
