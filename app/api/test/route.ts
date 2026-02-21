@@ -16,7 +16,7 @@ export async function GET() {
     // Test with a known table - let's try to see what happens
     const testTables = ['donations', 'donation', 'projects', 'project', 'inquiries', 'inquiry', 'donors', 'donor', 'gallery', 'videos']
 
-    const results = {}
+    const results: Record<string, any> = {}
 
     for (const tableName of testTables) {
       try {

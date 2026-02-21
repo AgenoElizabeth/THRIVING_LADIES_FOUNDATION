@@ -24,6 +24,7 @@ interface AuthContextType {
   isAuthenticated: boolean
   role: string | null
   signIn: (email: string, password: string) => Promise<{ error: string | null }>
+  signup: (email: string, password: string) => Promise<{ success: boolean; error: string | null }>
   signOut: () => Promise<void>
 }
 
@@ -37,6 +38,7 @@ const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
   role: null,
   signIn: async () => ({ error: null }),
+  signup: async () => ({ success: false, error: null }),
   signOut: async () => { },
 })
 
@@ -157,6 +159,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const signup = async (email: string, password: string): Promise<{ success: boolean; error: string | null }> => {
+    setIsLoading(true)
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      })
+
+      if (error) {
+        return { success: false, error: error.message }
+      }
+
+      if (data.user && !data.session) {
+        return { success: true, error: "Please check your email for a confirmation link." }
+      }
+
+      return { success: true, error: null }
+    } catch (error) {
+      return { success: false, error: "An unexpected error occurred." }
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const signOut = async () => {
     setIsLoading(true)
     await supabase.auth.signOut()
@@ -174,6 +200,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isAuthenticated: !!user && !!adminUser,
     role: adminUser?.role ?? null,
     signIn,
+    signup,
     signOut,
   }
 

@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params
     // Try different possible table names
     const possibleTables = ['videos', 'media', 'video_library', 'video_files']
 
@@ -11,7 +12,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
         const { error } = await supabase
           .from(tableName)
           .delete()
-          .eq('id', params.id)
+          .eq('id', id)
 
         if (!error) {
           return NextResponse.json({ message: 'Video deleted successfully' })

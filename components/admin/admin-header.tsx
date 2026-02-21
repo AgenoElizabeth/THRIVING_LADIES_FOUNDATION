@@ -19,7 +19,7 @@ import Link from "next/link"
 
 export function AdminHeader() {
   const { sidebarOpen, setSidebarOpen, isMobile } = useAdmin()
-  const { user, logout } = useAuth()
+  const { user, adminUser, signOut } = useAuth()
 
   return (
     <header className="bg-background/95 backdrop-blur-md border-b border-border/50 sticky top-0 z-50">
@@ -87,7 +87,7 @@ export function AdminHeader() {
           <div className="hidden md:flex items-center gap-2 px-3 py-2 bg-muted/30 rounded-lg">
             <User className="h-4 w-4 text-muted-foreground" />
             <span className="text-sm text-foreground font-medium">
-              {user?.name || 'Admin'}
+              {adminUser?.full_name || user?.email || 'Admin'}
             </span>
           </div>
           
@@ -95,7 +95,7 @@ export function AdminHeader() {
             variant="outline" 
             size="icon" 
             className="h-9 w-9 text-destructive hover:bg-destructive hover:text-destructive-foreground"
-            onClick={logout}
+            onClick={signOut}
             title="Logout"
           >
             <LogOut className="h-4 w-4" />
