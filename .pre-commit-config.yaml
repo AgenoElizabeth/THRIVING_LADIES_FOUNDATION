@@ -1,0 +1,17 @@
+# Pre-commit hooks for secret scanning
+# Install: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+ 
+repos:
+  # Gitleaks - Secret detection
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.0
+    hooks:
+      - id: gitleaks
+ 
+  # Additional security checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: detect-private-key
+      - id: detect-aws-credentials
