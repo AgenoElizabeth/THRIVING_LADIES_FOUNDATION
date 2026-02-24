@@ -44,7 +44,7 @@ export default function CommunityVoices() {
             color: "from-orange-500/10 to-transparent"
         },
         {
-            name: "Namukose Sarah",
+            name: "Abenakyo Agatha",
             role: "Pupil at Buwaiswa P/S",
             image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.44%20(1).jpeg?updatedAt=1771330512518",
             speech: "I used to stay home every month and I fell behind in my classes. Now, I have my pads and I know how to use them. I haven't missed a single day this term! I want to study hard and become a teacher too, so I can help others like the foundation helped me.",

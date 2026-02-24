@@ -477,7 +477,7 @@ export default function AboutPage() {
                   <span className="text-white font-bold text-sm">A</span>
                 </div>
                 <div>
-                  <div className="font-bold text-gray-800 dark:text-gray-200">Anonymous Pupil</div>
+                  <div className="font-bold text-gray-800 dark:text-gray-200">Abenakyo Agatha</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Grade 8</div>
                 </div>
               </div>
@@ -525,40 +525,46 @@ export default function AboutPage() {
           <div className="flex flex-row overflow-x-auto gap-4 pb-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {[
               {
-                value: "Resilience",
-                description: "We bounce back from challenges stronger than before, teaching our communities to persevere through adversity and emerge victorious.",
-                icon: Shield,
+                value: "God Fearing",
+                description: "We pray and put God at the centre of our work, ensuring our efforts are guided by compassion and integrity.",
+                icon: Heart,
                 color: "from-purple-500 to-indigo-500",
                 image: "https://ik.imagekit.io/xjtx0zx5v/images/child4.jpeg"
               },
               {
-                value: "Ambition",
-                description: "We dream big and work tirelessly to turn those dreams into reality, inspiring others to reach for the stars.",
-                icon: Rocket,
+                value: "Accountability",
+                description: "We are transparent and accountable in all our activities, from resource allocation to program implementation.",
+                icon: Shield,
                 color: "from-pink-500 to-rose-500",
                 image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
               },
               {
-                value: "Continuous Learning",
-                description: "We embrace growth through education and adaptation, ensuring our methods evolve with the changing needs of our communities.",
-                icon: BookOpen,
+                value: "Integrity",
+                description: "We maintain honesty and clear communication in all our interactions with stakeholders.",
+                icon: CheckCircle,
                 color: "from-red-500 to-orange-500",
                 image: "https://ik.imagekit.io/xjtx0zx5v/images/class1.jpeg"
               },
-
               {
-                value: "Self Leadership",
-                description: "We lead by example, taking ownership of our actions and inspiring others to become confident, capable leaders in their own right.",
-                icon: Star,
+                value: "Impact",
+                description: "We measure the success of our programs by the positive changes they bring to girls' lives.",
+                icon: Target,
                 color: "from-indigo-500 to-purple-500",
                 image: "https://ik.imagekit.io/xjtx0zx5v/images/class3.jpeg"
               },
               {
-                value: "Integrity",
-                description: "We act with honesty, transparency, and ethical principles in all our dealings, building trust that lasts generations.",
-                icon: CheckCircle,
+                value: "Commitment",
+                description: "We are dedicated to creating lasting change in the lives of vulnerable girls.",
+                icon: Star,
                 color: "from-rose-500 to-pink-500",
                 image: "https://ik.imagekit.io/xjtx0zx5v/images/outreach1.jpeg",
+              },
+              {
+                value: "Teamwork",
+                description: "We collaborate with communities, partners, and stakeholders to achieve our goals.",
+                icon: Users,
+                color: "from-teal-500 to-cyan-500",
+                image: "https://ik.imagekit.io/xjtx0zx5v/images/distribution1.jpeg"
               }
             ].map((item, index) => (
               <Card key={index} className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 bg-white dark:bg-gray-800 backdrop-blur-sm min-w-80">
