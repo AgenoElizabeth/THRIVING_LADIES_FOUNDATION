@@ -130,14 +130,7 @@ export default function WhereWeWork() {
                   <h3 className="font-semibold text-primary mb-2">Buwaiswa Primary School</h3>
                   <p className="text-sm text-muted-foreground">Our flagship program location, serving over 200 pupils with comprehensive MHM education and support.</p>
                 </Card>
-                <Card className="p-4 bg-gradient-to-r from-secondary/5 to-secondary/10 border-secondary/20">
-                  <h3 className="font-semibold text-secondary mb-2">Kawempe Division Schools</h3>
-                  <p className="text-sm text-muted-foreground">Multiple primary schools in Kampala's Kawempe area receiving our educational interventions.</p>
-                </Card>
-                <Card className="p-4 bg-gradient-to-r from-accent/5 to-accent/10 border-accent/20">
-                  <h3 className="font-semibold text-accent mb-2">Eastern Uganda Communities</h3>
-                  <p className="text-sm text-muted-foreground">Expanding our reach to schools in Mbale and surrounding districts.</p>
-                </Card>
+                
               </div>
             </div>
           </div>
