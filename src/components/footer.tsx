@@ -48,37 +48,37 @@ export default function Footer() {
                 Empowering girls through comprehensive menstrual hygiene management programs, education, and community
                 support across Uganda.
               </p>
-              
+
               {/* Social Media Links */}
               <div className="space-y-4">
                 <h6 className="font-semibold text-foreground text-sm">Follow Us</h6>
                 <div className="flex gap-3">
-                  <Link 
-                    href="https://facebook.com/thrivingladiesfoundation" 
+                  <Link
+                    href="https://facebook.com/thrivingladiesfoundation"
                     className="w-10 h-10 bg-blue-600 hover:bg-blue-700 rounded-lg flex items-center justify-center transition-colors group"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Facebook className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
                   </Link>
-                  <Link 
-                    href="https://instagram.com/thrivingladiesfoundation" 
+                  <Link
+                    href="https://instagram.com/thrivingladiesfoundation"
                     className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg flex items-center justify-center transition-all group"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Instagram className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
                   </Link>
-                  <Link 
-                    href="https://tiktok.com/@thrivingladiesfoundation" 
+                  <Link
+                    href="https://tiktok.com/@thrivingladiesfoundation"
                     className="w-10 h-10 bg-black hover:bg-gray-800 rounded-lg flex items-center justify-center transition-colors group"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <MessageCircle className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
                   </Link>
-                  <Link 
-                    href="https://twitter.com/thrivingladies" 
+                  <Link
+                    href="https://twitter.com/thrivingladies"
                     className="w-10 h-10 bg-sky-500 hover:bg-sky-600 rounded-lg flex items-center justify-center transition-colors group"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -122,9 +122,12 @@ export default function Footer() {
                   <MapPin className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>Kampala District, Uganda</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="h-4 w-4 text-primary flex-shrink-0" />
-                  <Link href="tel:+256123456789" className="hover:text-primary transition-colors">+256 788 553 224</Link>
+                <div className="flex items-start gap-3">
+                  <Phone className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
+                  <div className="flex flex-col">
+                    <Link href="tel:+256741062371" className="hover:text-primary transition-colors">+256 741 062 371</Link>
+                    <Link href="tel:+256793661558" className="hover:text-primary transition-colors">+256 793 661 558</Link>
+                  </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="h-4 w-4 text-primary flex-shrink-0" />
@@ -161,7 +164,7 @@ export default function Footer() {
           {/* Pulsing ring animations */}
           <div className="absolute inset-0 rounded-xl bg-green-500 animate-ping opacity-60"></div>
           <div className="absolute inset-0 rounded-xl bg-green-400 animate-pulse opacity-40"></div>
-          
+
           {/* Main button - clean square design with animations */}
           <div className="relative w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-bounce-whatsapp flex items-center justify-center">
             <MessageCircle className="h-5 w-5 transition-transform group-hover:scale-110" />
@@ -187,7 +190,7 @@ export default function Footer() {
             aria-label="Scroll to top"
           >
             <ChevronUp className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-            
+
             {/* Simple tooltip */}
             <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
               <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap">

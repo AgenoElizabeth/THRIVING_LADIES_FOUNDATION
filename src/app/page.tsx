@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+
+export const dynamic = 'force-dynamic';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -13,6 +15,7 @@ import {
   Trophy,
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import "./home.css";
 
 export default async function Home() {
   // Fetch impact metrics from Supabase
@@ -34,15 +37,10 @@ export default async function Home() {
   const familiesReached = getMetric('families_reached', '50+');
 
   return (
-    <main className="flex-1 relative">
-      {/* Office Interior Background for entire page */}
+    <main className="flex-1 relative overflow-hidden">
+      {/* Office Interior Background - Now more visible and animated */}
       <div
-        className="fixed inset-0 z-0 opacity-20 pointer-events-none"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
+        className="fixed inset-0 z-0 pointer-events-none animate-background-zoom bg-overlay-visible"
       />
       {/* Hero Section */}
       <section className="relative min-h-screen pt-32 pb-16 overflow-hidden">
@@ -54,7 +52,7 @@ export default async function Home() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-10 animate-pulse"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
+            backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad11ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
           }}
         />
 
@@ -69,15 +67,15 @@ export default async function Home() {
                 </span>
               </div>
 
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight animate-fade-in-up">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in-up">
                 Empowering Girls, Widows and Boys Through{" "}
-                <span className="text-gradient bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+                <span className="text-gradient bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent italic">
                   Health & Education
                 </span>
               </h1>
               <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed animate-fade-in-up animation-delay-200">
-                Transforming lives through innovative menstrual hygiene management programs
-                and education initiatives in disadvantaged primary schools in Uganda.
+                Transforming lives through innovative menstrual health management, youth empowerment,
+                and sustainable agricultural programs across Uganda.
               </p>
               <div className="flex flex-wrap gap-4 animate-fade-in-up animation-delay-400">
                 <Button className="btn-demo shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105" asChild>
@@ -331,8 +329,8 @@ export default async function Home() {
             <div className="text-center group">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 mb-6">
                 <Image
-                  src="https://ik.imagekit.io/xjtx0zx5v/images/outreach1.jpeg"
-                  alt="Counseling Services"
+                  src="https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.47.jpeg?updatedAt=1771330514557"
+                  alt="Community Outreach"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -347,8 +345,8 @@ export default async function Home() {
             <div className="text-center group">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 mb-6">
                 <Image
-                  src="https://ik.imagekit.io/xjtx0zx5v/images/happy1.jpeg"
-                  alt="Support Programs"
+                  src="https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.49.01.jpeg?updatedAt=1771330516345"
+                  alt="Empowered Pupils"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -424,8 +422,8 @@ export default async function Home() {
             <div className="text-center group">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 mb-6">
                 <Image
-                  src="https://ik.imagekit.io/xjtx0zx5v/images/distribution1.jpeg"
-                  alt="Distribution Programs"
+                  src="https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.45%20(1).jpeg?updatedAt=1771330517456"
+                  alt="Resource Distribution Programs"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -439,13 +437,13 @@ export default async function Home() {
           </div>
 
           <div className="mt-16 rounded-2xl overflow-hidden shadow-2xl h-[400px] w-full animate-fade-in-up animation-delay-300">
-            <iframe 
+            <iframe
               src="https://www.google.com/maps?q=0.3204633155473506,32.64571981410256&hll=0.3204633155473506,32.64571981410256&z=15&output=embed"
-              width="100%" 
-              height="100%" 
-              style={{ border: 0 }} 
-              allowFullScreen={true} 
-              loading="lazy" 
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={true}
+              loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>

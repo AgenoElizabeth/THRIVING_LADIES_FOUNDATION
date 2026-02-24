@@ -342,7 +342,7 @@
 }
 
 .section-title {
-  @apply text-4xl md:text-5xl font-bold mb-6;
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold mb-6;
   background: linear-gradient(to right, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   color: transparent;
