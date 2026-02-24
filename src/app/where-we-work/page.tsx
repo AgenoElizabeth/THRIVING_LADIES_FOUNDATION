@@ -130,7 +130,6 @@ export default function WhereWeWork() {
                   <h3 className="font-semibold text-primary mb-2">Buwaiswa Primary School</h3>
                   <p className="text-sm text-muted-foreground">Our flagship program location, serving over 200 pupils with comprehensive MHM education and support.</p>
                 </Card>
-                
               </div>
             </div>
           </div>
