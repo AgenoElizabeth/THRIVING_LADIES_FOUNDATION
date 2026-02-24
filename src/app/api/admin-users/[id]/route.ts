@@ -1,13 +1,14 @@
+export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase-admin'
 
 // PUT /api/admin-users/[id] - Update admin user
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
     const body = await request.json()
-    const { data, error } = await supabase
-      .from('admin_user')
+    const { data, error } = await supabaseAdmin
+      .from('admin_users')
       .update(body)
       .eq('id', id)
       .select()
@@ -30,8 +31,8 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
-    const { error } = await supabase
-      .from('admin_user')
+    const { error } = await supabaseAdmin
+      .from('admin_users')
       .delete()
       .eq('id', id)
 

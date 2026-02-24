@@ -1,17 +1,6 @@
+export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
-
-// Admin API key for creating users
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
-
-// Create admin client with service role key
-const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false
-  }
-})
+import { supabaseAdmin } from '@/lib/supabase-admin'
 
 export async function POST(request: NextRequest) {
   try {
@@ -43,13 +32,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Also add to admin_user table
+    // Also add to admin_users table
     const { error: tableError } = await supabaseAdmin
-      .from('admin_user')
+      .from('admin_users')
       .insert({
-        id: data.user.id,
+        auth_user_id: data.user.id,
         email: data.user.email,
-        name: name || email.split('@')[0],
+        full_name: name || email.split('@')[0],
         role: role || 'admin'
       })
 
