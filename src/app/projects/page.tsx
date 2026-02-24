@@ -142,8 +142,8 @@ export default function ProjectsPage() {
 
             {/* Spectacular Title */}
             <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight">
-                <span className="block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent motion-safe:animate-pulse">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight">
+                <span className="block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent motion-safe:animate-pulse italic">
                   Our Amazing
                 </span>
                 <span className="block text-foreground mt-2">
@@ -200,7 +200,7 @@ export default function ProjectsPage() {
                   <Trophy className="h-4 w-4 md:h-5 md:w-5 text-primary" />
                   <span className="text-xs md:text-sm font-bold text-primary">Featured Project</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4">{featuredProject.title}</h2>
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4">{featuredProject.title}</h2>
                 <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
                   {featuredProject.description}
                 </p>
@@ -296,7 +296,7 @@ export default function ProjectsPage() {
                 <Lightbulb className="h-5 w-5 text-secondary animate-pulse" />
                 <span className="text-sm font-bold text-secondary">Innovation in Action</span>
               </div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">More Amazing Projects</h2>
+              <h2 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">More Amazing Projects</h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 Explore our diverse portfolio of life-changing initiatives across Uganda
               </p>
@@ -587,7 +587,7 @@ export default function ProjectsPage() {
             <span className="text-lg font-bold text-white uppercase tracking-wider">Join Our Mission</span>
           </div>
 
-          <h2 className="text-5xl lg:text-7xl font-black text-white leading-tight">
+          <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black text-white leading-tight">
             Be Part of the <span className="text-primary italic">Transformation</span>
           </h2>
 

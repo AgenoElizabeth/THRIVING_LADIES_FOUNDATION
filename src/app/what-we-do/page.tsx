@@ -97,8 +97,8 @@ export default async function WhatWeDo() {
             <div className="relative group">
               <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500">
                 <Image
-                  src="https://ik.imagekit.io/xjtx0zx5v/images/training2.jpeg"
-                  alt="Education Programs"
+                  src="https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.49.01.jpeg?updatedAt=1771330516345"
+                  alt="Education training"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -188,8 +188,8 @@ export default async function WhatWeDo() {
             <div className="relative group">
               <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500">
                 <Image
-                  src="https://ik.imagekit.io/xjtx0zx5v/images/happy1.jpeg"
-                  alt="Counseling Services"
+                  src="https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.45%20(1).jpeg?updatedAt=1771330517456"
+                  alt="Distribution outreach"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />

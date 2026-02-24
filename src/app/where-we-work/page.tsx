@@ -62,9 +62,9 @@ export default function WhereWeWork() {
                 </span>
               </div>
 
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                 Where We Work: Bringing Hope to{" "}
-                <span className="text-gradient bg-gradient-to-r from-secondary via-primary to-accent bg-clip-text text-transparent">
+                <span className="text-gradient bg-gradient-to-r from-secondary via-primary to-accent bg-clip-text text-transparent italic">
                   Communities Across Uganda
                 </span>
               </h1>
@@ -128,7 +128,7 @@ export default function WhereWeWork() {
               <div className="grid grid-cols-1 gap-4">
                 <Card className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
                   <h3 className="font-semibold text-primary mb-2">Buwaiswa Primary School</h3>
-                  <p className="text-sm text-muted-foreground">Our flagship program location, serving over 200 students with comprehensive MHM education and support.</p>
+                  <p className="text-sm text-muted-foreground">Our flagship program location, serving over 200 pupils with comprehensive MHM education and support.</p>
                 </Card>
                 <Card className="p-4 bg-gradient-to-r from-secondary/5 to-secondary/10 border-secondary/20">
                   <h3 className="font-semibold text-secondary mb-2">Kawempe Division Schools</h3>
@@ -139,6 +139,30 @@ export default function WhereWeWork() {
                   <p className="text-sm text-muted-foreground">Expanding our reach to schools in Mbale and surrounding districts.</p>
                 </Card>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Community Voices CTA Section */}
+      <section className="py-24 bg-gradient-to-br from-background via-secondary/5 to-background">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            <div className="inline-flex items-center gap-2 bg-secondary/10 px-4 py-2 rounded-full mb-4">
+              <Users className="h-4 w-4 text-secondary" />
+              <span className="text-sm font-semibold text-secondary">Community Impact</span>
+            </div>
+            <h2 className="text-3xl lg:text-5xl font-bold">Hear from Our Community</h2>
+            <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
+              Behind every project are stories of transformation, resilience, and hope. Explore our interactive gallery and hear directly from the people whose lives are being changed.
+            </p>
+            <div className="flex justify-center">
+              <Button size="lg" className="rounded-full px-8 shadow-xl hover:scale-105 transition-transform group" asChild>
+                <Link href="/community-voices">
+                  View Community Voices & Magazine
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -271,7 +295,7 @@ export default function WhereWeWork() {
             <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="aspect-[4/3] relative">
                 <Image
-                  src="https://ik.imagekit.io/xjtx0zx5v/images/happy1.jpeg"
+                  src="https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.49.01.jpeg?updatedAt=1771330516345"
                   alt="Vulnerable children in our programs"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -322,7 +346,7 @@ export default function WhereWeWork() {
             <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="aspect-[4/3] relative">
                 <Image
-                  src="https://ik.imagekit.io/xjtx0zx5v/images/staff1.jpeg"
+                  src="https://ik.imagekit.io/xjtx0zx5v/Visit%204%20Group1?updatedAt=1771502256136"
                   alt="Children participating in our programs"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -356,7 +380,7 @@ export default function WhereWeWork() {
             <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="aspect-[4/3] relative">
                 <Image
-                  src="https://ik.imagekit.io/xjtx0zx5v/images/training.jpeg"
+                  src="https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.45%20(1).jpeg?updatedAt=1771330517456"
                   alt="Educational training sessions"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -364,7 +388,7 @@ export default function WhereWeWork() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="text-white font-semibold text-lg mb-1">Educational Sessions</h3>
-                  <p className="text-white/80 text-sm">Teaching menstrual hygiene management to students</p>
+                  <p className="text-white/80 text-sm">Teaching menstrual hygiene management to pupils</p>
                 </div>
               </div>
             </div>

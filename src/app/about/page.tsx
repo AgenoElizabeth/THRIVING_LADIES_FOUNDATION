@@ -50,7 +50,7 @@ export default function AboutPage() {
   const [selectedMember, setSelectedMember] = useState<any>(null)
   const [scrollY, setScrollY] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
-  const autoplay = useRef(Autoplay({ delay: 3000, stopOnInteraction: true, playOnInit: false })).current
+  const autoplay = useRef(Autoplay({ delay: 3000, stopOnInteraction: true, playOnInit: false }) as unknown as any).current
 
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({})
 
@@ -140,8 +140,8 @@ export default function AboutPage() {
               <span className="text-base font-bold bg-gradient-to-r from-blue-600 via-green-600 to-cyan-600 bg-clip-text text-transparent">Our Inspiring Story</span>
             </div>
 
-            <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight">
-              <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-green-600 bg-clip-text text-transparent drop-shadow-lg">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+              <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-green-600 bg-clip-text text-transparent drop-shadow-lg italic">
                 Empowering
               </span>
               <br />
@@ -151,8 +151,8 @@ export default function AboutPage() {
             </h1>
 
             <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
-              Revolutionary approach to menstrual health education and women's empowerment,
-              creating lasting change in communities across Uganda.
+              A holistic approach to menstrual health, youth empowerment, and climate action,
+              empowering pupils, widows, and boys to build a sustainable future.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6">
@@ -180,7 +180,7 @@ export default function AboutPage() {
             <div className="relative rounded-3xl overflow-hidden shadow-2xl mx-auto max-w-5xl ring-4 ring-blue-300/50 dark:ring-blue-500/30">
               <Image
                 src="https://ik.imagekit.io/xjtx0zx5v/images/distribution1.jpeg"
-                alt="Distribution of menstrual health supplies to Ugandan students"
+                alt="Distribution of menstrual health supplies to Ugandan pupils"
                 width={1200}
                 height={600}
                 className="object-cover w-full h-[350px] md:h-[450px] lg:h-[550px]"
@@ -316,23 +316,32 @@ export default function AboutPage() {
                 image: "https://ik.imagekit.io/xjtx0zx5v/images/vicky1.jpeg",
                 description: "Visionary community development leader with 8+ years of transformative experience in women's empowerment and menstrual health education.",
                 message: "\"Breaking the silence around menstrual health and empowering every girl to reach her full potential without barriers.\"",
-                tags: ["Leadership", "Development", "Vision"]
+                tags: ["Leadership", "Development", "Vision"],
+                position: "object-top",
+                fit: "object-cover",
+                scale: "scale-100"
               },
               {
                 name: "Achan Gloria Dengole",
                 role: "Program Director",
-                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                image: "https://ik.imagekit.io/xjtx0zx5v/GLORIA.jpeg",
                 description: "Expert in educational programs and community outreach, driving meaningful change in rural schools and fostering sustainable development.",
                 message: "\"Education forms the foundation of empowerment. Building a future where every child has the knowledge and resources they need.\"",
-                tags: ["Education", "Outreach", "Impact"]
+                tags: ["Education", "Outreach", "Impact"],
+                position: "object-top",
+                fit: "object-contain",
+                scale: "scale-95"
               },
               {
                 name: "Acayo ChristBella",
                 role: "Operations Manager",
-                image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                image: "https://ik.imagekit.io/xjtx0zx5v/Bella.jpeg?",
                 description: "Strategic operations expert managing logistics, supply chains, and fostering powerful partnerships for organizational growth and efficiency.",
                 message: "\"Meticulous planning and strong partnerships ensure our operations run smoothly to maximize impact.\"",
-                tags: ["Operations", "Partnerships", "Strategy"]
+                tags: ["Operations", "Partnerships", "Strategy"],
+                position: "object-top",
+                fit: "object-cover",
+                scale: "scale-100"
               },
               {
                 name: "Ageno Elizabeth",
@@ -340,26 +349,32 @@ export default function AboutPage() {
                 image: "https://ik.imagekit.io/xjtx0zx5v/images/liz1.jpeg",
                 description: "Innovative IT and Media specialist managing digital infrastructure, content creation, and communication strategies to amplify our mission's reach.",
                 message: "\"Technology and media serve as powerful tools for change. Connecting our story with supporters worldwide.\"",
-                tags: ["IT", "Media", "Technology"]
+                tags: ["IT", "Media", "Technology"],
+                position: "object-top",
+                fit: "object-cover",
+                scale: "scale-100"
               },
               {
-                name: "Kiza Kizito",
+                name: "Kiiza Kizito",
                 role: "Chairman Board of Directors",
-                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                image: "https://ik.imagekit.io/xjtx0zx5v/Kiza%20Kizito.jpeg",
                 description: "Experienced leader overseeing all organizational operations and strategic initiatives to ensure sustainable growth and maximum community impact.",
                 message: "\"Guiding our foundation with integrity, innovation, and inclusivity to create lasting positive change in Uganda.\"",
-                tags: ["Leadership", "Strategy", "Oversight"]
+                tags: ["Leadership", "Strategy", "Oversight"],
+                position: "object-top",
+                fit: "object-cover",
+                scale: "scale-100"
               }
             ].map((member, index) => (
               <div key={index} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8`}>
                 <div className="flex-1">
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl max-w-md mx-auto">
+                  <div className={`relative overflow-hidden rounded-2xl shadow-2xl max-w-md mx-auto aspect-[4/5] bg-gray-100 dark:bg-gray-800`}>
                     <Image
                       src={member.image}
                       alt={member.name}
                       width={400}
                       height={500}
-                      className="object-cover object-top w-full h-80 md:h-96 group-hover:scale-110 transition-transform duration-700"
+                      className={`${member.fit || 'object-cover'} ${member.position || 'object-top'} ${member.scale || 'scale-100'} w-full h-full transition-all duration-700`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent"></div>
                   </div>
@@ -462,7 +477,7 @@ export default function AboutPage() {
                   <span className="text-white font-bold text-sm">A</span>
                 </div>
                 <div>
-                  <div className="font-bold text-gray-800 dark:text-gray-200">Anonymous Student</div>
+                  <div className="font-bold text-gray-800 dark:text-gray-200">Anonymous Pupil</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Grade 8</div>
                 </div>
               </div>
@@ -482,7 +497,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <p className="text-gray-700 dark:text-gray-300 text-sm italic">
-                "The transformation in our students is incredible. They're confident and thriving."
+                "The transformation in our pupils is incredible. They're confident and thriving."
               </p>
             </div>
           </div>
@@ -827,9 +842,9 @@ export default function AboutPage() {
                 <span className="text-lg font-bold text-white">Join Our Movement</span>
               </div>
 
-              <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight">
+              <h2 className="text-2xl sm:text-4xl lg:text-6xl font-extrabold text-white leading-tight">
                 Ready to{" "}
-                <span className="bg-gradient-to-r from-green-300 via-emerald-300 to-teal-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-green-300 via-emerald-300 to-teal-300 bg-clip-text text-transparent italic">
                   Make a Difference?
                 </span>
               </h2>

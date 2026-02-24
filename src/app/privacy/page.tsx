@@ -192,7 +192,7 @@ export default function PrivacyPage() {
                     <Phone className="h-5 w-5 text-secondary" />
                     <div>
                       <p className="font-medium">Phone</p>
-                      <p className="text-muted-foreground">+256 788 553 224</p>
+                      <p className="text-muted-foreground">+256 741 062 371</p>
                     </div>
                   </div>
                 </div>

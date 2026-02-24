@@ -92,7 +92,7 @@ export default function DonatePage() {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <Image
                   src="https://ik.imagekit.io/xjtx0zx5v/images/distribution1.jpeg"
-                  alt="Students celebrating success"
+                  alt="Pupils celebrating success"
                   width={600}
                   height={500}
                   className="object-cover w-full h-[400px] md:h-[500px]"
@@ -144,7 +144,7 @@ export default function DonatePage() {
             {/* MTN Mobile Money */}
             <Card className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 bg-gradient-to-br from-yellow-50 to-amber-50 dark:from-gray-800 dark:to-yellow-900/20">
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-amber-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               <CardHeader className="relative z-10 text-center pb-4">
                 {/* MTN Logo */}
                 <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-xl p-2">
@@ -174,7 +174,7 @@ export default function DonatePage() {
             {/* Airtel Money */}
             <Card className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 bg-gradient-to-br from-red-50 to-rose-50 dark:from-gray-800 dark:to-red-900/20">
               <div className="absolute inset-0 bg-gradient-to-br from-red-400/10 to-rose-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               <CardHeader className="relative z-10 text-center pb-4">
                 {/* Airtel Logo */}
                 <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 shadow-xl p-2">
@@ -204,7 +204,7 @@ export default function DonatePage() {
             {/* Centenary Bank */}
             <Card className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-800 dark:to-purple-900/20">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-400/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               <CardHeader className="relative z-10 text-center pb-4">
                 {/* Centenary Bank Logo */}
                 <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300 shadow-xl p-2">
@@ -356,7 +356,7 @@ export default function DonatePage() {
                 <div className="relative rounded-xl overflow-hidden shadow-lg">
                   <Image
                     src="https://ik.imagekit.io/xjtx0zx5v/images/training4.jpeg"
-                    alt="Happy students"
+                    alt="Happy pupils"
                     width={400}
                     height={200}
                     className="object-cover w-full h-32"

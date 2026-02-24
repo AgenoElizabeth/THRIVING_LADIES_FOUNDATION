@@ -194,7 +194,7 @@ export default function QuestionsPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Call Us</h3>
-                    <p className="text-muted-foreground">+256 414 123 456</p>
+                    <p className="text-muted-foreground">+256 741 062 371 / +256 793 661 558</p>
                     <p className="text-sm text-muted-foreground">Mon-Fri, 9AM-5PM EAT</p>
                   </div>
                 </div>

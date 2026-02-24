@@ -48,7 +48,7 @@ export default function ContactPage() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY
       const windowHeight = window.innerHeight
-      
+
       // Show button when user scrolls past first section
       if (scrollPosition > windowHeight * 0.3) {
         setShowFloatingButton(true)
@@ -61,49 +61,49 @@ export default function ContactPage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-    // Modal focus management, Escape to close, and simple focus trap
-    useEffect(() => {
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (!showChatbot) return
-        if (e.key === 'Escape') {
-          setShowChatbot(false)
-        }
-        if (e.key === 'Tab' && modalRef.current) {
-          const focusable = modalRef.current.querySelectorAll<HTMLElement>(
-            'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-          )
-          if (focusable.length === 0) return
-          const first = focusable[0]
-          const last = focusable[focusable.length - 1]
-          const active = document.activeElement as HTMLElement | null
-          if (e.shiftKey) {
-            if (active === first) {
-              e.preventDefault()
-              last.focus()
-            }
-          } else {
-            if (active === last) {
-              e.preventDefault()
-              first.focus()
-            }
+  // Modal focus management, Escape to close, and simple focus trap
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!showChatbot) return
+      if (e.key === 'Escape') {
+        setShowChatbot(false)
+      }
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        )
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        const active = document.activeElement as HTMLElement | null
+        if (e.shiftKey) {
+          if (active === first) {
+            e.preventDefault()
+            last.focus()
+          }
+        } else {
+          if (active === last) {
+            e.preventDefault()
+            first.focus()
           }
         }
       }
+    }
 
-      if (showChatbot) {
-        document.addEventListener('keydown', handleKeyDown)
-        // Focus the input when opening
-        setTimeout(() => {
-          const input = document.getElementById('chatInput') as HTMLElement | null
-          input?.focus()
-        }, 0)
-      } else {
-        // return focus to trigger when closing
-        triggerButtonRef.current?.focus()
-      }
+    if (showChatbot) {
+      document.addEventListener('keydown', handleKeyDown)
+      // Focus the input when opening
+      setTimeout(() => {
+        const input = document.getElementById('chatInput') as HTMLElement | null
+        input?.focus()
+      }, 0)
+    } else {
+      // return focus to trigger when closing
+      triggerButtonRef.current?.focus()
+    }
 
-      return () => document.removeEventListener('keydown', handleKeyDown)
-    }, [showChatbot])
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [showChatbot])
 
   const handleStepSubmit = () => {
     if (currentStep < chatSteps.length - 1) {
@@ -143,8 +143,8 @@ export default function ContactPage() {
       <section className="relative py-24 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <Image 
-            src="https://ik.imagekit.io/xjtx0zx5v/images/distribution1.jpeg" 
+          <Image
+            src="https://ik.imagekit.io/xjtx0zx5v/images/distribution1.jpeg"
             alt="Woman on phone providing support"
             fill
             priority
@@ -167,7 +167,7 @@ export default function ContactPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:shadow-lg transition-all duration-300" asChild>
-                <a href="tel:+256788553224">
+                <a href="tel:+256741062371">
                   <Phone className="mr-2 h-4 w-4" />
                   Call Now
                 </a>
@@ -204,8 +204,8 @@ export default function ContactPage() {
                   Speak directly with our team for immediate assistance and personalized support.
                 </p>
                 <div className="space-y-2">
-                  <p className="font-semibold text-primary text-lg">+256 788 553 224 / +256 779 153 111</p>
-                  <p className="text-sm text-muted-foreground">Available 24/7</p>
+                  <p className="font-semibold text-primary text-lg">+256 741 062 371 / +256 793 661 558</p>
+                  <p className="text-sm text-muted-foreground">Available 24hrs</p>
                 </div>
               </CardContent>
             </Card>
@@ -237,7 +237,7 @@ export default function ContactPage() {
                 </p>
                 <div className="space-y-2">
                   <p className="font-semibold text-accent text-lg">Mutungo Avenue</p>
-                  <p className="text-sm text-muted-foreground">Community Center, CC 12345</p>
+                  <p className="text-sm text-muted-foreground">P.O.Box 197731 Kampala, Uganda</p>
                 </div>
               </CardContent>
             </Card>
@@ -268,11 +268,11 @@ export default function ContactPage() {
                     <div className="space-y-3">
                       <div className="flex justify-between items-center">
                         <span className="font-medium">Mon - Fri</span>
-                        <span className="text-primary font-semibold">9 AM - 6 PM</span>
+                        <span className="text-primary font-semibold">9 AM - 5 PM</span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="font-medium">Saturday</span>
-                        <span className="text-secondary font-semibold">10 AM - 4 PM</span>
+                        <span className="text-secondary font-semibold">9 AM - 12 PM</span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="font-medium">Sunday</span>
@@ -310,9 +310,11 @@ export default function ContactPage() {
                   <p className="text-sm text-muted-foreground mb-4">
                     Need immediate assistance? Our emergency line is available 24/7.
                   </p>
-                  <Button variant="outline" className="font-semibold border-red-500/30 text-red-600 hover:bg-red-500/10">
-                    <Phone className="mr-2 h-4 w-4" />
-                    +256 788 553 224-HELP
+                  <Button variant="outline" className="font-semibold border-red-500/30 text-red-600 hover:bg-red-500/10" asChild>
+                    <a href="tel:+256741062371">
+                      <Phone className="mr-2 h-4 w-4" />
+                      +256 741 062 371
+                    </a>
                   </Button>
                 </div>
               </div>
@@ -356,7 +358,7 @@ export default function ContactPage() {
                       <X className="h-6 w-6" />
                     </button>
                   </div>
-                  
+
                   {/* Progress Bar */}
                   <div className="mt-6 relative z-10">
                     <div className="flex justify-between items-center mb-2">
@@ -380,8 +382,8 @@ export default function ContactPage() {
                       <div className="flex-1">
                         <div className="bg-gradient-to-r from-muted/30 to-muted/10 rounded-2xl rounded-tl-sm p-6 shadow-sm border border-muted/30">
                           <p className="text-base leading-relaxed font-medium">
-                            {currentStep === 0 
-                              ? currentStepData?.message 
+                            {currentStep === 0
+                              ? currentStepData?.message
                               : currentStepData?.message.replace('Nice to meet you!', `Nice to meet you, ${formData.name}!`)
                             }
                           </p>
@@ -457,7 +459,7 @@ export default function ContactPage() {
                   Message Sent Successfully!
                 </h3>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Thank you for reaching out, <span className="font-semibold text-primary">{formData.name}</span>! 
+                  Thank you for reaching out, <span className="font-semibold text-primary">{formData.name}</span>!
                   We'll get back to you within 24 hours.
                 </p>
                 <div className="mt-6 p-4 bg-primary/10 rounded-xl">
@@ -475,17 +477,17 @@ export default function ContactPage() {
       {showFloatingButton && (
         <div className="fixed top-1/2 right-3 z-50 transform -translate-y-1/2">
           <a
-            href="sms:+256778501066?body=Welcome%20to%20Thriving%20Ladies%20Foundation%2C%20how%20may%20we%20help%20you%20today%3F"
+            href="sms:+256741062371?body=Welcome%20to%20Thriving%20Ladies%20Foundation%2C%20how%20may%20we%20help%20you%20today%3F"
             ref={triggerButtonRef as any}
             className="group relative shine-effect bg-gradient-to-r from-gray-900 via-black to-gray-900 hover:from-primary hover:via-secondary hover:to-accent text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 w-14 h-16 flex items-center justify-center animate-gradient"
             aria-label="Send quick SMS message"
           >
             {/* Animated gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
-            
+
             {/* Telegram icon (Send icon) */}
             <Send className="relative z-10 h-6 w-6 transition-transform duration-300 group-hover:rotate-180" />
-            
+
             {/* Tooltip */}
             <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
               <div className="bg-gray-900 text-white text-sm rounded-lg px-3 py-2 whitespace-nowrap">

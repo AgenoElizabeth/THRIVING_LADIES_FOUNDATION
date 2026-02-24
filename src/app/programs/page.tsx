@@ -41,7 +41,7 @@ import {
 } from "lucide-react"
 
 export default function ProgramsPage() {
-  const autoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: false })).current
+  const autoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }) as unknown as any).current
   const videoRef = useRef<HTMLVideoElement>(null)
   const [api, setApi] = useState<CarouselApi>()
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -119,9 +119,9 @@ export default function ProgramsPage() {
                 <Rocket className="h-5 w-5 text-accent animate-pulse" />
                 <span className="text-sm font-bold text-accent">Our Programs</span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground">
                 Transformative{" "}
-                <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent italic">
                   Impact Programs
                 </span>
               </h1>
@@ -159,12 +159,12 @@ export default function ProgramsPage() {
                     <Heart className="h-4 w-4 text-primary animate-pulse" />
                     <span className="text-xs font-bold text-primary">Flagship Program</span>
                   </div>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground">
                     Menstrual Health Education
                   </h2>
                   <p className="text-lg text-muted-foreground">
-                    Comprehensive education programs that break taboos and provide girls with the knowledge,
-                    resources, and confidence to manage their menstrual health with dignity.
+                    Comprehensive education programs that break taboos and provide both girls and boys with the knowledge,
+                    resources, and confidence to manage health with dignity and mutual respect.
                   </p>
                 </div>
 
@@ -214,8 +214,8 @@ export default function ProgramsPage() {
               <div className="relative">
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                   <Image
-                    src="https://ik.imagekit.io/xjtx0zx5v/images/training.jpeg"
-                    alt="Menstrual health education session"
+                    src="https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.49.01.jpeg?updatedAt=1771330516345"
+                    alt="Menstrual Health Education Session"
                     width={600}
                     height={400}
                     className="object-cover w-full h-[400px] md:h-[500px]"
@@ -245,7 +245,7 @@ export default function ProgramsPage() {
                   <Scissors className="h-5 w-5 text-primary animate-pulse" />
                   <span className="text-sm font-bold text-primary">Making a Difference</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
                   Reusable Pad Making Process
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -297,7 +297,7 @@ export default function ProgramsPage() {
                             Your browser does not support the video tag.
                           </video>
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 pointer-events-none">
-                            <p className="text-xs sm:text-sm font-semibold text-white">Student Speech - Buwaiswa Primary School</p>
+                            <p className="text-xs sm:text-sm font-semibold text-white">Pupil Speech - Buwaiswa Primary School</p>
                           </div>
                         </div>
                       </CarouselItem>
@@ -368,7 +368,7 @@ export default function ProgramsPage() {
                     <Droplets className="h-4 w-4 text-secondary animate-pulse" />
                     <span className="text-xs font-bold text-secondary">Infrastructure</span>
                   </div>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground">
                     Water & Sanitation Access
                   </h2>
                   <p className="text-lg text-muted-foreground">
@@ -429,7 +429,7 @@ export default function ProgramsPage() {
                     <Users className="h-4 w-4 text-accent animate-pulse" />
                     <span className="text-xs font-bold text-accent">Community</span>
                   </div>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground">
                     Girl's Empowerment
                   </h2>
                   <p className="text-lg text-muted-foreground">
@@ -502,6 +502,80 @@ export default function ProgramsPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Program 4: Environment & Agriculture */}
+        <div className="mt-24 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="relative lg:order-2">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+              <Image
+                src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                alt="Pupils planting trees"
+                width={600}
+                height={400}
+                className="object-cover w-full h-[400px] md:h-[500px]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
+          </div>
+
+          <div className="space-y-8 lg:order-1">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500/15 to-emerald-500/15 rounded-full px-4 py-2">
+                <Sparkles className="h-4 w-4 text-green-600 animate-pulse" />
+                <span className="text-xs font-bold text-green-600 uppercase tracking-wider">Sustainability</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground">
+                Environment & Agriculture
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Empowering the youth and pupils with practical skills in tree planting, sustainable agriculture,
+                and climate change awareness to ensure long-term community survival and food security.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <div className="text-2xl font-bold text-green-600">1,000+</div>
+                <div className="text-sm text-muted-foreground">Trees Planted</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-2xl font-bold text-emerald-600">5+</div>
+                <div className="text-sm text-muted-foreground">School Gardens</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-2xl font-bold text-green-600">300+</div>
+                <div className="text-sm text-muted-foreground">Pupils Trained</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-2xl font-bold text-emerald-600">100%</div>
+                <div className="text-sm text-muted-foreground">Youth Engagement</div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold text-foreground">Initiative Focus:</h3>
+              <div className="space-y-3">
+                {[
+                  "Tree planting projects for climate resilience",
+                  "School-based vegetable gardens and nutrition",
+                  "Climate change awareness workshops",
+                  "Sustainable agricultural techniques for youth survival"
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+                    <span className="text-muted-foreground">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white group">
+              <Target className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+              Join the Green Mission
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
           </div>
         </div>
       </section>
@@ -585,7 +659,7 @@ export default function ProgramsPage() {
             {[
               {
                 name: "Achen Patricia",
-                role: "Student Leader",
+                role: "Pupil Leader",
                 program: "Menstrual Health Education",
                 quote: "This program gave me confidence to speak openly about health issues. Now I help other girls in my school.",
                 // image: "https://ik.imagekit.io/xjtx0zx5v/images/pi.webp"
