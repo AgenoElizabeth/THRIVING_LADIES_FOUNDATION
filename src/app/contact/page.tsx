@@ -204,7 +204,7 @@ export default function ContactPage() {
                   Speak directly with our team for immediate assistance and personalized support.
                 </p>
                 <div className="space-y-2">
-                  <p className="font-semibold text-primary text-lg">+256 741 062 371 / +256 793 661 558</p>
+                  <p className="font-semibold text-primary text-lg">+256 740 349 235 / +256 793 661 558</p>
                   <p className="text-sm text-muted-foreground">Available 24hrs</p>
                 </div>
               </CardContent>
