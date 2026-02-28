@@ -29,7 +29,7 @@ export default function Footer() {
   return (
     <>
       {/* Footer */}
-      <footer className="bg-gradient-to-br from-card to-primary/5 border-t py-12 md:py-16 px-4 md:px-6">
+      <footer className="relative z-10 bg-gradient-to-br from-card to-primary/5 border-t py-12 md:py-16 px-4 md:px-6">
         <div className="container mx-auto max-w-7xl">
           {/* Main Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
@@ -45,7 +45,7 @@ export default function Footer() {
                 </div>
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Empowering girls through comprehensive menstrual hygiene management programs, education, and community
+                Empowering girls and youths through comprehensive menstrual hygiene management programs, education, and community
                 support across Uganda.
               </p>
 
@@ -61,16 +61,16 @@ export default function Footer() {
                   >
                     <Facebook className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
                   </Link>
-                  <Link
-                    href="https://instagram.com/thrivingladiesfoundation"
+                  {/* <Link
+                    href="https://www.instagram.com/thrivingladiesfoundation"
                     className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg flex items-center justify-center transition-all group"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Instagram className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-                  </Link>
+                  </Link> */}
                   <Link
-                    href="https://tiktok.com/@thrivingladiesfoundation"
+                    href="https://wa.me/256740349235"
                     className="w-10 h-10 bg-black hover:bg-gray-800 rounded-lg flex items-center justify-center transition-colors group"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -78,13 +78,31 @@ export default function Footer() {
                     <MessageCircle className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
                   </Link>
                   <Link
-                    href="https://twitter.com/thrivingladies"
-                    className="w-10 h-10 bg-sky-500 hover:bg-sky-600 rounded-lg flex items-center justify-center transition-colors group"
+                    href="https://x.com/thrivingladies"
+                    className="w-10 h-10 bg-black hover:bg-gray-800 rounded-lg flex items-center justify-center transition-colors group"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Twitter className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
                   </Link>
+                  {/* <Link
+                    href="https://www.tiktok.com/@thrivingladiesfoundation"
+                    className="w-10 h-10 bg-black hover:bg-gray-800 rounded-lg flex items-center justify-center transition-colors group"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-5 w-5 text-white group-hover:scale-110 transition-transform"
+                    >
+                      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5v3a3 3 0 0 1-3-3" />
+                    </svg>
+                  </Link> */}
                 </div>
               </div>
             </div>
@@ -125,7 +143,7 @@ export default function Footer() {
                 <div className="flex items-start gap-3">
                   <Phone className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
                   <div className="flex flex-col">
-                    <Link href="tel:+256741062371" className="hover:text-primary transition-colors">+256 741 062 371</Link>
+                    <Link href="tel:+256740349235" className="hover:text-primary transition-colors">+256 740 349 235</Link>
                     <Link href="tel:+256793661558" className="hover:text-primary transition-colors">+256 793 661 558</Link>
                   </div>
                 </div>
@@ -156,7 +174,7 @@ export default function Footer() {
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
         {/* Enhanced WhatsApp Button */}
         <Link
-          href="https://wa.me/256778501066?text=Welcome%20to%20Thriving%20Ladies%20Foundation%2C%20how%20may%20we%20help%20you%20today%3F"
+          href="https://wa.me/256740349235 ?text=Welcome%20to%20Thriving%20Ladies%20Foundation%2C%20how%20may%20we%20help%20you%20today%3F"
           target="_blank"
           rel="noopener noreferrer"
           className="group relative"
