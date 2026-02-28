@@ -154,7 +154,7 @@ export default function DonatePage() {
               </CardHeader>
               <CardContent className="relative z-10 space-y-4">
                 <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-2xl p-4 border-2 border-yellow-300/50 dark:border-yellow-500/30">
-                  <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">Machant Code:</p>
+                  <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">Merchant Code:</p>
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
                       03947405
@@ -184,7 +184,7 @@ export default function DonatePage() {
               </CardHeader>
               <CardContent className="relative z-10 space-y-4">
                 <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-2xl p-4 border-2 border-red-300/50 dark:border-red-500/30">
-                  <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">Machant Code:</p>
+                  <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">Merchant Code:</p>
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-2xl font-bold text-red-600 dark:text-red-400">
                       4403262
