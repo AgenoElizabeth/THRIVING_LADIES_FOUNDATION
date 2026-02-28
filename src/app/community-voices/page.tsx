@@ -32,7 +32,7 @@ export default function CommunityVoices() {
         {
             name: "Waiswa Henry",
             role: "Senior Man Teacher",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400&h=500",
+            image: "https://ik.imagekit.io/xjtx0zx5v/Henry%20Waiswa.jpeg",
             speech: "Education is a holistic journey. Supporting our girls isn't just a 'woman's issue'—it's a community necessity. The foundation has helped us create an inclusive environment where every pupil, boy or girl, understands and respects each other's needs.",
             color: "from-accent/10 to-transparent"
         },

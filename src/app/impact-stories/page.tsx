@@ -27,55 +27,55 @@ export default function ImpactStoriesPage() {
     {
       title: "Sarah's Journey to Confidence",
       story: "Sarah was a shy 14-year-old girl from Buwaiswa Primary School who missed school frequently due to menstrual discomfort. Through our menstrual hygiene management program, she learned about proper hygiene practices and received reusable sanitary pads. Today, Sarah is a confident young woman who regularly attends school and dreams of becoming a doctor. 'The pads changed my life,' she says. 'Now I can focus on my studies instead of worrying about stains and discomfort.'",
-      image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.49.01.jpeg?updatedAt=1771330516345",
+      // image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.49.01.jpeg?updatedAt=1771330516345",
       name: "Sarah, 14",
       location: "Buwaiswa Primary School",
-      beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/slum1.jpg",
+      // beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/slum1.jpg",
       beforeCaption: "Before: Sarah's community faced many challenges"
     },
     {
       title: "A Mother's Hope Restored",
       story: "Grace lost her husband five years ago and struggled to provide for her three children. Our community outreach program connected her with educational resources and small business training. With our support, Grace started a small tailoring business and enrolled her children in our after-school program. 'I thought my dreams died with my husband,' Grace shares. 'But Thriving Ladies Foundation showed me that hope is never lost.' Her children now excel in school and Grace's business supports the entire family.",
-      image: "https://ik.imagekit.io/xjtx0zx5v/Visit%204%20Group1?updatedAt=1771502256136",
+      // image: "https://ik.imagekit.io/xjtx0zx5v/Visit%204%20Group1?updatedAt=1771502256136",
       name: "Grace, 42",
       location: "Kampala Community",
-      beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/house1.jpg",
+      // beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/house1.jpg",
       beforeCaption: "Before: Grace struggled to provide for her family"
     },
     {
       title: "From Dropout to Dreamer",
       story: "Michael was on the verge of dropping out of school due to lack of basic supplies and family financial difficulties. Our scholarship program provided him with books, uniforms, and school fees. More importantly, our mentorship program connected him with positive male role models who taught him about responsibility and the importance of education. Today, Michael is in secondary school and aspires to be an engineer. 'Education is my ticket to a better life,' he says proudly.",
-      image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.45%20(1).jpeg?updatedAt=1771330517456",
+      // image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.45%20(1).jpeg?updatedAt=1771330517456",
       name: "Michael, 16",
       location: "Eastern Uganda",
-      beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/toilet2.jpg",
+      // beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/toilet2.jpg",
       beforeCaption: "Before: Poor school facilities affected attendance"
     },
     {
       title: "A Teacher's Transformation",
       story: "Mrs. Nakato had been teaching for 15 years but felt frustrated by the lack of resources in her rural school. Our teacher training program equipped her with modern teaching methods and menstrual hygiene education materials. She now confidently teaches comprehensive health education to both boys and girls. 'I've seen my pupils change,' she says. 'The girls are more confident, the boys are more understanding, and absenteeism has dropped significantly.' Her school has become a model for other institutions in the region.",
-      image: "https://ik.imagekit.io/xjtx0zx5v/images/staff1.jpeg",
+      // image: "https://ik.imagekit.io/xjtx0zx5v/images/staff1.jpeg",
       name: "Mrs. Nakato, 38",
       location: "Rural Primary School",
-      beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/slum1.jpg",
+      // beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/slum1.jpg",
       beforeCaption: "Before: Limited resources in rural schools"
     },
     {
       title: "Community Unity Through Action",
       story: "The village of Kitgum was divided by poverty and lack of clean water. Our water project not only provided clean water access but also brought the community together for maintenance and education sessions. Parents, teachers, and local leaders worked side by side. 'We learned that when we unite, we can solve our problems,' says village elder Mr. Oola. The project reduced waterborne diseases by 70% and created a sense of community pride and ownership.",
-      image: "https://ik.imagekit.io/xjtx0zx5v/images/clean-water.jpg",
+      // image: "https://ik.imagekit.io/xjtx0zx5v/images/clean-water.jpg",
       name: "Mr. Oola, 65",
       location: "Kitgum Village",
-      beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/water.jpeg",
+      // beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/water.jpeg",
       beforeCaption: "Before: Lack of clean water affected the entire community"
     },
     {
       title: "Breaking the Cycle of Poverty",
       story: "At 19, Patricia was a single mother struggling to provide for her infant daughter. Our vocational training program taught her tailoring skills and connected her with microfinance opportunities. She now runs a successful dressmaking business that employs three other women. 'I was trapped in poverty,' Patricia explains. 'But the foundation didn't just give me skills—they gave me hope and a future.' Her daughter is now in preschool, and Patricia mentors other young mothers in her community.",
-      image: "https://ik.imagekit.io/xjtx0zx5v/images/making.jpeg",
+      // image: "https://ik.imagekit.io/xjtx0zx5v/images/making.jpeg",
       name: "Patricia, 21",
       location: "Urban Kampala",
-      beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/hustle1.jpg",
+      // beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/hustle1.jpg",
       beforeCaption: "Before: Patricia faced daily struggles as a single mother"
     }
   ]
@@ -236,13 +236,13 @@ export default function ImpactStoriesPage() {
                         </div>
 
                         <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group">
-                          <Image
+                          {/* <Image
                             src={currentStory.image}
                             alt={currentStory.title}
                             fill
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                             priority
-                          />
+                          /> */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                           <div className="absolute bottom-4 left-6">
                             <p className="text-white text-2xl font-black tracking-tight">{currentStory.name}</p>
@@ -267,12 +267,12 @@ export default function ImpactStoriesPage() {
                     <div className="h-full flex flex-col space-y-8">
                       <h3 className="text-2xl font-bold text-amber-800 dark:text-amber-400 border-b-2 border-amber-100 pb-4">The Challenge</h3>
                       <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl grayscale-50 opacity-80">
-                        <Image
+                        {/* <Image
                           src={currentStory.beforeImage}
                           alt="Context Image"
                           fill
                           className="object-cover"
-                        />
+                        /> */}
                         <div className="absolute inset-0 bg-black/40" />
                         <p className="absolute bottom-4 left-4 text-white font-bold bg-black/50 px-3 py-1 rounded-md">{currentStory.beforeCaption}</p>
                       </div>

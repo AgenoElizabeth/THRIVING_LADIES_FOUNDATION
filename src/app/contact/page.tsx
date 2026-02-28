@@ -167,7 +167,7 @@ export default function ContactPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:shadow-lg transition-all duration-300" asChild>
-                <a href="tel:+256741062371">
+                <a href="tel:+256740349235">
                   <Phone className="mr-2 h-4 w-4" />
                   Call Now
                 </a>
@@ -311,9 +311,9 @@ export default function ContactPage() {
                     Need immediate assistance? Our emergency line is available 24/7.
                   </p>
                   <Button variant="outline" className="font-semibold border-red-500/30 text-red-600 hover:bg-red-500/10" asChild>
-                    <a href="tel:+256741062371">
+                    <a href="tel:+256740349235">
                       <Phone className="mr-2 h-4 w-4" />
-                      +256 741 062 371
+                      +256 740 349 235
                     </a>
                   </Button>
                 </div>

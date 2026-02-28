@@ -525,40 +525,47 @@ export default function AboutPage() {
           <div className="flex flex-row overflow-x-auto gap-4 pb-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {[
               {
-                value: "Resilience",
-                description: "We bounce back from challenges stronger than before, teaching our communities to persevere through adversity and emerge victorious.",
+                value: "Dignity and Inclusion",
+                description: "We are committed to providing safe, dignified learning environments for girls and specifically supporting marginalized groups, including widows and women-headed households.",
                 icon: Shield,
                 color: "from-purple-500 to-indigo-500",
-                image: "https://ik.imagekit.io/xjtx0zx5v/images/child4.jpeg"
+                image: "https://ik.imagekit.io/xjtx0zx5v/visit3.jpeg"
               },
               {
-                value: "Ambition",
-                description: "We dream big and work tirelessly to turn those dreams into reality, inspiring others to reach for the stars.",
+                value: "Holistic Empowerment",
+                description: "We believe sustainable change requires addressing the interconnected root causes of poverty, including education, economic stability, and environmental health.",
                 icon: Rocket,
                 color: "from-pink-500 to-rose-500",
-                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                image: "https://ik.imagekit.io/xjtx0zx5v/visit2.jpeg?updatedAt=1772033435794"
               },
               {
-                value: "Continuous Learning",
-                description: "We embrace growth through education and adaptation, ensuring our methods evolve with the changing needs of our communities.",
+                value: "Community-Centered Ownership",
+                description: "All our interventions are designed with active community participation to ensure long-term ownership and sustainability.",
                 icon: BookOpen,
                 color: "from-red-500 to-orange-500",
-                image: "https://ik.imagekit.io/xjtx0zx5v/images/class1.jpeg"
+                image: "https://ik.imagekit.io/xjtx0zx5v/visit14.jpeg"
               },
 
               {
-                value: "Self Leadership",
-                description: "We lead by example, taking ownership of our actions and inspiring others to become confident, capable leaders in their own right.",
+                value: "Environmental Stewardship",
+                description: "We recognize that protecting natural resources and climate action are essential for long-term agricultural productivity and community livelihoods.",
                 icon: Star,
                 color: "from-indigo-500 to-purple-500",
-                image: "https://ik.imagekit.io/xjtx0zx5v/images/class3.jpeg"
+                image: "https://ik.imagekit.io/xjtx0zx5v/climate.jpg"
               },
               {
-                value: "Integrity",
-                description: "We act with honesty, transparency, and ethical principles in all our dealings, building trust that lasts generations.",
+                value: "Sustainability",
+                description: "Our programs are designed for long-term impact, featuring built-in income generation and community-led management.",
+                icon: Star,
+                color: "from-indigo-500 to-purple-500",
+                image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.49%20(1).jpeg?"
+              },
+              {
+                value: "Transparency and Accountability",
+                description: "We maintain the trust of our partners and beneficiaries through regular monitoring, evaluation, and reporting to all stakeholders..",
                 icon: CheckCircle,
                 color: "from-rose-500 to-pink-500",
-                image: "https://ik.imagekit.io/xjtx0zx5v/images/outreach1.jpeg",
+                image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.49.02.jpeg?",
               }
             ].map((item, index) => (
               <Card key={index} className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 bg-white dark:bg-gray-800 backdrop-blur-sm min-w-80">
@@ -618,14 +625,14 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                value: "Inclusivity",
-                description: "We create spaces where everyone belongs, regardless of background, gender, or circumstance, fostering a sense of unity and shared purpose.",
+                value: "Collaborative Learning Hubs",
+                description: "We turn schools into community hubs where pupils, students, and parents connect through shared initiatives like tree-planting and hygiene training.",
                 icon: Heart,
                 color: "from-green-500 to-emerald-500"
               },
               {
-                value: "Collaboration",
-                description: "We work together with communities, partners, and stakeholders to achieve greater impact than any one organization could alone.",
+                value: "Grassroots Participation",
+                description: "By involving the community in every design phase, we ensure our programs foster a deep sense of connection and shared responsibility.",
                 icon: Share,
                 color: "from-emerald-500 to-teal-500"
               },
@@ -673,32 +680,32 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                impact: "Empowering Women",
-                description: "Providing women with the tools, knowledge, and opportunities to become leaders in their communities and beyond.",
+                impact: "Proven Menstrual Hygiene Results",
+                description: "Our Menstrual Hygiene Management (MHM) programs have already demonstrated measurable reductions in school absenteeism.",
                 icon: Users,
                 color: "from-blue-500 to-indigo-500"
               },
               {
-                impact: "Promoting Education",
-                description: "Ensuring every child has access to quality education that opens doors to brighter futures and endless possibilities.",
+                impact: "Increased School Attendance",
+                description: "Our programs aim to increase school attendance to 95% among our beneficiaries.",
                 icon: BookOpen,
                 color: "from-indigo-500 to-purple-500"
               },
               {
-                impact: "Fostering Innovation",
-                description: "Developing creative solutions to complex challenges, from menstrual hygiene to community development.",
+                impact: "Sustainable Livelihoods",
+                description: "Our training in climate-smart agriculture and agroforestry improves both food security and household income.",
                 icon: Lightbulb,
                 color: "from-purple-500 to-pink-500"
               },
               {
-                impact: "Advocating for Change",
-                description: "Speaking up for the vulnerable and driving systemic change that addresses root causes of poverty and inequality.",
+                impact: "Measurable Educational Success",
+                description: "We are working toward a goal to reduce girl-child dropout rates.",
                 icon: TrendingUp,
                 color: "from-pink-500 to-red-500"
               },
               {
-                impact: "Building Strong Communities",
-                description: "Creating networks of support and collaboration that strengthen families and neighborhoods for generations to come.",
+                impact: "Holistic Transformation",
+                description: "By integrating education, economic, and environmental programs, we ensure that progress in one area reinforces lasting change in others.",
                 icon: Home,
                 color: "from-red-500 to-orange-500"
               }

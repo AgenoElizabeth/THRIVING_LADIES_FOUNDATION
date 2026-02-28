@@ -530,8 +530,7 @@ export default function ProgramsPage() {
                 Environment & Agriculture
               </h2>
               <p className="text-lg text-muted-foreground">
-                Empowering the youth and pupils with practical skills in tree planting, sustainable agriculture,
-                and climate change awareness to ensure long-term community survival and food security.
+                Empowering youth, pupils, and rural farming communities with practical skills in agroforestry, climate-smart agriculture, and environmental conservation to ensure long-term food security and climate resilience.
               </p>
             </div>
 
@@ -558,10 +557,10 @@ export default function ProgramsPage() {
               <h3 className="text-xl font-semibold text-foreground">Initiative Focus:</h3>
               <div className="space-y-3">
                 {[
-                  "Tree planting projects for climate resilience",
+                  "Distributing and planting trees to restore degraded landscapes.",
                   "School-based vegetable gardens and nutrition",
-                  "Climate change awareness workshops",
-                  "Sustainable agricultural techniques for youth survival"
+                  "Climate-Smart Training",
+                  "Climate-smart agriculture and agroforestry programs"
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />

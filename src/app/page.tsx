@@ -429,8 +429,8 @@ export default async function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
-                  <h3 className="text-xl font-bold">Urban Outreach</h3>
-                  <p className="text-sm opacity-90">Extending help to city communities</p>
+                  <h3 className="text-xl font-bold">Rural Outreach</h3>
+                  <p className="text-sm opacity-90">Extending help to rural communities</p>
                 </div>
               </div>
             </div>
