@@ -477,7 +477,7 @@ export default function AboutPage() {
                   <span className="text-white font-bold text-sm">A</span>
                 </div>
                 <div>
-                  <div className="font-bold text-gray-800 dark:text-gray-200">Anonymous Pupil</div>
+                  <div className="font-bold text-gray-800 dark:text-gray-200">Abenakyo Agatha</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Grade 8</div>
                 </div>
               </div>
@@ -545,7 +545,6 @@ export default function AboutPage() {
                 color: "from-red-500 to-orange-500",
                 image: "https://ik.imagekit.io/xjtx0zx5v/visit14.jpeg"
               },
-
               {
                 value: "Environmental Stewardship",
                 description: "We recognize that protecting natural resources and climate action are essential for long-term agricultural productivity and community livelihoods.",

@@ -37,16 +37,16 @@ export default function ImpactStoriesPage() {
     //   title: "A Mother's Hope Restored",
     //   story: "Grace lost her husband five years ago and struggled to provide for her three children. Our community outreach program connected her with educational resources and small business training. With our support, Grace started a small tailoring business and enrolled her children in our after-school program. 'I thought my dreams died with my husband,' Grace shares. 'But Thriving Ladies Foundation showed me that hope is never lost.' Her children now excel in school and Grace's business supports the entire family.",
     //   // image: "https://ik.imagekit.io/xjtx0zx5v/Visit%204%20Group1?updatedAt=1771502256136",
-    //   name: "Grace, 42",
+    //   name: ", 42",
     //   location: "Kampala Community",
     //   // beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/house1.jpg",
     //   beforeCaption: "Before: Grace struggled to provide for her family"
     // },
     {
       title: "From Dropout to Dreamer",
-      story: "I was on the verge of dropping out of school due to lack of basic supplies and family financial difficulties. Our scholarship program provided him with books, uniforms, and school fees. More importantly, our mentorship program connected him with positive male role models who taught him about responsibility and the importance of education. Today, Michael is in secondary school and aspires to be an engineer. 'Education is my ticket to a better life,' he says proudly.",
+      story: "Tabitha  was on the verge of dropping out of school due to lack of basic supplies and family financial difficulties. Our scholarship program provided her with books, uniforms, and school fees. More importantly, our mentorship program connected her with positive female role models who taught her about responsibility and the importance of education. Today, Mary is in secondary school and aspires to be an engineer. 'Education is my ticket to a better life,' she says proudly.",
       // image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.45%20(1).jpeg?updatedAt=1771330517456",
-      name: "Michael, 16",
+      name: "Tabitha, 16",
       location: "Eastern Uganda",
       // beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/toilet2.jpg",
       beforeCaption: "Before: Poor school facilities affected attendance"
