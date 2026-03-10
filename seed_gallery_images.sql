@@ -3,7 +3,7 @@
 
 INSERT INTO gallery (title, description, image_url, category, is_published, sort_order)
 VALUES 
-('Our Journey to Confidence', 'Through our menstrual hygiene management program, we learned about proper hygiene practices and received reusable sanitary pads. Today, we are confident young women who regularly attend school and dream of becoming  doctors.', 'https://ik.imagekit.io/xjtx0zx5v/images/happy1.jpeg', 'beneficiaries', true, 1),
+('Our Journey to Confidence', 'Through our menstrual hygiene management program, we learned about proper hygiene practices and received reusable sanitary pads. Today, we are confident young women who regularly attends school and dreams of becoming a doctor.', 'https://ik.imagekit.io/xjtx0zx5v/images/happy1.jpeg', 'beneficiaries', true, 1),
 
 ('Our Hope Restored', 'Our community outreach program connected us with educational resources and small business training with support from Thriving Ladies Foundation.', 'https://ik.imagekit.io/xjtx0zx5v/images/staff1.jpeg', 'beneficiaries', true, 2),
 

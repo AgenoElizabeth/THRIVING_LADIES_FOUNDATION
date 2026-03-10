@@ -671,7 +671,7 @@ export default function ProgramsPage() {
                 // image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
               },
               {
-                name: "Sarah Mugisha",
+                name: "Mary Kirabo",
                 role: "School Administrator",
                 program: "Water & Sanitation",
                 quote: "Girl's attendance increased by 40% after we got proper sanitation facilities at our school.",
