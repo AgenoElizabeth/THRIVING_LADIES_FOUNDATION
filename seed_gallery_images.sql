@@ -3,7 +3,7 @@
 
 INSERT INTO gallery (title, description, image_url, category, is_published, sort_order)
 VALUES 
-('Sarah''s Journey to Confidence', 'Sarah was a shy 14-year-old girl from Buwaiswa Primary School who missed school frequently due to menstrual discomfort. Through our menstrual hygiene management program, she learned about proper hygiene practices and received reusable sanitary pads. Today, Sarah is a confident young woman who regularly attends school and dreams of becoming a doctor.', 'https://ik.imagekit.io/xjtx0zx5v/images/happy1.jpeg', 'beneficiaries', true, 1),
+('Our Journey to Confidence', 'Through our menstrual hygiene management program, we learned about proper hygiene practices and received reusable sanitary pads. Today, we are confident young women who regularly attends school and dreams of becoming a doctor.', 'https://ik.imagekit.io/xjtx0zx5v/images/happy1.jpeg', 'beneficiaries', true, 1),
 
 ('A Mother''s Hope Restored', 'Grace lost her husband five years ago and struggled to provide for her three children. Our community outreach program connected her with educational resources and small business training. With our support, Grace started a small tailoring business and enrolled her children in our after-school program.', 'https://ik.imagekit.io/xjtx0zx5v/images/staff1.jpeg', 'beneficiaries', true, 2),
 
