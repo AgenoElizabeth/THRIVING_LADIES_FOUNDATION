@@ -25,26 +25,26 @@ export default function ImpactStoriesPage() {
 
   const stories = [
     {
-      title: "Sarah's Journey to Confidence",
-      story: "Sarah was a shy 14-year-old girl from Buwaiswa Primary School who missed school frequently due to menstrual discomfort. Through our menstrual hygiene management program, she learned about proper hygiene practices and received reusable sanitary pads. Today, Sarah is a confident young woman who regularly attends school and dreams of becoming a doctor. 'The pads changed my life,' she says. 'Now I can focus on my studies instead of worrying about stains and discomfort.'",
+      title: "Our Journey to Confidence",
+      story: "Through the menstrual hygiene management program, we have learned about proper hygiene practices and received reusable sanitary pads. Today, we are confident young women who regularly attend school and dream of becoming the future leaders of Uganda.'  We can now focus on our studies instead of worrying about stains and discomfort.'",
       // image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.49.01.jpeg?updatedAt=1771330516345",
-      name: "Sarah, 14",
+      name: "Buwaiswa Primary School Girls",
       location: "Buwaiswa Primary School",
       // beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/slum1.jpg",
-      beforeCaption: "Before: Sarah's community faced many challenges"
+      beforeCaption: "Before: We as pupils of Buwaiswa primary school faced alot of challenges"
     },
-    {
-      title: "A Mother's Hope Restored",
-      story: "Grace lost her husband five years ago and struggled to provide for her three children. Our community outreach program connected her with educational resources and small business training. With our support, Grace started a small tailoring business and enrolled her children in our after-school program. 'I thought my dreams died with my husband,' Grace shares. 'But Thriving Ladies Foundation showed me that hope is never lost.' Her children now excel in school and Grace's business supports the entire family.",
-      // image: "https://ik.imagekit.io/xjtx0zx5v/Visit%204%20Group1?updatedAt=1771502256136",
-      name: "Grace, 42",
-      location: "Kampala Community",
-      // beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/house1.jpg",
-      beforeCaption: "Before: Grace struggled to provide for her family"
-    },
+    // {
+    //   title: "A Mother's Hope Restored",
+    //   story: "Grace lost her husband five years ago and struggled to provide for her three children. Our community outreach program connected her with educational resources and small business training. With our support, Grace started a small tailoring business and enrolled her children in our after-school program. 'I thought my dreams died with my husband,' Grace shares. 'But Thriving Ladies Foundation showed me that hope is never lost.' Her children now excel in school and Grace's business supports the entire family.",
+    //   // image: "https://ik.imagekit.io/xjtx0zx5v/Visit%204%20Group1?updatedAt=1771502256136",
+    //   name: "Grace, 42",
+    //   location: "Kampala Community",
+    //   // beforeImage: "https://ik.imagekit.io/xjtx0zx5v/images/house1.jpg",
+    //   beforeCaption: "Before: Grace struggled to provide for her family"
+    // },
     {
       title: "From Dropout to Dreamer",
-      story: "Michael was on the verge of dropping out of school due to lack of basic supplies and family financial difficulties. Our scholarship program provided him with books, uniforms, and school fees. More importantly, our mentorship program connected him with positive male role models who taught him about responsibility and the importance of education. Today, Michael is in secondary school and aspires to be an engineer. 'Education is my ticket to a better life,' he says proudly.",
+      story: "I was on the verge of dropping out of school due to lack of basic supplies and family financial difficulties. Our scholarship program provided him with books, uniforms, and school fees. More importantly, our mentorship program connected him with positive male role models who taught him about responsibility and the importance of education. Today, Michael is in secondary school and aspires to be an engineer. 'Education is my ticket to a better life,' he says proudly.",
       // image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.45%20(1).jpeg?updatedAt=1771330517456",
       name: "Michael, 16",
       location: "Eastern Uganda",
