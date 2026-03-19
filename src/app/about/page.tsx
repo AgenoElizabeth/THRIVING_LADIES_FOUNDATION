@@ -151,8 +151,7 @@ export default function AboutPage() {
             </h1>
 
             <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
-              A holistic approach to menstrual health, youth empowerment, and climate action,
-              empowering pupils, widows, and boys to build a sustainable future.
+              We are a Ugandan NGO committed to empowering vulnerable girls, women, and widows through integrated programs in education, economic empowerment, and environmental sustainability.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6">
@@ -247,7 +246,7 @@ export default function AboutPage() {
               </CardHeader>
               <CardContent className="relative z-10 flex-grow">
                 <CardDescription className="text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-300 font-medium mb-6">
-                  To create lasting change by breaking cycles of poverty, inspiring leadership and fostering community collaboration.
+                  Empowering vulnerable girls, women, and widows through integrated programs in education, economic empowerment, and environmental sustainability.
                 </CardDescription>
                 <div className="flex flex-wrap gap-3">
                   <span className="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full text-sm font-bold shadow-lg">Leadership</span>
@@ -283,6 +282,55 @@ export default function AboutPage() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Geographic Focus & The Challenge */}
+      <section id="focus-challenges" ref={(el) => { sectionRefs.current.focusChallenges = el }} className={`py-20 px-6 bg-white dark:bg-gray-950 transition-all duration-1000 ${visibleSections.has('focus-challenges') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className="container mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Geographic Focus */}
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-3 bg-blue-500/10 rounded-full px-6 py-3 border border-blue-200 dark:border-blue-800">
+                <MapPin className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <span className="font-bold text-blue-700 dark:text-blue-300">Geographic Focus</span>
+              </div>
+              <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">Serving the <span className="text-blue-600">Busoga Sub-region</span></h2>
+              <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-video bg-blue-100 dark:bg-blue-900/20">
+                <div className="absolute inset-0 flex items-center justify-center p-8 text-center">
+                  <p className="text-xl font-medium text-blue-800 dark:text-blue-200">
+                    TLF operates in Eastern Uganda's Busoga sub-region, comprising 11 districts with a population over 4.4 million people.
+                  </p>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-blue-900/60 p-6">
+                  <div className="text-white font-bold italic text-lg">Uganda's Second Largest Sub-region</div>
+                </div>
+              </div>
+            </div>
+
+            {/* The Challenge */}
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-3 bg-red-500/10 rounded-full px-6 py-3 border border-red-200 dark:border-red-800">
+                <Target className="h-5 w-5 text-red-600 dark:text-red-400" />
+                <span className="font-bold text-red-700 dark:text-red-300">The Challenge</span>
+              </div>
+              <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">Interconnected <span className="text-red-600">Development Challenges</span></h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  { title: "High Dropout Rates", desc: "Particularly girls, due to inadequate menstrual hygiene facilities.", icon: BookOpen },
+                  { title: "Teenage Pregnancy", desc: "Disrupting education and perpetuating cycles of poverty.", icon: Users },
+                  { title: "Environmental Degradation", desc: "Driven by sugarcane monoculture and deforestation.", icon: Droplets },
+                  { title: "Widespread Poverty", desc: "Especially in women-headed households with limited income.", icon: TrendingUp }
+                ].map((item, idx) => (
+                  <div key={idx} className="p-6 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 hover:shadow-lg transition-all">
+                    <item.icon className="h-8 w-8 text-red-500 mb-4" />
+                    <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">{item.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -603,123 +651,178 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Community and Connection Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-gray-900 dark:via-green-900/10 dark:to-emerald-900/10">
+      {/* Core Programs Section */}
+      <section id="programs" ref={(el) => { sectionRefs.current.programs = el }} className={`py-24 px-6 bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-all duration-1000 ${visibleSections.has('programs') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10 rounded-full px-8 py-4 border-2 border-green-300/30 dark:border-green-500/30 shadow-lg backdrop-blur-sm mb-6">
-              <Users className="h-5 w-5 text-green-600 dark:text-green-400 animate-pulse" />
-              <span className="text-base font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">Community & Connection</span>
+          <div className="text-center mb-16 space-y-4">
+            <div className="inline-flex items-center gap-3 bg-green-500/10 rounded-full px-8 py-4 border border-green-200 dark:border-green-800">
+              <Zap className="h-6 w-6 text-green-600 dark:text-green-400" />
+              <span className="text-lg font-bold text-green-700 dark:text-green-300">Our Core Programs</span>
             </div>
-
-            <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold mb-6">
-              <span className="text-gray-800 dark:text-gray-200">Building</span>{" "}
-              <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">Stronger Bonds</span>
-            </h2>
-            <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto font-medium">
-              We believe in the power of genuine connections and inclusive communities that uplift everyone involved.
-            </p>
+            <h2 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white">Three Pillars of <span className="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent italic">Lasting Change</span></h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">Our holistic approach addresses interconnected issues simultaneously to break the cycle of poverty.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                value: "Collaborative Learning Hubs",
-                description: "We turn schools into community hubs where pupils, students, and parents connect through shared initiatives like tree-planting and hygiene training.",
-                icon: Heart,
-                color: "from-green-500 to-emerald-500"
-              },
-              {
-                value: "Grassroots Participation",
-                description: "By involving the community in every design phase, we ensure our programs foster a deep sense of connection and shared responsibility.",
-                icon: Share,
-                color: "from-emerald-500 to-teal-500"
-              },
-              {
-                value: "Authenticity",
-                description: "We stay true to our values and mission, building genuine relationships based on trust, respect, and mutual understanding.",
-                icon: Eye,
-                color: "from-teal-500 to-cyan-500"
-              }
-            ].map((item, index) => (
-              <Card key={index} className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 bg-white dark:bg-gray-800 backdrop-blur-sm">
-                <CardContent className="p-8 text-center">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-xl`}>
-                    <item.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className={`text-2xl font-extrabold bg-gradient-to-r ${item.color} bg-clip-text text-transparent mb-4`}>{item.value}</h3>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed font-medium">
-                    {item.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Education & Girls' Empowerment */}
+            <Card className="flex flex-col border-0 shadow-2xl bg-white dark:bg-gray-900 overflow-hidden group">
+              <div className="h-2 bg-blue-500"></div>
+              <CardHeader>
+                <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <BookOpen className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                </div>
+                <CardTitle className="text-2xl font-bold">Education & Girls' Empowerment</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 flex-grow">
+                <ul className="space-y-3">
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-blue-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">Child Sponsorship:</strong> Fees and materials for low-income households.</span>
+                  </li>
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-blue-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">MHM:</strong> Reusable pad production and school changing facilities.</span>
+                  </li>
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-blue-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">Life Skills:</strong> Reproductive health and decision-making training.</span>
+                  </li>
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-blue-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">WASH Facilities:</strong> Improving school sanitation for dignity.</span>
+                  </li>
+                </ul>
+                <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800">
+                  <p className="text-sm font-bold text-blue-700 dark:text-blue-300">Impact Goal: Reduce girl-child dropout by 30% and increase attendance to 95%.</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Women & Youth Economic Empowerment */}
+            <Card className="flex flex-col border-0 shadow-2xl bg-white dark:bg-gray-900 overflow-hidden group">
+              <div className="h-2 bg-yellow-500"></div>
+              <CardHeader>
+                <div className="w-16 h-16 bg-yellow-100 dark:bg-yellow-900/30 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <TrendingUp className="h-8 w-8 text-yellow-600 dark:text-yellow-400" />
+                </div>
+                <CardTitle className="text-2xl font-bold">Economic Empowerment</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 flex-grow">
+                <ul className="space-y-3">
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-yellow-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">IGAs:</strong> Startup capital for tailoring, agriculture, and small trade.</span>
+                  </li>
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-yellow-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">VSLAs:</strong> Community-based savings groups for financial resilience.</span>
+                  </li>
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-yellow-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">Youth Training:</strong> Entrepreneurship skills and financial literacy.</span>
+                  </li>
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-yellow-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">Agri-Skills:</strong> Climate-smart agriculture and agroforestry training.</span>
+                  </li>
+                </ul>
+                <div className="mt-8 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl border border-yellow-100 dark:border-yellow-800">
+                  <p className="text-sm font-bold text-yellow-700 dark:text-yellow-300">Integration: Economic strength ensures children stay in school.</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Climate Action & Environmental Sustainability */}
+            <Card className="flex flex-col border-0 shadow-2xl bg-white dark:bg-gray-900 overflow-hidden group">
+              <div className="h-2 bg-green-500"></div>
+              <CardHeader>
+                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Droplets className="h-8 w-8 text-green-600 dark:text-green-400" />
+                </div>
+                <CardTitle className="text-2xl font-bold">Climate Action</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 flex-grow">
+                <ul className="space-y-3">
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-green-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">Tree Planting:</strong> restored degraded landscapes through community campaigns.</span>
+                  </li>
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-green-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">Agroforestry:</strong> Integrating trees into farming for soil health and income.</span>
+                  </li>
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-green-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">Wetland Conservation:</strong> Protecting ecosystems through community stewardship.</span>
+                  </li>
+                  <li className="flex gap-3 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-green-500 shrink-0" />
+                    <span><strong className="text-gray-900 dark:text-white">Climate-Smart Agri:</strong> Drought-resistant crops and water conservation.</span>
+                  </li>
+                </ul>
+                <div className="mt-8 p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-100 dark:border-green-800">
+                  <p className="text-sm font-bold text-green-700 dark:text-green-300">Rational: Protecting resources ensures long-term livelihoods.</p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Our Impact Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/10 dark:to-indigo-900/10">
+      {/* Holistic Approach Diagram */}
+      <section id="holistic" ref={(el) => { sectionRefs.current.holistic = el }} className={`py-20 px-6 bg-white dark:bg-gray-950 transition-all duration-1000 ${visibleSections.has('holistic') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className="container mx-auto max-w-7xl">
+          <div className="bg-gradient-to-br from-blue-600 to-green-600 rounded-[3rem] p-12 lg:p-20 text-white relative overflow-hidden shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <h2 className="text-4xl md:text-5xl font-extrabold italic">Our Holistic Approach</h2>
+                <p className="text-xl text-blue-50 font-medium leading-relaxed">
+                  Sustainable education requires simultaneously addressing household poverty and environmental degradation. Our integrated model ensures that progress in one area reinforces others.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+                    <p className="text-sm italic">"Educated girls become entrepreneurs and environmental stewards."</p>
+                  </div>
+                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+                    <p className="text-sm italic">"Schools become tree-planting hubs engaging youth."</p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <div className="relative w-80 h-80 flex items-center justify-center">
+                  <div className="absolute w-full h-full border-4 border-white/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                  <div className="absolute -top-4 bg-white text-blue-600 font-bold px-6 py-2 rounded-full shadow-lg">Education</div>
+                  <div className="absolute -bottom-4 bg-white text-green-600 font-bold px-6 py-2 rounded-full shadow-lg">Climate Action</div>
+                  <div className="absolute -left-12 bg-white text-yellow-600 font-bold px-6 py-2 rounded-full shadow-lg">Economics</div>
+                  <div className="w-40 h-40 bg-white rounded-full flex items-center justify-center text-blue-600 font-black text-4xl shadow-2xl">TLF</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Target Beneficiaries */}
+      <section id="beneficiaries" ref={(el) => { sectionRefs.current.beneficiaries = el }} className={`py-20 px-6 bg-gray-50 dark:bg-gray-900 transition-all duration-1000 ${visibleSections.has('beneficiaries') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 rounded-full px-8 py-4 border-2 border-blue-300/30 dark:border-blue-500/30 shadow-lg backdrop-blur-sm mb-6">
-              <Target className="h-5 w-5 text-blue-600 dark:text-blue-400 animate-pulse" />
-              <span className="text-base font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Our Impact</span>
-            </div>
-
-            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-6">
-              <span className="text-gray-800 dark:text-gray-200">Creating</span>{" "}
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Lasting Change</span>
-            </h2>
-            <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto font-medium">
-              Through our comprehensive approach, we are transforming lives and building stronger communities across Uganda.
-            </p>
+            <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">Target <span className="text-blue-600">Beneficiaries</span></h2>
+            <p className="text-gray-600 dark:text-gray-400 mt-4">Those we are committed to serving and empowering every day.</p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              {
-                impact: "Proven Menstrual Hygiene Results",
-                description: "Our Menstrual Hygiene Management (MHM) programs have already demonstrated measurable reductions in school absenteeism.",
-                icon: Users,
-                color: "from-blue-500 to-indigo-500"
-              },
-              {
-                impact: "Increased School Attendance",
-                description: "Our programs aim to increase school attendance to 95% among our beneficiaries.",
-                icon: BookOpen,
-                color: "from-indigo-500 to-purple-500"
-              },
-              {
-                impact: "Sustainable Livelihoods",
-                description: "Our training in climate-smart agriculture and agroforestry improves both food security and household income.",
-                icon: Lightbulb,
-                color: "from-purple-500 to-pink-500"
-              },
-              {
-                impact: "Measurable Educational Success",
-                description: "We are working toward a goal to reduce girl-child dropout rates.",
-                icon: TrendingUp,
-                color: "from-pink-500 to-red-500"
-              },
-              {
-                impact: "Holistic Transformation",
-                description: "By integrating education, economic, and environmental programs, we ensure that progress in one area reinforces lasting change in others.",
-                icon: Home,
-                color: "from-red-500 to-orange-500"
-              }
-            ].map((item, index) => (
-              <Card key={index} className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 bg-white dark:bg-gray-800 backdrop-blur-sm">
-                <CardContent className="p-8 text-center">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-xl`}>
-                    <item.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className={`text-2xl font-extrabold bg-gradient-to-r ${item.color} bg-clip-text text-transparent mb-4`}>{item.impact}</h3>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed font-medium">
-                    {item.description}
-                  </p>
-                </CardContent>
-              </Card>
+              { title: "Vulnerable Girls", age: "10-18 Years", core: "Poverty & lack of MHM facilities risk dropout." },
+              { title: "Women-Headed Households", age: "Single Mothers", core: "Limited income and economic opportunities." },
+              { title: "Widows", age: "All Ages", core: "Facing economic hardship and social marginalization." },
+              { title: "Rural Farming Communities", age: "Smallholders", core: "Affected by environmental degradation." },
+              { title: "Young People", age: "15-25 Years", core: "Seeking vocational skills and entrepreneurship." }
+            ].map((b, idx) => (
+              <div key={idx} className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 hover:-translate-y-2 transition-transform">
+                <div className="text-blue-600 dark:text-blue-400 font-bold text-sm mb-2 uppercase tracking-wider">{b.age}</div>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{b.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{b.core}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -827,6 +930,77 @@ export default function AboutPage() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Partner Section */}
+      <section className="py-20 px-6 bg-white dark:bg-gray-950">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white italic">Why <span className="text-green-600">Partner</span> With TLF?</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { title: "Holistic Approach", desc: "We address root causes of poverty through integrated education, economic, and environmental programs." },
+              { title: "Community-Centered", desc: "All interventions are designed with community participation to ensure ownership and sustainability." },
+              { title: "Proven Impact", desc: "Our MHM programs have demonstrated measurable reductions in school dropout and absenteeism." },
+              { title: "Sustainability Focus", desc: "Programs are designed for long-term impact with built-in income generation." },
+              { title: "Strategic Geography", desc: "Operating in Busoga, one of Uganda's most underserved regions, ensures maximum impact." },
+              { title: "Transparency", desc: "Regular monitoring, evaluation, and reporting to all stakeholders ensures accountability." }
+            ].map((item, idx) => (
+              <div key={idx} className="flex gap-4 p-6 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800">
+                <CheckCircle className="h-6 w-6 text-green-500 shrink-0" />
+                <div>
+                  <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Information Section */}
+      <section id="contact-info" className="py-20 px-6 bg-gray-900 text-white">
+        <div className="container mx-auto max-w-4xl text-center space-y-12">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold">Contact Information</h2>
+            <p className="text-gray-400">Reach out to us for partnership inquiries, funding opportunities, or program information.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <MapPin className="h-6 w-6 text-blue-400" />
+                <div>
+                  <h3 className="font-bold">Address</h3>
+                  <p className="text-gray-400">Thriving Ladies Foundation Limited<br />P.O. Box 179931<br />Kampala, Uganda</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <Users className="h-6 w-6 text-green-400" />
+                <div>
+                  <h3 className="font-bold">Project Coordinator</h3>
+                  <p className="text-gray-400">Acayo Christbella</p>
+                </div>
+              </div>
+            </div>
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <Play className="h-6 w-6 text-cyan-400 rotate-90" />
+                <div>
+                  <h3 className="font-bold">Phone</h3>
+                  <p className="text-gray-400">+256 780 392 394</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <Globe className="h-6 w-6 text-purple-400" />
+                <div>
+                  <h3 className="font-bold">Email & Web</h3>
+                  <p className="text-gray-400">[Your organization email]<br />[Your website if applicable]</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
