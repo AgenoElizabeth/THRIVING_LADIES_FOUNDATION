@@ -961,50 +961,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Contact Information Section */}
-      <section id="contact-info" className="py-20 px-6 bg-gray-900 text-white">
-        <div className="container mx-auto max-w-4xl text-center space-y-12">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold">Contact Information</h2>
-            <p className="text-gray-400">Reach out to us for partnership inquiries, funding opportunities, or program information.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <MapPin className="h-6 w-6 text-blue-400" />
-                <div>
-                  <h3 className="font-bold">Address</h3>
-                  <p className="text-gray-400">Thriving Ladies Foundation Limited<br />P.O. Box 179931<br />Kampala, Uganda</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <Users className="h-6 w-6 text-green-400" />
-                <div>
-                  <h3 className="font-bold">Project Coordinator</h3>
-                  <p className="text-gray-400">Acayo Christbella</p>
-                </div>
-              </div>
-            </div>
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <Play className="h-6 w-6 text-cyan-400 rotate-90" />
-                <div>
-                  <h3 className="font-bold">Phone</h3>
-                  <p className="text-gray-400">+256 780 392 394</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <Globe className="h-6 w-6 text-purple-400" />
-                <div>
-                  <h3 className="font-bold">Email & Web</h3>
-                  <p className="text-gray-400">[Your organization email]<br />[Your website if applicable]</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
       {/* CTA Section */}
       <section className="py-24 px-6 bg-gradient-to-br from-blue-600 via-cyan-600 to-green-600 relative overflow-hidden">
         {/* Animated Background Elements */}
