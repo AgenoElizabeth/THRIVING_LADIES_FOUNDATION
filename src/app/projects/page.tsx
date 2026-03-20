@@ -152,8 +152,8 @@ export default function ProjectsPage() {
               </h1>
 
               <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
-                Discover our groundbreaking initiatives that are revolutionizing menstrual health education and
-                empowering young women across Uganda with innovative, sustainable solutions.
+                Discover our groundbreaking initiatives that are revolutionizing child sponsorship, environmental conservation, and holistic community support
+                across Uganda with innovative, sustainable solutions.
               </p>
             </div>
 
@@ -194,7 +194,7 @@ export default function ProjectsPage() {
       <section className="py-24 px-6">
         <div className="container mx-auto max-w-7xl">
           {featuredProject && (
-            <div className="mb-20">
+            <div id="featured" className="mb-20">
               <div className="text-center mb-12">
                 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/15 to-secondary/15 rounded-full px-4 md:px-6 py-2 md:py-3 mb-6">
                   <Trophy className="h-4 w-4 md:h-5 md:w-5 text-primary" />
@@ -290,7 +290,7 @@ export default function ProjectsPage() {
           )}
 
           {/* Project Grid with Stunning Design */}
-          <div className="space-y-16">
+          <div id="all-projects" className="space-y-16">
             <div className="text-center">
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-secondary/15 to-accent/15 rounded-full px-6 py-3 mb-6">
                 <Lightbulb className="h-5 w-5 text-secondary animate-pulse" />

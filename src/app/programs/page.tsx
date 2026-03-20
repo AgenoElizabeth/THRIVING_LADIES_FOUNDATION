@@ -126,8 +126,8 @@ export default function ProgramsPage() {
                 </span>
               </h1>
               <p className="text-lg md:text-xl xl:text-2xl text-muted-foreground max-w-4xl mx-auto">
-                Comprehensive initiatives designed to empower women and girls through education,
-                health, and sustainable community development across Uganda.
+                Comprehensive initiatives designed to empower vulnerable children, widows, and communities through education,
+                health, environmental conservation, and sustainable community development across Uganda.
               </p>
             </div>
 
@@ -152,7 +152,7 @@ export default function ProgramsPage() {
           <div className="space-y-16">
 
             {/* Program 1: Menstrual Health Education */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div id="menstrual-health" className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-8">
                 <div className="space-y-4">
                   <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/15 to-secondary/15 rounded-full px-4 py-2">
@@ -341,7 +341,7 @@ export default function ProgramsPage() {
             </div>
 
             {/* Program 2: Water & Sanitation */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div id="water-sanitation" className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="relative lg:order-1">
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                   <Image
@@ -422,7 +422,7 @@ export default function ProgramsPage() {
             </div>
 
             {/* Program 3: Community Empowerment */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div id="girls-empowerment" className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-8">
                 <div className="space-y-4">
                   <div className="inline-flex items-center gap-2 bg-gradient-to-r from-accent/15 to-primary/15 rounded-full px-4 py-2">
@@ -506,7 +506,7 @@ export default function ProgramsPage() {
         </div>
 
         {/* Program 4: Environment & Agriculture */}
-        <div className="mt-24 grid lg:grid-cols-2 gap-12 items-center">
+        <div id="environment" className="mt-24 grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative lg:order-2">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <Image

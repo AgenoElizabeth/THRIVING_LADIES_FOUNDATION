@@ -102,7 +102,7 @@ export default function WhereWeWork() {
       </section>
 
       {/* Rural Schools Section */}
-      <section className="py-24 bg-gradient-to-b from-muted/50 via-background to-muted/30 relative">
+      <section id="rural-schools" className="py-24 bg-gradient-to-b from-muted/50 via-background to-muted/30 relative">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative group">
@@ -161,7 +161,7 @@ export default function WhereWeWork() {
       </section>
 
       {/* Community Centers Section */}
-      <section className="py-24 bg-gradient-to-b from-muted/30 via-background to-muted/50 relative">
+      <section id="community-centers" className="py-24 bg-gradient-to-b from-muted/30 via-background to-muted/50 relative">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
@@ -216,7 +216,7 @@ export default function WhereWeWork() {
       </section>
 
       {/* Urban Outreach Section */}
-      <section className="py-24 bg-gradient-to-b from-muted/50 via-background to-muted/30 relative">
+      <section id="urban-outreach" className="py-24 bg-gradient-to-b from-muted/50 via-background to-muted/30 relative">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative group">
