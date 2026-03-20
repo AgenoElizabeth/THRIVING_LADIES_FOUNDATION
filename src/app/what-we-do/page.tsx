@@ -14,6 +14,7 @@ import {
   BookOpen,
   MessageCircle,
   HandHeart,
+  Globe,
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
@@ -57,9 +58,7 @@ export default async function WhatWeDo() {
                   Education, Counseling & Support
                 </span>
               </h1>
-              <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
-                At Thriving Ladies Foundation, we are committed to empowering vulnerable children and families in Uganda through comprehensive programs that address their physical, emotional, and educational needs.
-              </p>
+                At Thriving Ladies Foundation, we are committed to empowering vulnerable girls, women, and widows through integrated programs in education, economic empowerment, and environmental sustainability.
               <div className="flex flex-wrap gap-4">
                 <Button className="btn-demo shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105" asChild>
                   <Link href="/donate">
@@ -91,13 +90,13 @@ export default async function WhatWeDo() {
       </section>
 
       {/* Education Section */}
-      <section className="py-24 bg-gradient-to-b from-muted/50 via-background to-muted/30 relative">
+      <section id="education" className="py-24 bg-gradient-to-b from-muted/50 via-background to-muted/30 relative">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative group">
               <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500">
                 <Image
-                  src="https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.49.01.jpeg?updatedAt=1771330516345"
+                  src="https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.45%20(1).jpeg?updatedAt=1771330517456"
                   alt="Education training"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -108,36 +107,36 @@ export default async function WhatWeDo() {
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
                 <BookOpen className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold text-primary">Education</span>
+                <span className="text-sm font-semibold text-primary">Core Program 1</span>
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold">Empowering Minds with Knowledge</h2>
+              <h2 className="text-3xl lg:text-4xl font-bold">Education & Girls' Empowerment</h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Our education programs focus on providing quality learning opportunities to children in disadvantaged primary schools across Uganda. We believe that education is the foundation for breaking the cycle of poverty.
+                Our education and girls’ empowerment programs support vulnerable children from low-income households by removing barriers to schooling and promoting dignity, health, and personal development. We focus on keeping girls and boys in school, improving their well-being, and creating safe, supportive learning environments.
               </p>
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-3">
                   <div className="bg-primary/10 p-1 rounded-full mt-1">
-                    <Target className="h-3 w-3 text-primary" />
+                    <Heart className="h-3 w-3 text-primary" />
                   </div>
-                  <span>Menstrual hygiene management education for girls</span>
+                  <span><strong>Child sponsorship programs:</strong> providing school fees, learning materials, and essential support to vulnerable children.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="bg-primary/10 p-1 rounded-full mt-1">
-                    <Target className="h-3 w-3 text-primary" />
+                    <Heart className="h-3 w-3 text-primary" />
                   </div>
-                  <span>Health education for boys to promote gender equality</span>
+                  <span><strong>Menstrual hygiene management (MHM):</strong> initiatives including reusable pad production units, hygiene training, and private changing facilities.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="bg-primary/10 p-1 rounded-full mt-1">
-                    <Target className="h-3 w-3 text-primary" />
+                    <Heart className="h-3 w-3 text-primary" />
                   </div>
-                  <span>Distribution of scholastic materials and supplies</span>
+                  <span><strong>Life skills and reproductive health:</strong> comprehensive training on adolescent health, decision-making, and future planning.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="bg-primary/10 p-1 rounded-full mt-1">
-                    <Target className="h-3 w-3 text-primary" />
+                    <Heart className="h-3 w-3 text-primary" />
                   </div>
-                  <span>Teacher training and capacity building</span>
+                  <span><strong>Educational infrastructure support:</strong> through improved WASH facilities to ensure safe and dignified learning environments.</span>
                 </li>
               </ul>
             </div>
@@ -145,51 +144,51 @@ export default async function WhatWeDo() {
         </div>
       </section>
 
-      {/* Counseling Section */}
-      <section className="py-24 bg-gradient-to-b from-muted/30 via-background to-muted/50 relative">
+      {/* Economic Empowerment Section */}
+      <section id="economic" className="py-24 bg-gradient-to-b from-muted/30 via-background to-muted/50 relative">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center flex-col-reverse lg:flex-row">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 bg-secondary/10 px-4 py-2 rounded-full">
-                <MessageCircle className="h-4 w-4 text-secondary" />
-                <span className="text-sm font-semibold text-secondary">Counseling</span>
+                <Users className="h-4 w-4 text-secondary" />
+                <span className="text-sm font-semibold text-secondary">Core Program 2</span>
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold">Guiding Hearts with Compassion</h2>
+              <h2 className="text-3xl lg:text-4xl font-bold">Women & Youth Economic Empowerment</h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Our counseling services provide emotional support and guidance to children and families facing various challenges. We create safe spaces for healing and personal growth.
+                Our women and youth economic empowerment programs focus on strengthening household incomes and building sustainable livelihoods, especially for vulnerable and women-headed families. By improving financial stability and skills development, we help communities become more resilient while supporting children’s ability to stay in school.
               </p>
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-3">
                   <div className="bg-secondary/10 p-1 rounded-full mt-1">
-                    <Heart className="h-3 w-3 text-secondary" />
+                    <Target className="h-3 w-3 text-secondary" />
                   </div>
-                  <span>Individual counseling for children experiencing trauma</span>
+                  <span><strong>Income-generating activities (IGAs):</strong> providing startup capital and training for sustainable enterprises.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="bg-secondary/10 p-1 rounded-full mt-1">
-                    <Heart className="h-3 w-3 text-secondary" />
+                    <Target className="h-3 w-3 text-secondary" />
                   </div>
-                  <span>Family counseling to strengthen household bonds</span>
+                  <span><strong>Village savings and loan associations (VSLAs):</strong> establishing savings groups to promote financial inclusion.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="bg-secondary/10 p-1 rounded-full mt-1">
-                    <Heart className="h-3 w-3 text-secondary" />
+                    <Target className="h-3 w-3 text-secondary" />
                   </div>
-                  <span>Peer support groups for adolescents</span>
+                  <span><strong>Youth entrepreneurship training:</strong> equipping young people with business skills and vocational training.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="bg-secondary/10 p-1 rounded-full mt-1">
-                    <Heart className="h-3 w-3 text-secondary" />
+                    <Target className="h-3 w-3 text-secondary" />
                   </div>
-                  <span>Crisis intervention and emergency support</span>
+                  <span><strong>Agricultural skills development:</strong> training in climate-smart agriculture and sustainable farming practices.</span>
                 </li>
               </ul>
             </div>
             <div className="relative group">
               <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500">
                 <Image
-                  src="https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.45%20(1).jpeg?updatedAt=1771330517456"
-                  alt="Distribution outreach"
+                  src="https://ik.imagekit.io/xjtx0zx5v/visit0.jpeg"
+                  alt="Economic Empowerment"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -200,15 +199,15 @@ export default async function WhatWeDo() {
         </div>
       </section>
 
-      {/* Support Section */}
-      <section className="py-24 bg-gradient-to-b from-muted/50 via-background to-muted/30 relative">
+      {/* Climate Action Section */}
+      <section id="environment" className="py-24 bg-gradient-to-b from-muted/50 via-background to-muted/30 relative">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative group">
               <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500">
                 <Image
-                  src="https://ik.imagekit.io/xjtx0zx5v/images/outreach1.jpeg"
-                  alt="Support Programs"
+                  src="https://ik.imagekit.io/xjtx0zx5v/tree%20planting.png"
+                  alt="Climate Action"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -217,37 +216,37 @@ export default async function WhatWeDo() {
             </div>
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 bg-accent/10 px-4 py-2 rounded-full">
-                <HandHeart className="h-4 w-4 text-accent" />
-                <span className="text-sm font-semibold text-accent">Support</span>
+                <Globe className="h-4 w-4 text-accent" />
+                <span className="text-sm font-semibold text-accent">Core Program 3</span>
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold">Lifting Lives with Care</h2>
+              <h2 className="text-3xl lg:text-4xl font-bold">Climate Action & Environmental Sustainability</h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Our support programs provide essential resources and assistance to ensure that no child is left behind. We address both immediate needs and long-term sustainability.
+                Our environmental sustainability programs focus on restoring ecosystems, promoting sustainable livelihoods, and protecting natural resources. We empower communities with environmentally friendly practices to address environmental degradation while improving food security.
               </p>
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-3">
                   <div className="bg-accent/10 p-1 rounded-full mt-1">
-                    <Users className="h-3 w-3 text-accent" />
+                    <Target className="h-3 w-3 text-accent" />
                   </div>
-                  <span>Distribution of reusable sanitary pads and hygiene kits</span>
+                  <span><strong>Community tree planting initiatives:</strong> supporting large-scale tree distribution and planting.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="bg-accent/10 p-1 rounded-full mt-1">
-                    <Users className="h-3 w-3 text-accent" />
+                    <Target className="h-3 w-3 text-accent" />
                   </div>
-                  <span>School feeding programs and nutritional support</span>
+                  <span><strong>Agroforestry programs:</strong> integrating trees into farming systems to improve soil health and generate income.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="bg-accent/10 p-1 rounded-full mt-1">
-                    <Users className="h-3 w-3 text-accent" />
+                    <Target className="h-3 w-3 text-accent" />
                   </div>
-                  <span>Medical care and health service referrals</span>
+                  <span><strong>Wetland conservation:</strong> protecting and restoring wetlands through community engagement.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="bg-accent/10 p-1 rounded-full mt-1">
-                    <Users className="h-3 w-3 text-accent" />
+                    <Target className="h-3 w-3 text-accent" />
                   </div>
-                  <span>Community outreach and awareness campaigns</span>
+                  <span><strong>Climate-smart agriculture:</strong> training farmers in drought-resistant crops and sustainable farming methods.</span>
                 </li>
               </ul>
             </div>

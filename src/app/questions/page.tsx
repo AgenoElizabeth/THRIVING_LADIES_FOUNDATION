@@ -132,7 +132,7 @@ export default function QuestionsPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6">
+      <section id="faq" className="py-16 md:py-24 px-4 md:px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -162,7 +162,7 @@ export default function QuestionsPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6 bg-muted/30">
+      <section id="contact-form" className="py-16 md:py-24 px-4 md:px-6 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Contact Information */}
@@ -337,7 +337,7 @@ export default function QuestionsPage() {
       </section>
 
       {/* Additional Help Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6">
+      <section id="get-involved" className="py-16 md:py-24 px-4 md:px-6">
         <div className="container mx-auto max-w-4xl text-center">
           <div className="space-y-8">
             <div>
