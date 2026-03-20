@@ -68,14 +68,13 @@ export default async function Home() {
               </div>
 
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in-up">
-                Empowering Girls, Widows and Boys Through{" "}
+                Empowering Girls, Women and Widows Through{" "}
                 <span className="text-gradient bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent italic">
-                  Health & Education
+                  Integrated Programs
                 </span>
               </h1>
               <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed animate-fade-in-up animation-delay-200">
-                Transforming lives through innovative menstrual health management, youth empowerment,
-                and sustainable agricultural programs across Uganda.
+                Thriving Ladies Foundation (TLF) is a Ugandan NGO committed to empowering vulnerable overall communities through integrated programs in education, economic empowerment, and environmental sustainability.
               </p>
               <div className="flex flex-wrap gap-4 animate-fade-in-up animation-delay-400">
                 <Button className="btn-demo shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105" asChild>
@@ -241,11 +240,10 @@ export default async function Home() {
               <span className="text-sm font-semibold text-accent">What We Do</span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-              Our Project Objectives
+              Our Core Programs
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Working towards better health, education, and well-being for primary school girls
-              through comprehensive menstrual hygiene management and boys through health education and importance of being in school.
+              We integrate our three core program areas to create lasting, sustainable change: Education & Girls' Empowerment, Women & Youth Economic Empowerment, and Climate Action & Environmental Sustainability.
             </p>
           </div>
 
@@ -256,11 +254,10 @@ export default async function Home() {
                 <Target className="h-6 w-6 text-primary" />
               </div>
               <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                Improved MHM Knowledge
+                Education & Empowerment
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Comprehensive education and training on menstrual hygiene management practices
-                for primary school girls.
+                Child sponsorship, menstrual hygiene management, life skills education, and improving school infrastructure.
               </p>
             </Card>
 
@@ -269,11 +266,10 @@ export default async function Home() {
                 <BarChart className="h-6 w-6 text-secondary" />
               </div>
               <h3 className="text-xl font-bold mb-3 group-hover:text-secondary transition-colors duration-300">
-                Enhanced Access
+                Economic Empowerment
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Providing reusable sanitary pads and improving hygiene facilities for better
-                menstrual health management.
+                Equipping women and youth with income-generating activities, VSLAs, and entrepreneurship training.
               </p>
             </Card>
 
@@ -282,11 +278,10 @@ export default async function Home() {
                 <Trophy className="h-6 w-6 text-accent" />
               </div>
               <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors duration-300">
-                Better Education
+                Climate Action
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Reducing absenteeism and dropout rates through improved menstrual hygiene
-                support systems.
+                Community tree planting, agroforestry, wetland conservation, and climate-smart agriculture.
               </p>
             </Card>
           </div>
@@ -476,8 +471,7 @@ export default async function Home() {
               Join Us in Making a Difference
             </h2>
             <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-              Support our mission to improve menstrual hygiene management and education
-              for primary school girls and boys in Uganda.
+              Support our mission to empower vulnerable girls, women, and widows through integrated programs in education, economic empowerment, and environmental sustainability in Uganda.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <Button className="btn-demo text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110" asChild>

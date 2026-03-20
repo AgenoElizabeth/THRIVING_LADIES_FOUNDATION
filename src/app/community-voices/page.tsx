@@ -19,35 +19,35 @@ export default function CommunityVoices() {
             name: "Mirembe Justine",
             role: "Headteacher",
             image: "https://ik.imagekit.io/xjtx0zx5v/headteacher",
-            speech: "The foundation's intervention has significantly reduced absenteeism among our girls. By providing both the knowledge and the resources for menstrual health, they've given our pupils the dignity and focus they need to excel in their studies.",
+            speech: "The foundation's intervention has significantly reduced absenteeism. By providing scholastic materials, sponsorships, and health education, they've given our pupils—both boys and girls—the dignity and resources they need to excel in their studies.",
             color: "from-primary/10 to-transparent"
         },
         {
             name: "Nakiyemba Annet",
             role: "Senior Woman Teacher",
             image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.42.45%20(1).jpeg",
-            speech: "I've seen a remarkable shift in the confidence of our female pupils. They are no longer afraid to come to school during their periods. The mentorship and health education have empowered them to stand tall and pursue their dreams without shame.",
+            speech: "I've seen a remarkable shift in the confidence of our pupils. With the provision of much-needed school supplies and sponsorships for the most vulnerable, they are no longer afraid of dropping out. They have been empowered to stand tall and pursue their dreams.",
             color: "from-secondary/10 to-transparent"
         },
         {
             name: "Waiswa Henry",
             role: "Senior Man Teacher",
             image: "https://ik.imagekit.io/xjtx0zx5v/Henry%20Waiswa.jpeg",
-            speech: "Education is a holistic journey. Supporting our girls isn't just a 'woman's issue'—it's a community necessity. The foundation has helped us create an inclusive environment where every pupil, boy or girl, understands and respects each other's needs.",
+            speech: "Education is a holistic journey. The foundation understands that supporting vulnerable children means addressing all their needs—from school fees to climate education. They've helped us create an inclusive environment where every pupil, boy or girl, is supported.",
             color: "from-accent/10 to-transparent"
         },
         {
             name: "Baluka Petu Isabirye",
             role: "Parents Coordinator",
             image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.42.44.jpeg",
-            speech: "As parents, we are deeply grateful. Many of us couldn't afford the supplies our daughters needed. The foundation has relieved a huge burden from our families and given us hope for our children's future through their consistent support.",
+            speech: "As parents, we are deeply grateful. Many of us couldn't afford the school fees or scholastic materials our children needed, especially the widows in our community. The foundation has relieved a huge burden from our families and given us hope for our children's future.",
             color: "from-orange-500/10 to-transparent"
         },
         {
             name: "Abenakyo Agatha",
             role: "Pupil at Buwaiswa P/S",
             image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.44%20(1).jpeg?updatedAt=1771330512518",
-            speech: "I used to stay home every month and I fell behind in my classes. Now, I have my pads and I know how to use them. I haven't missed a single day this term! I want to study hard and become a teacher too, so I can help others like the foundation helped me.",
+            speech: "I almost dropped out because I lacked school fees and books. Thanks to the foundation's child sponsorship and supplies, I haven't missed a single day this term! I want to study hard and become a teacher too, so I can help others like the foundation helped me.",
             color: "from-teal-500/10 to-transparent"
         }
     ];
@@ -66,7 +66,7 @@ export default function CommunityVoices() {
         {
             image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.37.56%20(1).jpeg?updatedAt=1771330506605",
             title: "The Heart of Learning",
-            story: "Our classrooms are safe havens where girls can learn without the fear of interruption. We provide the dignity they need to focus entirely on their studies."
+            story: "Our classrooms are safe havens where every child—boys and girls alike—can learn without the fear of interruption. We provide the dignity and resources they need to focus entirely on their studies."
         },
         {
             image: "https://ik.imagekit.io/xjtx0zx5v/images/making.jpeg",
@@ -91,12 +91,12 @@ export default function CommunityVoices() {
         {
             image: "https://ik.imagekit.io/xjtx0zx5v/images/distribution1.jpeg",
             title: "Tangible Support",
-            story: "Distribution days are filled with excitement. Providing physical supplies like sanitary pads directly removes one of the biggest barriers to school attendance."
+            story: "Distribution days are filled with excitement. Providing physical necessities like scholastic materials and health supplies directly removes massive barriers to school attendance."
         },
         {
             image: "https://ik.imagekit.io/xjtx0zx5v/WhatsApp%20Image%202026-02-17%20at%2014.41.44.jpeg?updatedAt=1771330516527",
             title: "A Reason to Smile",
-            story: "Confidence comes from knowing you are supported. A simple pack of supplies can change a girl's entire outlook on her future."
+            story: "Confidence comes from knowing you are supported. A simple pack of books, pens, and essentials can change a child's entire outlook on their future."
         },
         {
             image: "https://ik.imagekit.io/xjtx0zx5v/images/outreach1.jpeg",
@@ -136,7 +136,7 @@ export default function CommunityVoices() {
         {
             image: "https://ik.imagekit.io/xjtx0zx5v/images/class2.jpeg",
             title: "A Glimpse of the Future",
-            story: "Every lesson learned is a step toward a brighter future for these young women and their entire community."
+            story: "Every lesson learned is a step toward a brighter future for these young pupils—boys and girls—and their entire community."
         },
         {
             image: "https://ik.imagekit.io/xjtx0zx5v/images/training8.jpg",
@@ -187,13 +187,13 @@ export default function CommunityVoices() {
             </section>
 
             {/* Magazine Section */}
-            <section className="py-16 md:py-24 relative overflow-hidden bg-muted/30 border-y border-border/40">
+            <section id="magazine" className="py-16 md:py-24 relative overflow-hidden bg-muted/30 border-y border-border/40">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="text-center mb-12 space-y-2">
-                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight uppercase">The Storybook</h2>
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight uppercase">TLF Magazine</h2>
                         <div className="w-16 h-1 bg-primary mx-auto rounded-full opacity-50" />
                         <p className="text-muted-foreground text-sm md:text-base italic max-w-lg mx-auto leading-relaxed">
-                            Flip through the moments that define our mission.
+                            Flip through the moments that define our mission in our digital editorial.
                         </p>
                     </div>
 
@@ -206,7 +206,7 @@ export default function CommunityVoices() {
             </section>
 
             {/* Stakeholders Section - Alternating Layout */}
-            <section className="py-20 md:py-28 bg-background overflow-hidden">
+            <section id="community" className="py-20 md:py-28 bg-background overflow-hidden">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-24 space-y-3">
                         <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-1.5 rounded-full mb-2">
