@@ -355,7 +355,7 @@ export default function AboutPage() {
             {[
               {
                 name: "Awino Victoria",
-                role: "Founder & Director",
+                role: "Director",
                 image: "https://ik.imagekit.io/xjtx0zx5v/images/vicky1.jpeg",
                 description: "Visionary community development leader with 8+ years of transformative experience in women's empowerment, child sponsorship, and holistic education.",
                 message: "\"Providing every vulnerable child, woman, and widow with the support they need to reach their full potential without barriers.\"",
