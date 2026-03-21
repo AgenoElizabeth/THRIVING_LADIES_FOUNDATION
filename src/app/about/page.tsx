@@ -366,7 +366,7 @@ export default function AboutPage() {
               },
               {
                 name: "Achan Gloria Dengole",
-                role: "Program Director",
+                role: "Program Co-ordinator",
                 image: "https://ik.imagekit.io/xjtx0zx5v/GLORIA.jpeg",
                 description: "Expert in educational programs and community outreach, driving meaningful change in rural schools and fostering sustainable development.",
                 message: "\"Education forms the foundation of empowerment. Building a future where every child has the knowledge and resources they need.\"",
