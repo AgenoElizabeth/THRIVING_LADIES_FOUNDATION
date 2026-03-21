@@ -355,7 +355,7 @@ export default function AboutPage() {
             {[
               {
                 name: "Awino Victoria",
-                role: "Founder & Director",
+                role: "Director",
                 image: "https://ik.imagekit.io/xjtx0zx5v/images/vicky1.jpeg",
                 description: "Visionary community development leader with 8+ years of transformative experience in women's empowerment, child sponsorship, and holistic education.",
                 message: "\"Providing every vulnerable child, woman, and widow with the support they need to reach their full potential without barriers.\"",
@@ -366,7 +366,7 @@ export default function AboutPage() {
               },
               {
                 name: "Achan Gloria Dengole",
-                role: "Program Director",
+                role: "Program Co-ordinator",
                 image: "https://ik.imagekit.io/xjtx0zx5v/GLORIA.jpeg",
                 description: "Expert in educational programs and community outreach, driving meaningful change in rural schools and fostering sustainable development.",
                 message: "\"Education forms the foundation of empowerment. Building a future where every child has the knowledge and resources they need.\"",
