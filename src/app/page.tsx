@@ -68,7 +68,7 @@ export default async function Home() {
               </div>
 
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in-up">
-                Empowering Girls, Women and Widows Through{" "}
+                Empowering Youth and Women Through{" "}
                 <span className="text-gradient bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent italic">
                   Integrated Programs
                 </span>
