@@ -30,15 +30,7 @@ cleanup_old_releases() {
 }
 
 
-# 1. Create a unique folder for this specific build
-echo -------------------------------- RELEASE SCRIPT START ----------------------------
-env
-
-echo -------------------------------- ENV VARS --------------------------------
-
 RELEASE_PATH="$DIR_RELEASES/$RELEASE_NAME.tar.gz"
-
-# mkdir -p $RELEASE_PATH
 
 # Backup current serve dir (if it exists) and then delete it to prepare for the new release
 mv $DIR_SERVE{,.bak} 2>/dev/null || true  # Backup current serve dir, ignore if it doesn't exist
@@ -52,6 +44,8 @@ cp $DIR_RELEASES/.env $DIR_SERVE/.env 2>&1/dev/null || true  # Ignore if .env do
 # Update the .current file to point to the new release (for reference or other scripts)
 echo $RELEASE_NAME > $DIR_RELEASES/.current
 
+# Remove the backup of the old serve dir after successful deployment
+rm -rf $DIR_SERVE.bak
 
 # THE FLIP: Update the symlink to point to the new release
 # -n treats the link as a normal file, -f forces the update

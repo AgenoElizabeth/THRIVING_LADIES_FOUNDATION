@@ -66,7 +66,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "${{ steps.vars.outputs.release_name }}.tar.gz,scripts/release.sh"
+          source: "${{ steps.vars.outputs.release_name }}.tar.gz,scripts/deploy-release.sh"
           target: "${{ steps.vars.outputs.dir_releases }}"
 
       - name: Deploy Release on Server
@@ -76,12 +76,15 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          envs: DIR_RELEASES,DIR_SERVE
-          script: ${{ steps.vars.outputs.dir_releases }}/scripts/release.sh
+          envs: DIR_RELEASES,DIR_SERVE,SHA,TAG,TIMESTAMP,RELEASE_NAME
+          script: ${{ steps.vars.outputs.dir_releases }}/scripts/deploy-release.sh
         env:
           DIR_RELEASES: ${{ steps.vars.outputs.dir_releases }}
           DIR_SERVE: ${{ steps.vars.outputs.dir_serve }}
-          COMMIT_SHA: ${{ steps.vars.outputs.sha }}
+          SHA: ${{ steps.vars.outputs.sha }}
+          TAG: ${{ steps.vars.outputs.tag }}
+          TIMESTAMP: ${{ steps.vars.outputs.timestamp }}
+          RELEASE_NAME: ${{ steps.vars.outputs.release_name }}
 
       - name: Restart Application
         uses: appleboy/ssh-action@v1.2.5
