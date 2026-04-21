@@ -50,7 +50,7 @@ tar -xzf $RELEASE_PATH -C $DIR_SERVE
 cp $DIR_RELEASES/.env $DIR_SERVE/.env 2>&1/dev/null || true  # Ignore if .env doesn't exist
 
 # Update the .current file to point to the new release (for reference or other scripts)
-echo $RELEASE_NAME > $DIR_SERVE/.current
+echo $RELEASE_NAME > $DIR_RELEASES/.current
 
 
 # THE FLIP: Update the symlink to point to the new release
