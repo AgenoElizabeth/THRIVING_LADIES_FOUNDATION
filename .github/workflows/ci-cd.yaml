@@ -76,17 +76,15 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-        envs:
-          DIR_RELEASES: ${{ steps.vars.outputs.dir_releases }}
-          DIR_SERVE: ${{ steps.vars.outputs.dir_serve }}
-          COMMIT_SHA: ${{ steps.vars.outputs.sha }}
+          envs: DIR_RELEASES,DIR_SERVE
           script: |
-            export DIR_RELEASES=$DIR_RELEASES
-            export DIR_SERVE=$DIR_SERVE
-            # export COMMIT_SHA=$COMMIT_SHA
             pwd
             ls -al
             ./release.sh
+        env:
+          DIR_RELEASES: ${{ steps.vars.outputs.dir_releases }}
+          DIR_SERVE: ${{ steps.vars.outputs.dir_serve }}
+          COMMIT_SHA: ${{ steps.vars.outputs.sha }}
 
       - name: Restart Application
         uses: appleboy/ssh-action@v1.2.5
