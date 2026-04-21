@@ -21,7 +21,7 @@ cleanup_old_releases() {
 
     # We keep: deploy.tar.gz (new), stderr.log (logs), .env (configs), tmp (process)
     # find . -maxdepth 1 ! -name 'deploy.tar.gz' ! -name 'stderr.log' ! -name '.env' ! -name 'tmp' ! -name '.' -exec rm -rf {} +
-    ls -1 "$releases_dir" | grep -E '^[0-9]{8}_[0-9]{6}' | sort -v | head -n -"$keep" | while read -r old_release; do
+    ls -1 "$releases_dir" | grep -E '^[0-9]{8}_[0-9]{6}' | sort -V | head -n -"$keep" | while read -r old_release; do
         echo "Deleting old release: $old_release"
         rm -rf "$releases_dir/$old_release"
     done
