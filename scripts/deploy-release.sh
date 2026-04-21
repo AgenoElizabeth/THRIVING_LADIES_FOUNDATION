@@ -32,6 +32,7 @@ cleanup_old_releases() {
 restart_app() {
     # Trigger cPanel/Phusion Passenger restart
     echo -n "Restarting application..."
+    mkdir -p $DIR_SERVE/tmp
     touch $DIR_SERVE/tmp/restart.txt
     echo "Done."
 }
