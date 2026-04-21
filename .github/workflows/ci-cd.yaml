@@ -1,0 +1,129 @@
+name: Deploy App
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.vars.outputs.sha }}
+      tag: ${{ steps.vars.outputs.tag }}
+      timestamp: ${{ steps.vars.outputs.timestamp }}
+      release_name: ${{ steps.vars.outputs.release_name }}
+      dir_release: ${{ steps.vars.outputs.dir_release }}
+      dir_serve: ${{ steps.vars.outputs.dir_serve }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Vars
+        id: vars
+        run: |
+          SHA=$(git rev-parse --short HEAD)
+          TS=$(date +%Y%m%d_%H%M%S)
+          DIR_RELS="/home/${{ secrets.SSH_USER }}/artifacts/releases"
+          DIR_SERVE="/home/${{ secrets.SSH_USER }}/app"
+          
+          echo "sha=$SHA" >> $GITHUB_OUTPUT
+          # Get the current tag or "none" if no tag exists
+          # Use --tags --always to ensure it returns something even if no tag is found
+          echo "tag=$(git describe --tags --always)" >> $GITHUB_OUTPUT
+          echo "timestamp=$TS" >> $GITHUB_OUTPUT
+          echo "release_name=$TS-$SHA" >> $GITHUB_OUTPUT
+          echo "dir_releases=$DIR_RELS" >> $GITHUB_OUTPUT
+          echo "dir_serve=$DIR_SERVE" >> $GITHUB_OUTPUT
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # - name: Run Tests
+      #   run: pnpm test
+      - name: Build and Package
+        run: |
+          ./scripts/build-app.sh
+          tar -czf ${{ steps.vars.outputs.release_name }}.tar.gz -C build/app .
+          sha256sum ${{ steps.vars.outputs.release_name }}.tar.gz > ${{ steps.vars.outputs.release_name }}.tar.gz.sha256
+
+      - name: Upload Artifact for Deployment
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "${{ steps.vars.outputs.release_name }}.tar.gz,scripts/release.sh"
+          target: "${{ steps.vars.outputs.dir_releases }}"
+
+      - name: Deploy Release on Server
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+        envs:
+          DIR_RELEASES: ${{ steps.vars.outputs.dir_releases }}
+          DIR_SERVE: ${{ steps.vars.outputs.dir_serve }}
+          COMMIT_SHA: ${{ steps.vars.outputs.sha }}
+          script: |
+            export DIR_RELEASES=$DIR_RELEASES
+            export DIR_SERVE=$DIR_SERVE
+            # export COMMIT_SHA=$COMMIT_SHA
+            pwd
+            ls -al
+            ./release.sh
+
+      - name: Restart Application
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            # Trigger cPanel/Phusion Passenger restart
+            cd {{ steps.vars.outputs.dir_serve }}
+            mkdir -p tmp
+            touch tmp/restart.txt
+
+      - name: Upload Artifact for Release
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-assets
+          path: ${{ steps.vars.outputs.release_name }}.*
+
+  publish:
+      name: Publish Release
+      needs: build-and-deploy
+      runs-on: ubuntu-latest
+      permissions:
+        contents: write
+      steps:
+        - name: Download Built Artifact
+          uses: actions/download-artifact@v8
+          with:
+            name: release-assets
+
+        - name: Release
+          uses: softprops/action-gh-release@v3
+          with:
+            tag_name: ${{ needs.build-and-deploy.outputs.release_name }}
+            files: ${{ needs.build-and-deploy.outputs.release_name }}.*
+            body: "Release ${{ github.ref_name }}"
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
