@@ -77,10 +77,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           envs: DIR_RELEASES,DIR_SERVE
-          script: |
-            pwd
-            ls -al
-            ./release.sh
+          script: ${{ steps.vars.outputs.dir_releases }}/scripts/release.sh
         env:
           DIR_RELEASES: ${{ steps.vars.outputs.dir_releases }}
           DIR_SERVE: ${{ steps.vars.outputs.dir_serve }}
