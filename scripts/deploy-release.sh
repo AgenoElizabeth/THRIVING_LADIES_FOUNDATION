@@ -29,6 +29,12 @@ cleanup_old_releases() {
     echo "Cleanup complete."
 }
 
+restart_app() {
+    # Trigger cPanel/Phusion Passenger restart
+    echo -n "Restarting application..."
+    touch $DIR_SERVE/tmp/restart.txt
+    echo "Done."
+}
 
 RELEASE_PATH="$DIR_RELEASES/$RELEASE_NAME.tar.gz"
 
@@ -51,6 +57,7 @@ rm -rf $DIR_SERVE.bak
 # -n treats the link as a normal file, -f forces the update
 # ln -sfn $RELEASE_PATH /home/thrigrpj/app
 
+restart_app
 
 # Cleanup old releases, keeping the last 3
 cleanup_old_releases 3 "$DIR_RELEASES"
