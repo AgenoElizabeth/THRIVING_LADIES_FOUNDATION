@@ -86,19 +86,6 @@ jobs:
           TIMESTAMP: ${{ steps.vars.outputs.timestamp }}
           RELEASE_NAME: ${{ steps.vars.outputs.release_name }}
 
-      - name: Restart Application
-        uses: appleboy/ssh-action@v1.2.5
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            # Trigger cPanel/Phusion Passenger restart
-            cd {{ steps.vars.outputs.dir_serve }}
-            mkdir -p tmp
-            touch tmp/restart.txt
-
       - name: Upload Artifact for Release
         uses: actions/upload-artifact@v7
         with:
