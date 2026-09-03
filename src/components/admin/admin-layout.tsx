@@ -31,10 +31,10 @@ function AdminLayoutContent({ children }: AdminLayoutContentProps) {
   }, [setIsMobile])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/10">
+    <div className="min-h-[100dvh] bg-[hsl(var(--background))]">
       <AdminHeader />
       
-      <div className="flex h-[calc(100vh-4rem)]">
+      <div className="flex min-h-[calc(100dvh-4rem)]">
         {/* Desktop Sidebar */}
         <aside className={cn(
           "hidden lg:block transition-all duration-300 ease-in-out",
@@ -48,7 +48,7 @@ function AdminLayoutContent({ children }: AdminLayoutContentProps) {
 
         {/* Main Content Area */}
         <main className="flex-1 overflow-auto">
-          <div className="p-4 lg:p-6 space-y-6">
+          <div className="space-y-6 p-4 lg:p-8">
             <AdminBreadcrumb />
             <div className="min-h-full">
               {children}
