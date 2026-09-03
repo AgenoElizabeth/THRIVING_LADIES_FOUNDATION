@@ -1,6 +1,7 @@
 
 "use client"
 
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
@@ -17,12 +18,23 @@ import {
   Download,
   MessageCircle,
   HandHeart,
-  Smartphone,
   Landmark,
   Copy,
 } from "lucide-react"
 
 export default function DonatePage() {
+  const [copied, setCopied] = useState<string | null>(null)
+
+  const copyDonationReference = async (reference: string) => {
+    try {
+      await navigator.clipboard.writeText(reference)
+      setCopied(reference)
+      window.setTimeout(() => setCopied(null), 1800)
+    } catch {
+      setCopied(null)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/10">
       {/* Hero Section */}
@@ -54,7 +66,7 @@ export default function DonatePage() {
                 </div>
                 <div className="space-y-2">
                   <div className="text-2xl md:text-3xl font-bold text-secondary">$100</div>
-                  <div className="text-sm text-muted-foreground">Sponsors a girl's education for 1 month</div>
+                  <div className="text-sm text-muted-foreground">Sponsors a girl&apos;s education for 1 month</div>
                 </div>
                 <div className="space-y-2">
                   <div className="text-2xl md:text-3xl font-bold text-accent">$500</div>
@@ -159,7 +171,7 @@ export default function DonatePage() {
                     <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
                       03947405
                     </p>
-                    <button className="p-2 hover:bg-yellow-100 dark:hover:bg-yellow-900/30 rounded-lg transition-colors" aria-label="Copy MTN number">
+                     <button onClick={() => copyDonationReference("03947405")} className="rounded-lg p-2 transition-colors hover:bg-yellow-100 dark:hover:bg-yellow-900/30" aria-label="Copy MTN number" title={copied === "03947405" ? "Copied" : "Copy MTN number"}>
                       <Copy className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
                     </button>
                   </div>
@@ -189,7 +201,7 @@ export default function DonatePage() {
                     <p className="text-2xl font-bold text-red-600 dark:text-red-400">
                       4403262
                     </p>
-                    <button className="p-2 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-colors" aria-label="Copy Airtel number">
+                     <button onClick={() => copyDonationReference("4403262")} className="rounded-lg p-2 transition-colors hover:bg-red-100 dark:hover:bg-red-900/30" aria-label="Copy Airtel number" title={copied === "4403262" ? "Copied" : "Copy Airtel number"}>
                       <Copy className="h-5 w-5 text-red-600 dark:text-red-400" />
                     </button>
                   </div>
@@ -219,7 +231,7 @@ export default function DonatePage() {
                     <p className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                       3100122035
                     </p>
-                    <button className="p-2 hover:bg-purple-100 dark:hover:bg-purple-900/30 rounded-lg transition-colors" aria-label="Copy account number">
+                     <button onClick={() => copyDonationReference("3100122035")} className="rounded-lg p-2 transition-colors hover:bg-purple-100 dark:hover:bg-purple-900/30" aria-label="Copy account number" title={copied === "3100122035" ? "Copied" : "Copy account number"}>
                       <Copy className="h-5 w-5 text-purple-600 dark:text-purple-400" />
                     </button>
                   </div>
@@ -288,7 +300,7 @@ export default function DonatePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h3 className="text-2xl md:text-3xl font-bold text-foreground">Last Month's Impact</h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground">Last Month&apos;s Impact</h3>
                 <p className="text-lg text-muted-foreground">
                   Thanks to our generous donors, we achieved remarkable results in December 2024.
                 </p>
@@ -389,7 +401,7 @@ export default function DonatePage() {
               How We Use Your Donations
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              We believe in complete transparency. Here's exactly how your contributions are allocated.
+              We believe in complete transparency. Here&apos;s exactly how your contributions are allocated.
             </p>
           </div>
 
@@ -420,7 +432,7 @@ export default function DonatePage() {
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-xl font-semibold text-foreground">Why We're Efficient:</h4>
+                <h4 className="text-xl font-semibold text-foreground">Why We&apos;re Efficient:</h4>
                 <div className="space-y-3">
                   {[
                     "Volunteer-based leadership reduces overhead",
