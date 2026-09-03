@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import PageMotion from '@/components/page-motion'
 
 interface ConditionalLayoutProps {
   children: React.ReactNode
@@ -23,7 +24,7 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
   return (
     <>
       <Header />
-      {children}
+      <PageMotion>{children}</PageMotion>
       <Footer />
     </>
   )
