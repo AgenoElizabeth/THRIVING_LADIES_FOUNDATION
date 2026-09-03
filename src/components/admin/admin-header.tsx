@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useAdmin } from "@/contexts/admin-context"
 import { useAuth } from "@/contexts/auth-context"
 import {
@@ -22,8 +21,8 @@ export function AdminHeader() {
   const { user, adminUser, signOut } = useAuth()
 
   return (
-    <header className="bg-background/95 backdrop-blur-md border-b border-border/50 sticky top-0 z-50">
-      <div className="px-4 lg:px-6 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-card/90 backdrop-blur-xl">
+      <div className="flex h-[72px] items-center justify-between px-4 lg:px-8">
         <div className="flex items-center gap-4">
           {/* Mobile menu button */}
           {isMobile && (
@@ -31,7 +30,7 @@ export function AdminHeader() {
               variant="ghost" 
               size="icon"
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden"
+              className="rounded-xl lg:hidden"
             >
               {sidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
@@ -43,14 +42,14 @@ export function AdminHeader() {
               variant="ghost" 
               size="icon"
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="hidden lg:flex"
+               className="hidden rounded-xl lg:flex"
             >
               <Menu className="h-4 w-4" />
             </Button>
           )}
 
-          <Link href="/" className="flex items-center gap-3">
-            <div className="relative w-8 h-8 lg:w-10 lg:h-10">
+          <Link href="/" className="group flex items-center gap-3">
+            <div className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-primary/20 bg-background p-1 transition-transform group-hover:-rotate-3 lg:h-10 lg:w-10">
               <Image
                 src="https://ik.imagekit.io/xjtx0zx5v/images/logo.png"
                 alt="Thriving Ladies Foundation"
@@ -59,7 +58,7 @@ export function AdminHeader() {
               />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-lg font-bold text-foreground">Admin Dashboard</h1>
+              <h1 className="text-lg font-bold tracking-tight text-foreground" style={{ fontFamily: 'var(--font-display)' }}>Admin Dashboard</h1>
               <p className="text-xs text-muted-foreground">Thriving Ladies Foundation</p>
             </div>
           </Link>
@@ -71,20 +70,20 @@ export function AdminHeader() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input 
               placeholder="Search..." 
-              className="pl-10 w-48 lg:w-64 bg-muted/50"
+              className="w-48 rounded-xl border-border bg-muted/45 pl-10 lg:w-64"
             />
           </div>
 
           {/* Action buttons */}
-          <Button variant="outline" size="icon" className="h-9 w-9">
+          <Button variant="outline" size="icon" className="h-9 w-9 rounded-xl border-border bg-background/60">
             <Bell className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon" className="h-9 w-9">
+          <Button variant="outline" size="icon" className="h-9 w-9 rounded-xl border-border bg-background/60">
             <Settings className="h-4 w-4" />
           </Button>
           
           {/* User info and logout */}
-          <div className="hidden md:flex items-center gap-2 px-3 py-2 bg-muted/30 rounded-lg">
+          <div className="hidden items-center gap-2 rounded-xl border border-border bg-muted/35 px-3 py-2 md:flex">
             <User className="h-4 w-4 text-muted-foreground" />
             <span className="text-sm text-foreground font-medium">
               {adminUser?.full_name || user?.email || 'Admin'}
@@ -94,7 +93,7 @@ export function AdminHeader() {
           <Button 
             variant="outline" 
             size="icon" 
-            className="h-9 w-9 text-destructive hover:bg-destructive hover:text-destructive-foreground"
+            className="h-9 w-9 rounded-xl text-destructive hover:bg-destructive hover:text-destructive-foreground"
             onClick={signOut}
             title="Logout"
           >
