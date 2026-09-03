@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { useAdmin } from "@/contexts/admin-context"
@@ -15,10 +14,7 @@ import {
   Settings,
   HelpCircle,
   FileText,
-  Calendar,
-  Mail,
   Shield,
-  Database,
   Heart,
   Target,
   TrendingUp
@@ -99,19 +95,21 @@ export function AdminSidebar({ className }: SidebarProps) {
                   const isActive = pathname === item.href
                   
                   return (
-                    <Link key={item.id} href={item.href}>
-                      <Button
-                        variant={isActive ? "default" : "ghost"}
-                        className={cn(
-                          "w-full transition-all duration-200",
-                          sidebarOpen ? "justify-start" : "justify-center px-2",
-                          isActive && "bg-gradient-to-r from-primary to-secondary text-white shadow-lg"
-                        )}
-                        title={!sidebarOpen ? item.label : undefined}
-                      >
-                        <Icon className={cn("h-4 w-4", sidebarOpen && "mr-2")} />
-                        {sidebarOpen && <span>{item.label}</span>}
-                      </Button>
+                    <Link
+                      key={item.id}
+                      href={item.href}
+                      className={cn(
+                        "flex min-h-10 w-full items-center rounded-xl text-sm font-semibold transition-all duration-200",
+                        sidebarOpen ? "justify-start px-3" : "justify-center px-2",
+                        isActive
+                          ? "bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                      )}
+                      title={!sidebarOpen ? item.label : undefined}
+                      aria-current={isActive ? "page" : undefined}
+                    >
+                      <Icon className={cn("h-4 w-4 shrink-0", sidebarOpen && "mr-3")} />
+                      {sidebarOpen && <span>{item.label}</span>}
                     </Link>
                   )
                 })}
