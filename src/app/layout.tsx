@@ -8,8 +8,8 @@ import './globals.css'
 import ConditionalLayout from '@/components/conditional-layout'
 
 export const metadata: Metadata = {
-  title: 'Thriving Lives Foundation',
-  description: 'Empowering girls through education in Uganda',
+  title: 'Thriving Ladies Foundation | Building durable futures in Uganda',
+  description: 'Thriving Ladies Foundation partners with communities across Uganda through education, economic empowerment, menstrual health, and climate action.',
   generator: 'v0.app',
 }
 
