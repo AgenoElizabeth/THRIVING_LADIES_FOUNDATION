@@ -1,224 +1,108 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import Image from "next/image";
-import { Heart, Facebook, Instagram, Twitter, Mail, Phone, MapPin, ArrowRight, MessageCircle, ChevronUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { ArrowUp, Facebook, Mail, MapPin, MessageCircle, Phone, Twitter } from 'lucide-react'
+
+const workLinks = [
+  ['What we do', '/what-we-do'],
+  ['Where we work', '/where-we-work'],
+  ['Programs', '/programs'],
+  ['Projects', '/projects'],
+  ['Impact stories', '/impact-stories'],
+  ['Gallery', '/gallery'],
+]
+
+const joinLinks = [
+  ['Donate', '/donate'],
+  ['Volunteer', '/contact'],
+  ['Partner with us', '/contact'],
+  ['Questions', '/questions'],
+  ['Contact us', '/contact'],
+]
 
 export default function Footer() {
-  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false)
 
-  // Handle scroll to show/hide scroll-to-top button
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 500);
-    };
+    const handleScroll = () => setShowScrollTop(window.scrollY > 560)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Scroll to top function
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  };
   return (
     <>
-      {/* Footer */}
-      <footer className="relative z-10 bg-gradient-to-br from-card to-primary/5 border-t py-12 md:py-16 px-4 md:px-6">
-        <div className="container mx-auto max-w-7xl">
-          {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            {/* Organization Info - Full width on mobile */}
-            <div className="md:col-span-2 lg:col-span-1 space-y-6">
-              <Link href="/" className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
-                  <Heart className="h-6 w-6 text-white fill-white" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold text-foreground">Thriving Ladies</h4>
-                  <p className="text-sm text-muted-foreground">Foundation</p>
-                </div>
+      <footer className="border-t border-border bg-[hsl(var(--foreground))] text-[hsl(var(--background))]">
+        <div className="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
+          <div className="grid gap-12 lg:grid-cols-[1.5fr_.8fr_.8fr_1fr]">
+            <div className="max-w-sm">
+              <Link href="/" className="group inline-flex items-center gap-3">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[hsl(var(--background))] p-1 transition-transform group-hover:-rotate-3">
+                  <Image src="https://ik.imagekit.io/xjtx0zx5v/images/logo.png" alt="Thriving Ladies Foundation Logo" width={56} height={56} className="h-10 w-10 object-contain" />
+                </span>
+                <span>
+                  <span className="block text-sm font-black tracking-[0.1em]">THRIVING LADIES</span>
+                  <span className="block text-[10px] uppercase tracking-[0.32em] text-[hsl(var(--background)/.62)]">Foundation</span>
+                </span>
               </Link>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Empowering girls and youths through comprehensive menstrual hygiene management programs, education, and community
-                support across Uganda.
+              <p className="mt-6 text-sm leading-7 text-[hsl(var(--background)/.72)]">
+                We stand with girls, women, widows, youth, and families across Uganda as they build durable, dignified futures.
               </p>
-
-              {/* Social Media Links */}
-              <div className="space-y-4">
-                <h6 className="font-semibold text-foreground text-sm">Follow Us</h6>
-                <div className="flex gap-3">
-                  <Link
-                    href="https://facebook.com/thrivingladiesfoundation"
-                    className="w-10 h-10 bg-blue-600 hover:bg-blue-700 rounded-lg flex items-center justify-center transition-colors group"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Facebook className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-                  </Link>
-                  {/* <Link
-                    href="https://www.instagram.com/thrivingladiesfoundation"
-                    className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg flex items-center justify-center transition-all group"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Instagram className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-                  </Link> */}
-                  <Link
-                    href="https://wa.me/256740349235"
-                    className="w-10 h-10 bg-black hover:bg-gray-800 rounded-lg flex items-center justify-center transition-colors group"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <MessageCircle className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-                  </Link>
-                  <Link
-                    href="https://x.com/thrivingladies"
-                    className="w-10 h-10 bg-black hover:bg-gray-800 rounded-lg flex items-center justify-center transition-colors group"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Twitter className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-                  </Link>
-                  {/* <Link
-                    href="https://www.tiktok.com/@thrivingladiesfoundation"
-                    className="w-10 h-10 bg-black hover:bg-gray-800 rounded-lg flex items-center justify-center transition-colors group"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-5 w-5 text-white group-hover:scale-110 transition-transform"
-                    >
-                      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5v3a3 3 0 0 1-3-3" />
-                    </svg>
-                  </Link> */}
-                </div>
+              <div className="mt-7 flex gap-2">
+                <Link aria-label="Thriving Ladies Foundation on Facebook" href="https://facebook.com/thrivingladiesfoundation" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-[hsl(var(--background)/.2)] transition-colors hover:bg-[hsl(var(--background)/.12)]">
+                  <Facebook className="h-4 w-4" />
+                </Link>
+                <Link aria-label="Thriving Ladies Foundation on WhatsApp" href="https://wa.me/256740349235?text=Welcome%20to%20Thriving%20Ladies%20Foundation%2C%20how%20may%20we%20help%20you%20today%3F" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-[hsl(var(--background)/.2)] transition-colors hover:bg-[hsl(var(--background)/.12)]">
+                  <MessageCircle className="h-4 w-4" />
+                </Link>
+                <Link aria-label="Thriving Ladies Foundation on X" href="https://x.com/thrivingladies" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-[hsl(var(--background)/.2)] transition-colors hover:bg-[hsl(var(--background)/.12)]">
+                  <Twitter className="h-4 w-4" />
+                </Link>
               </div>
             </div>
 
-            {/* Quick Links - Stacked on mobile */}
-            <div className="space-y-6">
-              <h5 className="font-semibold text-foreground mb-4">Our Work</h5>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li><Link href="/where-we-work" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Where We Work</Link></li>
-                <li><Link href="/what-we-do" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />What We Do</Link></li>
-                <li><Link href="/impact-stories" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Impact Stories</Link></li>
-                <li><Link href="/projects" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Buwaiswa Primary School</Link></li>
-                <li><Link href="/programs" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Education Programs</Link></li>
-                <li><Link href="/projects" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Community Outreach</Link></li>
-                <li><Link href="/about" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Our Impact</Link></li>
-              </ul>
-            </div>
+            <FooterList title="Explore" links={workLinks} />
+            <FooterList title="Get involved" links={joinLinks} />
 
-            <div className="space-y-6">
-              <h5 className="font-semibold text-foreground mb-4">Get Involved</h5>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li><Link href="/donate" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Donate</Link></li>
-                <li><Link href="/questions" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />FAQ</Link></li>
-                <li><Link href="/contact" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Volunteer</Link></li>
-                <li><Link href="/contact" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Partner with Us</Link></li>
-                <li><Link href="/contact" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3" />Contact Us</Link></li>
-              </ul>
-            </div>
-
-            {/* Contact Info */}
-            <div className="space-y-6">
-              <h5 className="font-semibold text-foreground mb-4">Contact</h5>
-              <div className="space-y-3 text-sm text-muted-foreground">
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-4 w-4 text-primary flex-shrink-0" />
-                  <span>Kampala District, Uganda</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Phone className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                  <div className="flex flex-col">
-                    <Link href="tel:+256740349235" className="hover:text-primary transition-colors">+256 740 349 235</Link>
-                    <Link href="tel:+256793661558" className="hover:text-primary transition-colors">+256 793 661 558</Link>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="h-4 w-4 text-primary flex-shrink-0" />
-                  <Link href="mailto:info@thrivingladies.org" className="hover:text-primary transition-colors">info@thrivingladies.org</Link>
-                </div>
+            <div>
+              <h2 className="text-sm font-bold uppercase tracking-[0.18em] text-[hsl(var(--background)/.55)]">Talk with us</h2>
+              <div className="mt-5 space-y-4 text-sm text-[hsl(var(--background)/.74)]">
+                <p className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[hsl(var(--accent))]" /> Kampala District, Uganda</p>
+                <p className="flex items-start gap-3"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-[hsl(var(--accent))]" /><span><Link href="tel:+256740349235" className="block hover:text-[hsl(var(--accent))]">+256 740 349 235</Link><Link href="tel:+256793661558" className="block hover:text-[hsl(var(--accent))]">+256 793 661 558</Link></span></p>
+                <p className="flex items-start gap-3"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-[hsl(var(--accent))]" /><Link href="mailto:info@thrivingladies.org" className="hover:text-[hsl(var(--accent))]">info@thrivingladies.org</Link></p>
               </div>
             </div>
           </div>
 
-          {/* Footer Bottom */}
-          <div className="border-t mt-8 md:mt-12 pt-6 md:pt-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-muted-foreground text-sm text-center md:text-left">
-                © 2024 Thriving Ladies Foundation. Transforming lives through innovative projects.
-              </p>
-              <div className="flex gap-4 text-xs text-muted-foreground">
-                <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-                <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
-              </div>
-            </div>
+          <div className="mt-14 flex flex-col gap-4 border-t border-[hsl(var(--background)/.16)] pt-6 text-xs text-[hsl(var(--background)/.55)] sm:flex-row sm:items-center sm:justify-between">
+            <p>© 2024 Thriving Ladies Foundation. Transforming lives across Uganda.</p>
+            <div className="flex gap-5"><Link href="/privacy" className="hover:text-[hsl(var(--background))]">Privacy policy</Link><Link href="/terms" className="hover:text-[hsl(var(--background))]">Terms of service</Link></div>
           </div>
         </div>
       </footer>
 
-      {/* Floating Action Buttons */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-        {/* Enhanced WhatsApp Button */}
-        <Link
-          href="https://wa.me/256740349235 ?text=Welcome%20to%20Thriving%20Ladies%20Foundation%2C%20how%20may%20we%20help%20you%20today%3F"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group relative"
-        >
-          {/* Pulsing ring animations */}
-          <div className="absolute inset-0 rounded-xl bg-green-500 animate-ping opacity-60"></div>
-          <div className="absolute inset-0 rounded-xl bg-green-400 animate-pulse opacity-40"></div>
-
-          {/* Main button - clean square design with animations */}
-          <div className="relative w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-bounce-whatsapp flex items-center justify-center">
-            <MessageCircle className="h-5 w-5 transition-transform group-hover:scale-110" />
-          </div>
-
-          {/* Notification dot */}
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse border-2 border-white shadow-sm"></div>
-
-          {/* Simple tooltip */}
-          <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-            <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap">
-              WhatsApp
-              <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
-            </div>
-          </div>
+      <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-3">
+        <Link href="https://wa.me/256740349235?text=Welcome%20to%20Thriving%20Ladies%20Foundation%2C%20how%20may%20we%20help%20you%20today%3F" target="_blank" rel="noopener noreferrer" aria-label="Chat with Thriving Ladies Foundation on WhatsApp" className="flex h-12 w-12 items-center justify-center rounded-full bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] shadow-lg transition-transform hover:-translate-y-1">
+          <MessageCircle className="h-5 w-5" />
         </Link>
-
-        {/* Scroll to Top Button - positioned below WhatsApp */}
         {showScrollTop && (
-          <button
-            onClick={scrollToTop}
-            className="group w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-900 hover:from-gray-600 hover:to-gray-800 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-slide-up flex items-center justify-center"
-            aria-label="Scroll to top"
-          >
-            <ChevronUp className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-
-            {/* Simple tooltip */}
-            <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap">
-                Back to top
-                <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
-              </div>
-            </div>
+          <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Back to top" className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-lg transition-transform hover:-translate-y-1">
+            <ArrowUp className="h-5 w-5" />
           </button>
         )}
       </div>
     </>
-  );
+  )
+}
+
+function FooterList({ title, links }: { title: string; links: string[][] }) {
+  return (
+    <div>
+      <h2 className="text-sm font-bold uppercase tracking-[0.18em] text-[hsl(var(--background)/.55)]">{title}</h2>
+      <ul className="mt-5 space-y-3 text-sm text-[hsl(var(--background)/.74)]">
+        {links.map(([label, href]) => <li key={href + label}><Link href={href} className="transition-colors hover:text-[hsl(var(--accent))]">{label}</Link></li>)}
+      </ul>
+    </div>
+  )
 }
